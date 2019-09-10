@@ -19,11 +19,8 @@
   <ion-card>
     <ion-card-content>
       <ion-card-subtitle>Avisos</ion-card-subtitle>
-      <p>Aviso 1</p>
-      <p>Aviso 2</p>
+      <p *ngFor="let aviso of avisos">{{ aviso.name }}</p>
     </ion-card-content>
   </ion-card>
-
-
 
 </ion-content>

@@ -6,9 +6,19 @@ import { DatePicker } from '@ionic-native/date-picker/ngx';
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
+
 export class Tab2Page {
   myDate: string;
   customPickerOptions: any;
+
+  avisos: any[] = [
+    {
+      "name": "Aviso 1"
+    },
+    {
+      "name": "Aviso 2"
+    }
+  ];
 
   constructor(private datePicker: DatePicker) {
     this.customPickerOptions = {
@@ -23,8 +33,8 @@ export class Tab2Page {
         }
       }]
     }
-
   }
+
   showDatepicker() {
     this.datePicker.show({
       date: new Date(),
