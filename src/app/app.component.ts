@@ -7,7 +7,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss']
+  styleUrls: ['app.component.scss'],
+
 })
 export class AppComponent {
   constructor(
@@ -16,6 +17,19 @@ export class AppComponent {
     private statusBar: StatusBar
   ) {
     this.initializeApp();
+
+    this.customPickerOptions = {
+      buttons: [{
+        text: 'Save',
+        handler: () => console.log('Clicked Save!')
+      }, {
+        text: 'Log',
+        handler: () => {
+          console.log('Clicked Log. Do not Dismiss.');
+          return false;
+        }
+      }]
+    }
   }
 
   initializeApp() {
@@ -24,4 +38,6 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
+  customDayShortNames = ['sábado', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'domingo'];
+  customPickerOptions: any;
 }
