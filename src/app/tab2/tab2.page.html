@@ -16,10 +16,12 @@
     </ion-datetime>
   </ion-item>
 
-  <ion-card>
+  <ion-card *ngFor="let aviso of avisos">
     <ion-card-content>
-      <ion-card-subtitle>Avisos</ion-card-subtitle>
-      <p *ngFor="let aviso of avisos">{{ aviso.name }}</p>
+      <ion-card-subtitle>Informes dia: {{aviso.data}}</ion-card-subtitle>
+      <p>Idas ao banheiro: {{ aviso.banheiro }}</p>
+      <p>Alimentação: {{ aviso.alimentacao }}</p>
+      <p>Água: {{ aviso.agua }}</p>
     </ion-card-content>
   </ion-card>
 

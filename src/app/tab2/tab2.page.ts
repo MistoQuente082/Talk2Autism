@@ -13,10 +13,22 @@ export class Tab2Page {
 
   avisos: any[] = [
     {
-      "name": "Aviso 1"
+      "data": "11/09/2019",
+      "banheiro": "3",
+      "alimentação": "Comeu",
+      "agua": "2 copos"
     },
     {
-      "name": "Aviso 2"
+      "data": "11/09/2019",
+      "banheiro": "3",
+      "alimentação": "Comeu",
+      "agua": "2 copos"
+    },
+    {
+      "data": "11/09/2019",
+      "banheiro": "3",
+      "alimentação": "Comeu",
+      "agua": "2 copos"
     }
   ];
 
