@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { DetalhesPage } from '../detalhes/detalhes.page';
+
+
 
 @Component({
   selector: 'app-tab4',
@@ -7,7 +11,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Tab4Page implements OnInit {
 
-  constructor() { }
+  constructor(
+    public modalCtrl: ModalController
+  ) { }
+
+  async teste() {
+    const modal = await this.modalCtrl.create({
+      component: DetalhesPage
+    });
+    modal.present();
+  }
 
   ngOnInit() {
   }
