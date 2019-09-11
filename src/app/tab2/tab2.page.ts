@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
+import { ModalController } from '@ionic/angular';
+import { InformePage } from '../informe/informe.page';
+
 
 @Component({
   selector: 'app-tab2',
@@ -15,24 +18,25 @@ export class Tab2Page {
     {
       "data": "11/09/2019",
       "banheiro": "3",
-      "alimentação": "Comeu",
+      "alimentacao": "Comeu",
       "agua": "2 copos"
     },
     {
       "data": "11/09/2019",
       "banheiro": "3",
-      "alimentação": "Comeu",
+      "alimentacao": "Comeu",
       "agua": "2 copos"
     },
     {
       "data": "11/09/2019",
       "banheiro": "3",
-      "alimentação": "Comeu",
+      "alimentacao": "Comeu",
       "agua": "2 copos"
     }
   ];
 
-  constructor(private datePicker: DatePicker) {
+  constructor(private datePicker: DatePicker,
+    public modalCtrl: ModalController) {
     this.customPickerOptions = {
       buttons: [{
         text: 'Save',
@@ -45,6 +49,17 @@ export class Tab2Page {
         }
       }]
     }
+  }
+
+  async presentModal(data: any) {
+    console.log("Entrou");
+    const modal = await this.modalCtrl.create({
+      component: InformePage,
+      componentProps: {
+        'Data': data
+      }
+    });
+    return await modal.present();
   }
 
   showDatepicker() {
