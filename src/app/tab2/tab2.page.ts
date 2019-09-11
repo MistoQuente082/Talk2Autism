@@ -63,19 +63,19 @@ export class Tab2Page {
     return await modal.present();
   }
 
- // showDatepicker() {
- //   this.datePicker.show({
- //     date: new Date(),
- //     mode: 'date',
- //     androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK,
- //     okText: "Save Date",
- //     todayText: "Set Today"
- //   }).then(
- //     date => {
- //       this.myDate = date.getDate() + "/" + date.toLocaleString('default', { month: 'long' }) + "/" + date.getFullYear();
- //     },
- //     err => console.log('Error occurred while getting date: ', err)
- //   );
- // }
+  // showDatepicker() {
+  //   this.datePicker.show({
+  //     date: new Date(),
+  //     mode: 'date',
+  //     androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK,
+  //     okText: "Save Date",
+  //     todayText: "Set Today"
+  //   }).then(
+  //     date => {
+  //       this.myDate = date.getDate() + "/" + date.toLocaleString('default', { month: 'long' }) + "/" + date.getFullYear();
+  //     },
+  //     err => console.log('Error occurred while getting date: ', err)
+  //   );
+  // }
 }
 

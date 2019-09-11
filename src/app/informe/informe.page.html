@@ -1,9 +1,15 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar [color]="colorStatus?'toolbar-color':'medium'">
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>informe</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <h1>{{ this.Data.data }}</h1>
 
 </ion-content>

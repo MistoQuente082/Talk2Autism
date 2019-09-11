@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams } from '@ionic/angular';
+import { NavParams, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-informe',
@@ -11,8 +11,12 @@ export class InformePage implements OnInit {
   data: any;
 
   constructor(
+    public modalCtrl: ModalController,
     navParams: NavParams) {
-    //console.log(navParams.get('data'));
+    this.data = navParams.get('Data');
+  }
+  async dismiss() {
+    await this.modalCtrl.dismiss();
   }
 
   ngOnInit() {
