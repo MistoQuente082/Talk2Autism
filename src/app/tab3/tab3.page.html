@@ -6,4 +6,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <ion-card *ngFor="let req of req">
+    <img src="{{req.imag}}" />
+    <div class="card-title">{{req.tipo}}</div>
+  </ion-card>
+</ion-content>
