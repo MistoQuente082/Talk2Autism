@@ -28,7 +28,7 @@
 
 
   <ion-card *ngFor="let aviso of avisos">
-    <ion-card-content (click)="presentModal('aviso')">
+    <ion-card-content (click)="presentModal(aviso)">
       <ion-card-subtitle>Dia {{aviso.data}}</ion-card-subtitle>
       <p>Idas ao banheiro: {{ aviso.banheiro }}</p>
       <p>Alimentação: {{ aviso.alimentacao }}</p>

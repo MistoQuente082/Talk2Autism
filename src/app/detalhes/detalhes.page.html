@@ -1,3 +1,5 @@
+<!--Página de detalhes dos eventos da página de eventos-->
+
 <ion-header>
   <ion-toolbar [color]="colorStatus?'toolbar-color':'medium'">
     <ion-buttons slot="end">
@@ -5,10 +7,12 @@
         <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Detalhes</ion-title>
+    <ion-title>{{this.info.nome}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <h2>{{ this.info.data }}</h2>
+  <h1>{{ this.info.mensagem }}</h1>
 
 </ion-content>

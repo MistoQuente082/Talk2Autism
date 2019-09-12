@@ -9,10 +9,17 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
+import { Tab2Page } from './tab2/tab2.page';
+import { InformePage } from './informe/informe.page';
+import { Tab4Page } from './tab4/tab4.page';
+import { DetalhesPage } from './detalhes/detalhes.page';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [
+    AppComponent,
+  ],
+
+
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [
     StatusBar,
