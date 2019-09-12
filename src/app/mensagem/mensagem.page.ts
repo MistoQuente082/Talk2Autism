@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController, NavParams } from '@ionic/angular';
+import { Item } from 'src/assets/extra/item';
 
 @Component({
   selector: 'app-mensagem',
@@ -7,7 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MensagemPage implements OnInit {
 
-  constructor() { }
+  info: Item;
+
+  constructor(
+    public modalCtrl: ModalController,
+    navParams: NavParams) {
+    this.info = navParams.get('item');
+  }
+  async dismiss() {
+    await this.modalCtrl.dismiss();
+  }
 
   ngOnInit() {
   }

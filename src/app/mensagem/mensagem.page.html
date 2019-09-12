@@ -1,9 +1,16 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>mensagem</ion-title>
+  <ion-toolbar [color]="colorStatus?'toolbar-color':'medium'">
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ this.info.nome }} </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <h2>{{ this.info.data }}</h2>
+  <h1>{{ this.info.mensagem }}</h1>
 
 </ion-content>
