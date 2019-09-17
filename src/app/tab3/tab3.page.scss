@@ -1,1 +1,23 @@
+ion-card {
+  position: relative;
+  text-align: center;
+}
 
+// Formatação do título
+.card-title {
+  position: absolute;
+  top: 36%;
+  font-size: 2.0em;
+  width: 100%;
+  font-weight: bold;
+  color: #fff;
+}
+
+// Efeito de 'embaçamento' na imagem
+.emb {
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
+}

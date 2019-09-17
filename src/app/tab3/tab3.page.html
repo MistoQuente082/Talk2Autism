@@ -6,9 +6,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content >
+  <!--Mostra card para cada categoria-->
   <ion-card *ngFor="let req of req">
-    <img src="{{req.imag}}" />
+    <img class="emb"src="{{req.img}}" />
     <div class="card-title">{{req.tipo}}</div>
   </ion-card>
 </ion-content>

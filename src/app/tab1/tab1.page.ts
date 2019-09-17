@@ -9,7 +9,7 @@ import { Item } from 'src/assets/extra/item';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  ///lista de itens
+  // lista de itens
   noticias: any[] = [
     {
       nome: 'Novos módulos',
@@ -32,12 +32,12 @@ export class Tab1Page {
     public modalCtrl: ModalController) {
   }
 
-  //Função que chama a pagina na forma de um modal, enviando dados a ela
+  // Função que chama a pagina na forma de um modal, enviando dados a ela
   async presentModal(item: Item) {
     const modal = await this.modalCtrl.create({
       component: NoticiasPage,
       componentProps: {
-        item: item
+        item
       }
     });
     return await modal.present();

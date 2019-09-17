@@ -58,7 +58,7 @@ export class Tab2Page {
     const modal = await this.modalCtrl.create({
       component: InformePage,
       componentProps: {
-        item: item
+        item
       }
     });
     return await modal.present();
