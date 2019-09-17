@@ -3,7 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyCOEcu5TnSFPSrpqaiR5_S2H3p8H7BuJek",
+    authDomain: "talk2autism.firebaseapp.com",
+    databaseURL: "https://talk2autism.firebaseio.com",
+    projectId: "talk2autism",
+    storageBucket: "",
+    messagingSenderId: "571431387161"
+  }
 };
 
 /*
