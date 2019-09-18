@@ -16,12 +16,12 @@ import { Observable } from 'rxjs';
 export class AppComponent {
   items: Observable<any[]>;
   constructor(
-    db: AngularFirestore,
+    db: AngularFirestore, //Coloca em cada pg q for usar o banco de dados
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar
   ) {
-    this.items = db.collection('items').valueChanges();
+    this.items = db.collection('items').valueChanges(); //Preenche a lista com dados da collection do banco de dados OBS: trocar items pelo nome da coleção
 
     this.initializeApp();
 

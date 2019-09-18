@@ -10,12 +10,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
 
-import { AngularFireModule } from '@angular/fire';
-import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire'; //Necessário para qualquer coisa do Firebase
+import { environment } from '../environments/environment'; //As informações do Arquivo do firebase estão lá
 
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore'; //O Database 
+import { AngularFireStorageModule } from '@angular/fire/storage'; //Inútil, porém não sei
+import { AngularFireAuthModule } from '@angular/fire/auth'; //Autenticação
 
 @NgModule({
   declarations: [
