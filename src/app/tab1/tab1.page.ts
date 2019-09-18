@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { NoticiasPage } from '../noticias/noticias.page';
 import { Item } from 'src/assets/extra/item';
+import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-tab1',
@@ -28,8 +30,12 @@ export class Tab1Page {
     }
   ];
 
+  items: Observable<any[]>;
+
   constructor(
+    db: AngularFirestore,
     public modalCtrl: ModalController) {
+    this.items = db.collection('Aviso').valueChanges();
   }
 
   // Função que chama a pagina na forma de um modal, enviando dados a ela

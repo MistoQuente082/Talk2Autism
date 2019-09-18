@@ -8,12 +8,13 @@
 
 <ion-content>
 
-  <ion-card class="aviso" *ngFor="let noticia of noticias" (click)="presentModal(noticia)">
+  <ion-card class="aviso" *ngFor="let noticia of items | async" (click)="presentModal(noticia)">
     <ion-card-header>
-      <ion-card-subtitle>{{noticia.nome}}</ion-card-subtitle>
+      <ion-card-subtitle>{{noticia.Nome}}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <p>{{noticia.mensagem}}</p>
+      <p>{{noticia.Mensagem}}</p>
     </ion-card-content>
   </ion-card>
+
 </ion-content>
