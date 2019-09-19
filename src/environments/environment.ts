@@ -9,7 +9,7 @@ export const environment = {
     authDomain: "talk2autism.firebaseapp.com",
     databaseURL: "https://talk2autism.firebaseio.com",
     projectId: "talk2autism",
-    storageBucket: "",
+    storageBucket: "talk2autism.appspot.com",
     messagingSenderId: "571431387161"
   }
 };
