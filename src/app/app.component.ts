@@ -29,8 +29,10 @@ export class AppComponent {
           return false;
         }
       }]
-    }
+    };
   }
+  customDayShortNames = ['sábado', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'domingo'];
+  customPickerOptions: any;
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -38,6 +40,4 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
-  customDayShortNames = ['sábado', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'domingo'];
-  customPickerOptions: any;
 }
