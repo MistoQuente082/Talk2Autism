@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { Item } from 'src/assets/extra/item';
 
+
 @Component({
   selector: 'app-noticias',
   templateUrl: './noticias.page.html',

@@ -6,21 +6,21 @@
   <div class="input">
     <ion-card>
       <ion-item>
-        <ion-input type="text" placeholder="Email"></ion-input>
+        <ion-input type="text" placeholder="Email" [(ngModel)]="email"></ion-input>
       </ion-item>
     </ion-card>
 
     <ion-card>
       <ion-item>
-        <ion-input type="password" placeholder="Senha"></ion-input>
+        <ion-input type="password" placeholder="CPF" [(ngModel)]="cpf"></ion-input>
       </ion-item>
     </ion-card>
 
     <div>
 
-      <ion-button  class="btnLogin" expand="block" color="primary">Login</ion-button>
-      
-      <ion-button  fill="clear" color="secondary"expand="block" color="primary">Esqueceu a senha?</ion-button>
+      <ion-button (click)="login()" class="btnLogin" expand="block" color="medium">Login</ion-button>
+
+      <ion-button fill="clear" expand="block" color="light">Esqueceu a senha?</ion-button>
     </div>
   </div>
 
