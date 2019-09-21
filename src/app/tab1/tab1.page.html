@@ -1,20 +1,20 @@
 <ion-header>
-  <ion-toolbar [color]="colorStatus?'toolbar-color':'medium'">
-    <ion-title>
-      Notícias
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar [color]="colorStatus?'toolbar-color':'medium'">
+        <ion-title>
+            Notícias
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-card class="aviso" *ngFor="let noticia of items | async" (click)="presentModal(noticia)">
-    <ion-card-header>
-      <ion-card-subtitle>{{noticia.Nome}}</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <p>{{noticia.Mensagem}}</p>
-    </ion-card-content>
-  </ion-card>
+    <ion-card class="aviso" *ngFor="let noticia of noticias | async" (click)="presentModal(noticia)">
+        <ion-card-header>
+            <ion-card-subtitle>{{noticia.nome}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+            <p>{{noticia.mensagem}}</p>
+        </ion-card-content>
+    </ion-card>
 
 </ion-content>

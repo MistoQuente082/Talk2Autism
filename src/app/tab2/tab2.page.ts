@@ -4,6 +4,10 @@ import { ModalController } from '@ionic/angular';
 import { InformePage } from '../informe/informe.page';
 import { Item } from 'src/assets/extra/item';
 
+import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
+import * as firebase from 'firebase/app';
+
 
 @Component({
   selector: 'app-tab2',
@@ -12,45 +16,30 @@ import { Item } from 'src/assets/extra/item';
 })
 
 export class Tab2Page {
-  myDate: string;
-  customPickerOptions: any;
+  //myDate: string;
+  //customPickerOptions: any;
 
-  avisos: any[] = [
-    {
-      data: '11/09/2019',
-      banheiro: '3',
-      alimentacao: 'Comeu',
-      agua: '2 copos',
-    },
-    {
-      data: '11/09/2019',
-      banheiro: '3',
-      alimentacao: 'Comeu',
-      agua: '2 copos',
-    },
-    {
-      data: '11/09/2019',
-      banheiro: '3',
-      alimentacao: 'Comeu',
-      agua: '2 copos',
-    }
-  ];
+  informes: Observable<any[]>; //Só declaração de uma lista de variáveis
 
   constructor(
-    private datePicker: DatePicker,
+    db: AngularFirestore, //Confira App.components.ts
+    //private datePicker: DatePicker,//Útil para a visão dos psicólogos
     public modalCtrl: ModalController) {
-    this.customPickerOptions = {
-      buttons: [{
-        text: 'Save',
-        handler: () => console.log('Clicked Save!')
-      }, {
-        text: 'Log',
-        handler: () => {
-          console.log('Clicked Log. Do not Dismiss.');
-          return false;
-        }
-      }]
-    };
+    let currentUser = firebase.auth().currentUser; //Consegue o ID do usuário logago
+    this.informes = db.collection('Pais').doc(currentUser.uid).collection('informes').valueChanges(); //consegue os valores dos documentos do usuario logado entrando na pasta pais, documento do pai logado, coleção mensagens
+
+    //this.customPickerOptions = {
+    //  buttons: [{
+    //    text: 'Save',
+    //    handler: () => console.log('Clicked Save!')
+    //  }, {
+    //    text: 'Log',
+    //    handler: () => {
+    //      console.log('Clicked Log. Do not Dismiss.');
+    //      return false;
+    //    }
+    //  }]
+    //};
   }
 
 

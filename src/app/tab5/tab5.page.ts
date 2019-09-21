@@ -4,40 +4,23 @@ import { Item } from 'src/assets/extra/item';
 import { NoticiasPage } from '../noticias/noticias.page';
 import { MensagemPage } from '../mensagem/mensagem.page';
 
+import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
+import * as firebase from 'firebase/app';
+
 @Component({
   selector: 'app-tab5',
   templateUrl: './tab5.page.html',
   styleUrls: ['./tab5.page.scss'],
 })
 export class Tab5Page implements OnInit {
-
-  ///lista de itens
-  mensagens: any[] = [
-    {
-      nome: 'Jhonny Depp',
-      perfil: 'https://biografieonline.it/img/bio/gallery/p/Paulo_Dybala_5.jpg',
-      assunto: "Random",
-      mensagem: 'Yopyop',
-      data: '11/09/2019',
-    },
-    {
-      nome: 'Jhonny Depp',
-      perfil: 'https://biografieonline.it/img/bio/gallery/p/Paulo_Dybala_5.jpg',
-      assunto: "Random",
-      mensagem: 'Yopyop',
-      data: '11/09/2019',
-    },
-    {
-      nome: 'Jhonny Depp',
-      perfil: 'https://biografieonline.it/img/bio/gallery/p/Paulo_Dybala_5.jpg',
-      assunto: "Random",
-      mensagem: 'Yopyop',
-      data: '11/09/2019',
-    }
-  ];
+  mensagens: Observable<any[]>; //Só declaração de uma lista de variáveis
 
   constructor(
+    db: AngularFirestore, //Confira App.components.ts
     public modalCtrl: ModalController) {
+    let currentUser = firebase.auth().currentUser; //Consegue o ID do usuário logago
+    this.mensagens = db.collection('Pais').doc(currentUser.uid).collection('mensagens').valueChanges(); //consegue os valores dos documentos do usuario logado entrando na pasta pais, documento do pai logado, coleção mensagens
   }
   ngOnInit() {
   }

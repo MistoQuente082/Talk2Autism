@@ -1,22 +1,22 @@
 <ion-header>
-  <ion-toolbar [color]="colorStatus?'toolbar-color':'medium'">
-    <ion-title>
-      Informes
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar [color]="colorStatus?'toolbar-color':'medium'">
+        <ion-title>
+            Informes
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
 
 
-  <ion-fab horizontal="end" vertical="top" slot="fixed" edge>
-    <ion-fab-button>
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+    <ion-fab horizontal="end" vertical="top" slot="fixed" edge>
+        <ion-fab-button>
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 
-  <!-- Escolher data, pode ser útil
+    <!-- Escolher data, pode ser útil
     <ion-item>
     <ion-label>Data</ion-label>
     <ion-datetime display-format="DD de MMM de YYYY" picker-format="DD MM YYYY" min="2019-10-15" max="2019-12-15"
@@ -27,14 +27,14 @@
 
 
 
-  <ion-card *ngFor="let aviso of avisos">
-    <ion-card-content (click)="presentModal(aviso)">
-      <ion-card-subtitle>Dia {{aviso.data}}</ion-card-subtitle>
-      <p>Idas ao banheiro: {{ aviso.banheiro }}</p>
-      <p>Alimentação: {{ aviso.alimentacao }}</p>
-      <p>Água: {{ aviso.agua }}</p>
-    </ion-card-content>
-  </ion-card>
+    <ion-card *ngFor="let aviso of informes | async">
+        <ion-card-content (click)="presentModal(aviso)">
+            <ion-card-subtitle>Dia {{aviso.data}}</ion-card-subtitle>
+            <p>Idas ao banheiro: {{ aviso.banheiro[0] }}</p>
+            <p>Alimentação: {{ aviso.alimentacao }}</p>
+            <p>Água: {{ aviso.agua }}</p>
+        </ion-card-content>
+    </ion-card>
 
 
 </ion-content>

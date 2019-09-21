@@ -1,25 +1,25 @@
 <ion-header>
-  <ion-toolbar [color]="colorStatus?'toolbar-color':'medium'">
-    <ion-title>
-      Calendário
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar [color]="colorStatus?'toolbar-color':'medium'">
+        <ion-title>
+            Calendário
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-card *ngFor="let evento of eventos" class="evento" (click)="presentModal(evento)">
-    <ion-card-content>
-      <ion-row wrap>
-        <ion-col size="4.5">
-          <h6>{{ evento.data }}</h6>
-          <ion-card-subtitle>{{evento.nome}}</ion-card-subtitle>
-        </ion-col>
-        <ion-col size="7.5">
-          <p>{{evento.mensagem}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
+    <ion-card *ngFor="let evento of eventos | async" class="evento" (click)="presentModal(evento)">
+        <ion-card-content>
+            <ion-row wrap>
+                <ion-col size="4.5">
+                    <h6>{{ evento.datahora-inicio }} - {{ evento.datahora-fim }}</h6>
+                    <ion-card-subtitle>{{evento.nome}}</ion-card-subtitle>
+                </ion-col>
+                <ion-col size="7.5">
+                    <p>{{evento.detalhes}}</p>
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
 
 </ion-content>
