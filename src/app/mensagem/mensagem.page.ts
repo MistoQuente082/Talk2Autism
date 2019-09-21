@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams, ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { Item } from 'src/assets/extra/item';
 
 @Component({
-  selector: 'app-informe',
-  templateUrl: './informe.page.html',
-  styleUrls: ['./informe.page.scss'],
+  selector: 'app-mensagem',
+  templateUrl: './mensagem.page.html',
+  styleUrls: ['./mensagem.page.scss'],
 })
-export class InformePage implements OnInit {
+export class MensagemPage implements OnInit {
 
   info: Item;
 

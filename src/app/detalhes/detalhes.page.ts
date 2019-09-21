@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
+import { Item } from 'src/assets/extra/item';
 
 @Component({
   selector: 'app-detalhes',
@@ -7,10 +8,13 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./detalhes.page.scss'],
 })
 export class DetalhesPage implements OnInit {
+  info: Item;
 
   constructor(
-    public modalCtrl: ModalController
-  ) { }
+    public modalCtrl: ModalController,
+    navParams: NavParams) {
+    this.info = navParams.get('item');
+  }
   async dismiss() {
     await this.modalCtrl.dismiss();
   }

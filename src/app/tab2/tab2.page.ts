@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
 import { ModalController } from '@ionic/angular';
 import { InformePage } from '../informe/informe.page';
+import { Item } from 'src/assets/extra/item';
 
 
 @Component({
@@ -53,11 +54,11 @@ export class Tab2Page {
   }
 
 
-  async presentModal(data: any) {
+  async presentModal(item: Item) {
     const modal = await this.modalCtrl.create({
       component: InformePage,
       componentProps: {
-        'Data': data
+        item
       }
     });
     return await modal.present();

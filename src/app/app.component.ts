@@ -4,6 +4,9 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -11,11 +14,15 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 })
 export class AppComponent {
+  items: Observable<any[]>;
   constructor(
+    db: AngularFirestore, //Coloca em cada pg q for usar o banco de dados
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar
   ) {
+    this.items = db.collection('items').valueChanges(); //Preenche a lista com dados da collection do banco de dados OBS: trocar items pelo nome da coleção
+
     this.initializeApp();
 
     this.customPickerOptions = {
@@ -29,8 +36,10 @@ export class AppComponent {
           return false;
         }
       }]
-    }
+    };
   }
+  customDayShortNames = ['sábado', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'domingo'];
+  customPickerOptions: any;
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -38,6 +47,4 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
-  customDayShortNames = ['sábado', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'domingo'];
-  customPickerOptions: any;
 }

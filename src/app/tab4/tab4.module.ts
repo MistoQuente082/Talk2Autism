@@ -30,4 +30,4 @@ const routes: Routes = [
     DetalhesPage
   ],
 })
-export class Tab4PageModule {}
+export class Tab4PageModule { }

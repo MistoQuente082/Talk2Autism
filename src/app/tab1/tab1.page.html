@@ -8,30 +8,13 @@
 
 <ion-content>
 
-  <ion-card class="aviso">
+  <ion-card class="aviso" *ngFor="let noticia of items | async" (click)="presentModal(noticia)">
     <ion-card-header>
-      <ion-card-subtitle>Aviso: Novos módulos</ion-card-subtitle>
+      <ion-card-subtitle>{{noticia.Nome}}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <p>Estamos disponibilizando novos tipos de módulos para encomendas</p>
+      <p>{{noticia.Mensagem}}</p>
     </ion-card-content>
   </ion-card>
 
-  <ion-card class="aviso">
-    <ion-card-header>
-      <ion-card-subtitle>Aviso: Novos módulos</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <p>Estamos disponibilizando novos tipos de módulos para encomendas</p>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card class="aviso">
-    <ion-card-header>
-      <ion-card-subtitle>Aviso: Novos módulos</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <p>Estamos disponibilizando novos tipos de módulos para encomendas</p>
-    </ion-card-content>
-  </ion-card>
 </ion-content>

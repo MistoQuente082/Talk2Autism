@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, InjectionToken } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -10,16 +10,33 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
 
+import { AngularFireModule } from '@angular/fire'; //Necessário para qualquer coisa do Firebase
+import { environment } from '../environments/environment'; //As informações do Arquivo do firebase estão lá
+
+import { AngularFirestoreModule } from '@angular/fire/firestore'; //O Database 
+import { AngularFireStorageModule } from '@angular/fire/storage'; //Inútil, porém não sei
+import { AngularFireAuthModule } from '@angular/fire/auth'; //Autenticação
+
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  declarations: [
+    AppComponent,
+  ],
+
+  imports: [BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
+    AngularFireStorageModule, // imports firebase/storage only needed for storage features
+    AngularFireModule.initializeApp(environment.firebase)],
+
   providers: [
     StatusBar,
     SplashScreen,
     DatePicker,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

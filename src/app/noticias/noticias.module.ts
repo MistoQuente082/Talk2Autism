@@ -5,25 +5,22 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { Tab5Page } from './tab5.page';
-import { MensagemPage } from '../mensagem/mensagem.page';
+import { NoticiasPage } from './noticias.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: Tab5Page
+    component: NoticiasPage
   }
 ];
 
 @NgModule({
-  entryComponents: [MensagemPage],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [Tab5Page,
-    MensagemPage]
+  declarations: []
 })
-export class Tab5PageModule { }
+export class NoticiasPageModule { }
