@@ -12,7 +12,7 @@
         <ion-card-content>
             <ion-row wrap>
                 <ion-col size="4.5">
-                    <h6>{{ evento.datahora-inicio }} - {{ evento.datahora-fim }}</h6>
+                    <h6>{{ evento.datainicio.toDate('mm/dd/yyyy') }} - {{ evento.datafim.toDate() }}</h6>
                     <ion-card-subtitle>{{evento.nome}}</ion-card-subtitle>
                 </ion-col>
                 <ion-col size="7.5">
