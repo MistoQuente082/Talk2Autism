@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -11,43 +11,54 @@ import { AlertController, LoadingController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
   email: string;
-  cpf: string;
+  senha: string;
+  loading: HTMLIonLoadingElement;
+
+  tipo: boolean;
 
   constructor(
     public router: Router,
     public fAuth: AngularFireAuth,
     public alertController: AlertController,
-    public loadingController: LoadingController
+    public loadingController: LoadingController,
+    public toastCtrl: ToastController
   ) { }
+
+  hideShow() {
+    this.tipo = !this.tipo;
+  }
 
   // Botão para tabs
   async login() {
-    const { email, cpf } = this;
+    const { email, senha } = this;
+    // Loading em espera
+    await this.presentLoading();
+    // Se tudo certo, entra
     try {
-      const res = await
-
-        this.fAuth.auth.signInWithEmailAndPassword(email, cpf);
-      console.log("Login realizado com sucesso!");
-      this.presentLoading();
+      await this.fAuth.auth.signInWithEmailAndPassword(email, senha);
       this.router.navigate(['/tabs']);
+
+      // Senha ou email errado
     } catch (err) {
-      console.dir(err);
-      if (err.code === "auth/user-not-found") {
-        console.log("User not found");
+
+      if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password') {
+        console.log('User not found');
+        this.loading.dismiss();
+        this.presentToast('Email ou senha invalido!');
       }
+      // Finaliza loading
+    } finally {
+      this.loading.dismiss();
     }
   }
 
 
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      message: 'Hellooo',
-      duration: 2000
-    });
-    await loading.present();
 
-    const { role, data } = await loading.onDidDismiss();
-    console.log('Loading dismissed!');
+
+
+  async presentLoading() {
+    this.loading = await this.loadingController.create({ message: 'Aguarde...' });
+    return this.loading.present();
   }
 
   async presentLoadingWithOptions() {
@@ -59,6 +70,11 @@ export class LoginPage implements OnInit {
       cssClass: 'custom-class custom-loading'
     });
     return await loading.present();
+  }
+  // Aviso para o login
+  async presentToast(message: string) {
+    const toast = await this.toastCtrl.create({ message, duration: 2000 });
+    toast.present();
   }
 
 
