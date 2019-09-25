@@ -31,7 +31,7 @@ export class Tab5Page implements OnInit {
   ngOnInit() { }
 
   segmentChanged(event: any) {
-    if (event.detail.value === 'login') {
+    if (event.detail.value === 'recebidos') {
       this.slides.slidePrev();
       this.wavesPosition += this.wavesDifference;
     } else {

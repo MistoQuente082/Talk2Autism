@@ -5,33 +5,51 @@
 </ion-header>
 
 <ion-content>
-    <div>
-        <ion-segment (ionChange)="segmentChanged($event)" color="medium" mode="ios" value="login">
-            <ion-segment-button mode="ios" value="login">
-                <ion-label>Recebidos</ion-label>
-            </ion-segment-button>
-            <ion-segment-button mode="ios" value="register">
-                <ion-label>Enviados</ion-label>
-            </ion-segment-button>
-        </ion-segment>
+    <div class="slides">
+        <div>
+            <ion-segment (ionChange)="segmentChanged($event)" color="primary" size="large" mode="ios" value="recebidos">
+                <ion-segment-button mode="ios" value="recebidos">
+                    <ion-label>Recebidos</ion-label>
+                </ion-segment-button>
+                <ion-segment-button mode="ios" value="enviados">
+                    <ion-label>Enviados</ion-label>
+                </ion-segment-button>
+            </ion-segment>
+        </div>
+
+        <ion-slides>
+            <ion-slide>
+                <div class="slide-inner ion-padding">
+                    <span>Recebidos</span>
+                    <ion-list>
+                        <ion-item *ngFor="let mensagem of mensagens | async" (click)="presentModal(mensagem)">
+                            <ion-label>
+                                <h2>{{ mensagem.remetente }}</h2>
+                                <h3>{{mensagem.assunto}}</h3>
+                                <p>{{mensagem.mensagem}}</p>
+                            </ion-label>
+                        </ion-item>
+                    </ion-list>
+                </div>
+            </ion-slide>
+
+            <ion-slide>
+                <div class="slide-inner ion-padding">
+                    <span>Enviados</span>
+                    <ion-list>
+                        <ion-item *ngFor="let mensagem of mensagens | async" (click)="presentModal(mensagem)">
+                            <ion-label>
+                                <h2>{{ mensagem.remetente }}</h2>
+                                <h3>{{mensagem.assunto}}</h3>
+                                <p>{{mensagem.mensagem}}</p>
+                            </ion-label>
+                        </ion-item>
+                    </ion-list>
+
+                </div>
+            </ion-slide>
+        </ion-slides>
     </div>
-
-    <ion-slides>
-        <ion-slide>
-            <div class="slide-inner ion-padding">
-                <span>Recebidos</span>
-             
-
-            </div>
-        </ion-slide>
-
-        <ion-slide>
-            <div class="slide-inner ion-padding">
-                <span>Enviados</span>
-
-            </div>
-        </ion-slide>
-    </ion-slides>
 
 
 </ion-content>
