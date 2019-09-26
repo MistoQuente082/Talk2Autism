@@ -6,6 +6,7 @@ import { MensagemPage } from '../mensagem/mensagem.page';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
+import { EnvMensagemPage } from '../env-mensagem/env-mensagem.page';
 
 @Component({
   selector: 'app-tab5',
@@ -13,21 +14,23 @@ import * as firebase from 'firebase/app';
   styleUrls: ['./tab5.page.scss'],
 })
 export class Tab5Page implements OnInit {
-  // @ViewChild(IonSlides)
+  //@ViewChild(IonSlides)
   slides: IonSlides;
   public wavesPosition: 0;
   private wavesDifference: 100;
 
 
 
-  mensagens: Observable<any[]>; // Só declaração de uma lista de variáveis
+  mensagensrec: Observable<any[]>; // Só declaração de uma lista de variáveis
+  mensagensenv: Observable<any[]>; // Só declaração de uma lista de variáveis
 
   constructor(
     db: AngularFirestore, // Confira App.components.ts
     public modalCtrl: ModalController) {
     const currentUser = firebase.auth().currentUser; // Consegue o ID do usuário logago
     // consegue os valores dos documentos do usuario logado entrando na pasta pais, documento do pai logado, coleção mensagens
-    this.mensagens = db.collection('Pais').doc(currentUser.uid).collection('mensagens').valueChanges();
+    this.mensagensrec = db.collection('Pais').doc(currentUser.uid).collection('mensagens').valueChanges();
+    this.mensagensenv = db.collection('Pais').doc(currentUser.uid).collection('mensagens').valueChanges();
   }
   ngOnInit() { }
 
@@ -48,6 +51,13 @@ export class Tab5Page implements OnInit {
       componentProps: {
         item
       }
+    });
+    return await modal.present();
+  }
+
+  async presentModal2() {
+    const modal = await this.modalCtrl.create({
+      component: EnvMensagemPage
     });
     return await modal.present();
   }

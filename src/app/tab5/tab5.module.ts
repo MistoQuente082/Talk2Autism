@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { Tab5Page } from './tab5.page';
 import { MensagemPage } from '../mensagem/mensagem.page';
+import { EnvMensagemPage } from '../env-mensagem/env-mensagem.page';
 
 const routes: Routes = [
   {
@@ -16,7 +17,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  entryComponents: [MensagemPage],
+  entryComponents: [MensagemPage, EnvMensagemPage],
   imports: [
     CommonModule,
     FormsModule,
@@ -24,6 +25,8 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [Tab5Page,
-    MensagemPage]
+    MensagemPage,
+    EnvMensagemPage
+  ]
 })
 export class Tab5PageModule { }

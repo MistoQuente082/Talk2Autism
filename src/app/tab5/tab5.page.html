@@ -5,6 +5,13 @@
 </ion-header>
 
 <ion-content>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="presentModal2()">
+            <ion-icon name=" add">
+            </ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
     <div class="slides">
         <div>
             <ion-segment (ionChange)="segmentChanged($event)" color="primary" size="large" mode="ios" value="recebidos">
@@ -22,7 +29,7 @@
                 <div class="slide-inner ion-padding">
                     <span>Recebidos</span>
                     <ion-list>
-                        <ion-item *ngFor="let mensagem of mensagens | async" (click)="presentModal(mensagem)">
+                        <ion-item *ngFor="let mensagem of mensagensrec | async" (click)="presentModal(mensagem)">
                             <ion-label>
                                 <h2>{{ mensagem.remetente }}</h2>
                                 <h3>{{mensagem.assunto}}</h3>
@@ -37,7 +44,7 @@
                 <div class="slide-inner ion-padding">
                     <span>Enviados</span>
                     <ion-list>
-                        <ion-item *ngFor="let mensagem of mensagens | async" (click)="presentModal(mensagem)">
+                        <ion-item *ngFor="let mensagem of mensagensenv | async" (click)="presentModal(mensagem)">
                             <ion-label>
                                 <h2>{{ mensagem.remetente }}</h2>
                                 <h3>{{mensagem.assunto}}</h3>
