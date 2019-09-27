@@ -12,15 +12,17 @@
 
     <ion-card>
       <ion-item>
-        <ion-input type="password" placeholder="CPF" [(ngModel)]="cpf"></ion-input>
+        <ion-input [type]="tipo ? 'text' : 'password'" type="password" placeholder="Senha" [(ngModel)]="senha">
+        </ion-input>
+        <button expand="block" (click)="hideShow()">
+          <ion-icon [name]="tipo ? 'eye-off' : 'eye'">
+          </ion-icon>
+        </button>
       </ion-item>
     </ion-card>
 
     <div>
-
       <ion-button (click)="login()" class="btnLogin" expand="block" color="medium">Login</ion-button>
-
-      <ion-button fill="clear" expand="block" color="light">Esqueceu a senha?</ion-button>
     </div>
   </div>
 

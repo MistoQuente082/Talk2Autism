@@ -21,7 +21,8 @@ const routes: Routes = [
   { path: 'informe', loadChildren: './informe/informe.module#InformePageModule' },
   { path: 'noticias', loadChildren: './noticias/noticias.module#NoticiasPageModule' },
   { path: 'mensagem', loadChildren: './mensagem/mensagem.module#MensagemPageModule' },
-  { path: 'login', loadChildren: './login/login.module#LoginPageModule' }
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },  { path: 'env-mensagem', loadChildren: './env-mensagem/env-mensagem.module#EnvMensagemPageModule' }
+
 ];
 @NgModule({
   imports: [

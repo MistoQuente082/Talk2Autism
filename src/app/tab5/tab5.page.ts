@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ModalController, IonSlides } from '@ionic/angular';
 import { Item } from 'src/assets/extra/item';
-import { NoticiasPage } from '../noticias/noticias.page';
 import { MensagemPage } from '../mensagem/mensagem.page';
 
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
+import { EnvMensagemPage } from '../env-mensagem/env-mensagem.page';
 
 @Component({
   selector: 'app-tab5',
@@ -14,24 +14,50 @@ import * as firebase from 'firebase/app';
   styleUrls: ['./tab5.page.scss'],
 })
 export class Tab5Page implements OnInit {
-  mensagens: Observable<any[]>; //Só declaração de uma lista de variáveis
+  //@ViewChild(IonSlides)
+  slides: IonSlides;
+  public wavesPosition: 0;
+  private wavesDifference: 100;
+
+
+
+  mensagensrec: Observable<any[]>; // Só declaração de uma lista de variáveis
+  mensagensenv: Observable<any[]>; // Só declaração de uma lista de variáveis
 
   constructor(
-    db: AngularFirestore, //Confira App.components.ts
+    db: AngularFirestore, // Confira App.components.ts
     public modalCtrl: ModalController) {
-    let currentUser = firebase.auth().currentUser; //Consegue o ID do usuário logago
-    this.mensagens = db.collection('Pais').doc(currentUser.uid).collection('mensagens').valueChanges(); //consegue os valores dos documentos do usuario logado entrando na pasta pais, documento do pai logado, coleção mensagens
+    const currentUser = firebase.auth().currentUser; // Consegue o ID do usuário logago
+    // consegue os valores dos documentos do usuario logado entrando na pasta pais, documento do pai logado, coleção mensagens
+    this.mensagensrec = db.collection('Pais').doc(currentUser.uid).collection('mensagens').valueChanges();
+    this.mensagensenv = db.collection('Pais').doc(currentUser.uid).collection('mensagens').valueChanges();
   }
-  ngOnInit() {
+  ngOnInit() { }
+
+  segmentChanged(event: any) {
+    if (event.detail.value === 'recebidos') {
+      this.slides.slidePrev();
+      this.wavesPosition += this.wavesDifference;
+    } else {
+      this.slides.slideNext();
+      this.wavesPosition -= this.wavesDifference;
+    }
   }
 
-  //Função que chama a pagina na forma de um modal, enviando dados a ela
+  // Função que chama a pagina na forma de um modal, enviando dados a ela
   async presentModal(item: Item) {
     const modal = await this.modalCtrl.create({
       component: MensagemPage,
       componentProps: {
-        item: item
+        item
       }
+    });
+    return await modal.present();
+  }
+
+  async presentModal2() {
+    const modal = await this.modalCtrl.create({
+      component: EnvMensagemPage
     });
     return await modal.present();
   }

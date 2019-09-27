@@ -1,24 +1,23 @@
-.fn-img{
-    --background: url("../../assets/background-login.png") no-repeat center center / cover;
-    //  DEU ERRO. MODIFICAR DEPOIS:
-        //  -webkit-filter: blur(10px);
-        //  -moz-filter: blur(10px);
-        //  -o-filter: blur(10px);
-        //  -ms-filter: blur(10px);
-        //  filter: blur(10px);
-  
+.fn-img {
+  --background: url("../../assets/background-login.png") no-repeat center center / cover;
+  //  DEU ERRO. MODIFICAR DEPOIS:
+  //  -webkit-filter: blur(10px);
+  //  -moz-filter: blur(10px);
+  //  -o-filter: blur(10px);
+  //  -ms-filter: blur(10px);
+  //  filter: blur(10px);
 }
 
+
 .input {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%) 
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }
 
 .btn-login {
-    --border-radius: 100px;
-
+  --border-radius: 100px;
 }
