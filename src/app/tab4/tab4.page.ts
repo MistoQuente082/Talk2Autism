@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
-
+const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
 @Component({
   selector: 'app-tab4',
@@ -16,6 +16,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class Tab4Page implements OnInit {
   eventos: Observable<any[]>; //Só declaração de uma lista de variáveis
+
 
   constructor(
     db: AngularFirestore, //Confira App.components.ts
