@@ -49,6 +49,7 @@ export class LoginPage implements OnInit {
       // Finaliza loading
     } finally {
       this.loading.dismiss();
+      
     }
   }
 

@@ -29,8 +29,8 @@ export class Tab5Page implements OnInit {
     public modalCtrl: ModalController) {
     const currentUser = firebase.auth().currentUser; // Consegue o ID do usuário logago
     // consegue os valores dos documentos do usuario logado entrando na pasta pais, documento do pai logado, coleção mensagens
-    this.mensagensrec = db.collection('Pais').doc(currentUser.uid).collection('mensagens').valueChanges();
-    this.mensagensenv = db.collection('Pais').doc(currentUser.uid).collection('mensagens').valueChanges();
+    this.mensagensrec = db.collection('pais').doc(currentUser.uid).collection('mensagens').valueChanges();
+    this.mensagensenv = db.collection('pais').doc(currentUser.uid).collection('envios').valueChanges();
   }
   ngOnInit() { }
 

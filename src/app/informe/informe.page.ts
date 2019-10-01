@@ -12,13 +12,11 @@ import { Observable } from 'rxjs';
 export class InformePage implements OnInit {
 
   info: Item;
-  pais: Observable<any[]>;
 
   constructor(
     db: AngularFirestore,
     public modalCtrl: ModalController,
     navParams: NavParams) {
-    this.pais = db.collection('pais').valueChanges();
     this.info = navParams.get('item');
   }
   async dismiss() {

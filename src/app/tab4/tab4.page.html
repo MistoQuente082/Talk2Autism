@@ -12,9 +12,9 @@
         <ion-card-content>
             <ion-row wrap>
                 <ion-col size="4.5">
-                    <h6>De {{evento.datainicio.toDate() | date: 'dd/MM/yyyy'}}</h6>
-                    <h6>a {{evento.datainicio.toDate() | date: 'dd/MM/yyyy'}}</h6>
                     <ion-card-subtitle>{{evento.nome}}</ion-card-subtitle>
+                    <h6>{{evento.datainicio.toDate() | date: 'dd/MM/yyyy'}}</h6>
+                    <h6>{{evento.datainicio.toDate() | date: 'dd/MM/yyyy'}}</h6>
                 </ion-col>
                 <ion-col size="7.5">
                     <p>{{evento.detalhes}}</p>

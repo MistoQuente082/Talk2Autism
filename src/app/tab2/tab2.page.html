@@ -21,10 +21,10 @@
 
 
 
-    <ion-card *ngFor="let aviso of informes | async">
-        <ion-card-content (click)="presentModal(aviso)">
-            <ion-card-subtitle>Dia {{aviso.data}}</ion-card-subtitle>
-            <p>Idas ao banheiro: {{ aviso.banheiro[0] }}</p>
+    <ion-card *ngFor="let aviso of informes | async" (click)="presentModal(aviso)">
+        <ion-card-content >
+            <ion-card-subtitle>Dia: {{ aviso.data.toDate() | date:'dd/MM/yyyy'}}</ion-card-subtitle>
+            <p>Idas ao banheiro:</p>
             <p>Alimentação: {{ aviso.alimentacao }}</p>
             <p>Água: {{ aviso.agua }}</p>
         </ion-card-content>

@@ -26,7 +26,7 @@ export class Tab2Page {
     //private datePicker: DatePicker,//Útil para a visão dos psicólogos
     public modalCtrl: ModalController) {
     let currentUser = firebase.auth().currentUser; //Consegue o ID do usuário logago
-    this.informes = db.collection('Pais').doc(currentUser.uid).collection('informes').valueChanges(); //consegue os valores dos documentos do usuario logado entrando na pasta pais, documento do pai logado, coleção mensagens
+    this.informes = db.collection('pais').doc(currentUser.uid).collection('informes').valueChanges(); //consegue os valores dos documentos do usuario logado entrando na pasta pais, documento do pai logado, coleção mensagens
 
     //this.customPickerOptions = {
     //  buttons: [{
@@ -47,7 +47,7 @@ export class Tab2Page {
     const modal = await this.modalCtrl.create({
       component: InformePage,
       componentProps: {
-        item
+        item: item
       }
     });
     return await modal.present();
