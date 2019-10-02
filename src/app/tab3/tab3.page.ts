@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { ReqPage } from '../req/req.page';
 
 @Component({
   selector: 'app-tab3',
@@ -30,6 +32,17 @@ export class Tab3Page {
       tipo: 'Reuniões',
     },
   ];
-  constructor() { }
+  constructor(
+    public modalCtrl: ModalController
+  ) { }
 
+  async presentModal(tipo: any) {
+    const modal = await this.modalCtrl.create({
+      component: ReqPage,
+      componentProps: {
+        tipo
+      }
+    });
+    return await modal.present();
+  }
 }

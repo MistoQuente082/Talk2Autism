@@ -4,14 +4,24 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab3Page } from './tab3.page';
+import { ReqPage } from '../req/req.page';
 
 @NgModule({
+
+  entryComponents: [
+    ReqPage
+  ],
+
+
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
     RouterModule.forChild([{ path: '', component: Tab3Page }])
   ],
-  declarations: [Tab3Page]
+  declarations: [
+    Tab3Page,
+    ReqPage
+  ]
 })
-export class Tab3PageModule {}
+export class Tab3PageModule { }
