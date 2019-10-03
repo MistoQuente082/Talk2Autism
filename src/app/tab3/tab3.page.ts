@@ -14,21 +14,21 @@ export class Tab3Page {
     {
       // O comentario abaixo, permite linha mais longa.
       // tslint:disable-next-line: max-line-length
-      img: '/src/assets/uniforme.png',
+      img: '../assets/uniforme.png',
       tipo: 'Fardamentos',
     },
 
     {
       // O comentario abaixo, permite linha mais longa.
       // tslint:disable-next-line: max-line-length
-      img: '/src/assets/modulos.png',
+      img: '../assets/modulos.png',
       tipo: 'Módulos',
     },
 
     {
       // O comentario abaixo, permite linha mais longa.
       // tslint:disable-next-line: max-line-length
-      img: '/src/assets/reunioes.jpg',
+      img: '../assets/reunioes.jpg',
       tipo: 'Reuniões',
     },
   ];
