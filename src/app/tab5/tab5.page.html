@@ -28,7 +28,7 @@
                 <div style=" width: 100%" class="slide-inner ion-padding">
                     <span>Recebidos</span>
                     <ion-list>
-                        <ion-item *ngFor="let mensagem of mensagensrec | async" (click)="presentModal(mensagem)">
+                        <ion-item *ngFor="let mensagem of mensagensrec | async" (click)="presentAlertConfirm(mensagem)">
                             <ion-label>
                                 <h3>{{mensagem.remetente}}: {{mensagem.assunto}}</h3>
                                 <p>{{mensagem.mensagem}}</p>
@@ -42,7 +42,7 @@
                 <div style=" width: 100%" class="slide-inner ion-padding">
                     <span>Enviados</span>
                     <ion-list>
-                        <ion-item *ngFor="let mensagem of mensagensenv | async" (click)="presentModal(mensagem)">
+                        <ion-item *ngFor="let mensagem of mensagensenv | async" (click)="presentAlertConfirm(mensagem)">
                             <ion-label>
                                 <h3>{{mensagem.assunto}}</h3>
                                 <p>{{mensagem.mensagem}}</p>

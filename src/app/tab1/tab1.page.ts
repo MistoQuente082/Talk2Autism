@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { NoticiasPage } from '../noticias/noticias.page';
 import { Item } from 'src/assets/extra/item';
 
@@ -15,12 +15,15 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class Tab1Page {
   noticias: Observable<any[]>; //Só declaração de uma lista de variáveis
+  banco: AngularFirestore;
 
   constructor(
     db: AngularFirestore, //Confira App.components.ts
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController,
+    public alertController: AlertController) {
     let currentUser = firebase.auth().currentUser; //Consegue o ID do usuário logado
     this.noticias = db.collection('noticias').valueChanges(); //consegue os valores da coelção noticias
+    this.banco = db;
   }
 
   // Função que chama a pagina na forma de um modal, enviando dados a ela
@@ -32,6 +35,34 @@ export class Tab1Page {
       }
     });
     return await modal.present();
+  }
+
+  //Função que chama um alert
+  async presentAlert(mensagem) {
+    const alert = await this.alertController.create({
+      header: mensagem.nome,
+      message: mensagem.mensagem,
+      buttons: [
+        {
+          text: 'Fechar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+            this.banco.collection('noticias').doc(mensagem.id).update({
+              leituras: firebase.firestore.FieldValue.increment(1)
+            });
+
+          }
+        }, {
+          text: 'Comentário',
+          handler: () => {
+            console.log('Yeetz!');
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
 }

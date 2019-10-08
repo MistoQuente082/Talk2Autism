@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { InformePage } from '../informe/informe.page';
 import { Item } from 'src/assets/extra/item';
 
@@ -20,28 +20,17 @@ export class Tab2Page {
   //customPickerOptions: any;
 
   informes: Observable<any[]>; //Só declaração de uma lista de variáveis
+  banco: AngularFirestore;
 
   constructor(
     db: AngularFirestore, //Confira App.components.ts
     //private datePicker: DatePicker,//Útil para a visão dos psicólogos
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController,
+    public alertController: AlertController) {
     let currentUser = firebase.auth().currentUser; //Consegue o ID do usuário logago
     this.informes = db.collection('pais').doc(currentUser.uid).collection('informes').valueChanges(); //consegue os valores dos documentos do usuario logado entrando na pasta pais, documento do pai logado, coleção mensagens
-
-    //this.customPickerOptions = {
-    //  buttons: [{
-    //    text: 'Save',
-    //    handler: () => console.log('Clicked Save!')
-    //  }, {
-    //    text: 'Log',
-    //    handler: () => {
-    //      console.log('Clicked Log. Do not Dismiss.');
-    //      return false;
-    //    }
-    //  }]
-    //};
+    this.banco = db;
   }
-
 
   async presentModal(item: Item) {
     const modal = await this.modalCtrl.create({
@@ -51,6 +40,31 @@ export class Tab2Page {
       }
     });
     return await modal.present();
+  }
+
+
+  //Função que chama um alert
+  async presentAlert(aviso) {
+    const alert = await this.alertController.create({
+      header: aviso.atendido,
+      message: aviso.alimentacao,
+      buttons: [
+        {
+          text: 'Fechar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Comentário',
+          handler: () => {
+            console.log('Yeetz!');
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
   // showDatepicker() {

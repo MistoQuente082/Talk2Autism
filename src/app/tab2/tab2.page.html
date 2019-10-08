@@ -21,8 +21,8 @@
 
 
 
-    <ion-card *ngFor="let aviso of informes | async" (click)="presentModal(aviso)">
-        <ion-card-content >
+    <ion-card class="informe" *ngFor="let aviso of informes | async" (click)="presentAlert(aviso)">
+        <ion-card-content>
             <ion-card-subtitle>Dia: {{ aviso.data.toDate() | date:'dd/MM/yyyy'}}</ion-card-subtitle>
             <p>Idas ao banheiro:</p>
             <p>Alimentação: {{ aviso.alimentacao }}</p>
