@@ -14,7 +14,12 @@ import { modais } from './modais.html';
 })
 export class ReqPage implements OnInit {
   tipo: any;
+
+  motivo: string;
+
+
   public fardamentos = modais.fardamentos;
+  public reunioes = modais.reunioes;
   constructor(
     public modalCtrl: ModalController,
     public navParams: NavParams,
@@ -30,20 +35,23 @@ export class ReqPage implements OnInit {
   ngOnInit() {
     console.log(this.tipo);
 
-    if (this.tipo.tipo === "Fardamentos") {
+    if (this.tipo.tipo === 'Fardamentos') {
       var element = document.getElementById('teste');
       element.innerHTML = this.fardamentos;
     }
 
-    if (this.tipo.tipo === "Módulos") {
+    if (this.tipo.tipo === 'Módulos') {
       var element = document.getElementById('teste');
       element.innerHTML = '<p>cdjcd</p>';
     }
 
-    if (this.tipo.tipo === "Reuniões") {
+    if (this.tipo.tipo === 'Reuniões') {
       var element = document.getElementById('teste');
-      element.innerHTML = '<b>Hello World!</b>'
+      element.innerHTML = this.reunioes;
     }
   }
+
+  // Enviar pedido de reunião
+  subMeeting() {  }
 
 }

@@ -15,22 +15,22 @@ const reducer = (accumulator, currentValue) => accumulator + currentValue;
   styleUrls: ['./tab4.page.scss'],
 })
 export class Tab4Page implements OnInit {
-  eventos: Observable<any[]>; //Só declaração de uma lista de variáveis
+  eventos: Observable<any[]>; // Só declaração de uma lista de variáveis
 
 
   constructor(
-    db: AngularFirestore, //Confira App.components.ts
+    db: AngularFirestore, // Confira App.components.ts
     public modalCtrl: ModalController
   ) {
-    let currentUser = firebase.auth().currentUser; //Consegue o ID do usuário logago
-    this.eventos = db.collection('eventos').valueChanges(); //consegue os valores da coelção noticias
+    const currentUser = firebase.auth().currentUser; // Consegue o ID do usuário logago
+    this.eventos = db.collection('eventos').valueChanges(); // consegue os valores da coelção noticias
   }
 
   async presentModal(item: Item) {
     const modal = await this.modalCtrl.create({
       component: DetalhesPage,
       componentProps: {
-        item: item
+        item
       }
     });
     return await modal.present();

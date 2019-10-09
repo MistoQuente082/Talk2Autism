@@ -21,7 +21,7 @@ export class Tab1Page {
     db: AngularFirestore, //Confira App.components.ts
     public modalCtrl: ModalController,
     public alertController: AlertController) {
-    let currentUser = firebase.auth().currentUser; //Consegue o ID do usuário logado
+    const currentUser = firebase.auth().currentUser; // Consegue o ID do usuário logado
     this.noticias = db.collection('noticias').valueChanges(); //consegue os valores da coelção noticias
     this.banco = db;
   }
