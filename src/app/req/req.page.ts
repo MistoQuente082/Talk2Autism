@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Item } from 'src/assets/extra/item';
 import { ModalController, NavParams } from '@ionic/angular';
 import { modais } from './modais.html';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 
 
@@ -14,16 +15,19 @@ import { modais } from './modais.html';
 })
 export class ReqPage implements OnInit {
   tipo: any;
+  banco: AngularFirestore;
 
   motivo: string;
 
-
   public fardamentos = modais.fardamentos;
   public reunioes = modais.reunioes;
+
+
   constructor(
     public modalCtrl: ModalController,
-    public navParams: NavParams,
-  ) {
+    public db: AngularFirestore,
+    public navParams: NavParams) {
+    this.banco = db;
     this.tipo = navParams.get('tipo');
   }
 
@@ -52,6 +56,14 @@ export class ReqPage implements OnInit {
   }
 
   // Enviar pedido de reunião
-  subMeeting() {  }
+  subMeeting(tipo) {
+  }
+
+  // Enviar pedido de fardamento
+  subUniform() {
+    this.banco.collection("requisicoes").doc("fardamentos").collection("pedidos").doc("PN1").set({
+      pedinte: "June 23, 1912",
+    });
+  }
 
 }
