@@ -22,8 +22,30 @@ export class ReqPage implements OnInit {
 
   motivo: string;
 
+  fard = {
+    tamanho: '',
+    quantidade: '',
+  };
+
+  mod = {
+    aQnt: '',
+    tema: '',
+    elementos: '',
+    infoAd: '',
+    modulos: '',
+
+  };
+
+  reun = {
+    motivos: '',
+    limHorario: '',
+    limData: '',
+    datelhes: '',
+  };
+
   public fardamentos = modais.fardamentos;
   public reunioes = modais.reunioes;
+  public modulos = modais.modulos;
 
 
   constructor(
@@ -45,25 +67,32 @@ export class ReqPage implements OnInit {
     console.log(this.tipo);
 
     if (this.tipo.nome === 'Fardamentos') {
-      var element = document.getElementById('teste');
+      var element = document.getElementById('reqModal');
       element.innerHTML = this.fardamentos;
     }
 
     if (this.tipo.nome === 'Módulos') {
-      var element = document.getElementById('teste');
+      var element = document.getElementById('reqModal');
       element.innerHTML = '<p>cdjcd</p>';
     }
 
     if (this.tipo.nome === 'Reuniões') {
-      var element = document.getElementById('teste');
+      var element = document.getElementById('reqModal');
       element.innerHTML = this.reunioes;
     }
+  }
+
+  sub() {
+    console.log(this.mod);
   }
 
   // Enviar pedido de reunião
   subMeeting(tipo) {
   }
 
+  // Enviar pedido de Modulos
+  subModules() {
+  }
   // Enviar pedido de fardamento
   subUniform() {
     this.banco.collection("requisicoes").doc("fardamentos").collection("pedidos").doc("PN1").set({

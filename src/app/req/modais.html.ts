@@ -9,7 +9,7 @@ export let modais = {
     </ion-list-header>
   <ion-item>
   <ion-label position="floating">Tamanhos disponíveis</ion-label>
-  <ion-select placeholder="Tamanho" >
+  <ion-select [(ngModel)]="fard.tamanho" placeholder="Tamanho" >
     <ion-select-option value="pp">PP</ion-select-option>
     <ion-select-option value="p">P</ion-select-option>
     <ion-select-option value="m">M</ion-select-option>
@@ -21,7 +21,7 @@ export let modais = {
 
 <ion-item>
   <ion-label position="floating">Quantas fardas deseja adquirir</ion-label>
-  <ion-select placeholder="Quantidade" >
+  <ion-select [(ngModel)]="fard.quantidade" placeholder="Quantidade" >
       <ion-select-option value="1">1</ion-select-option>
       <ion-select-option value="2">2</ion-select-option>
       <ion-select-option value="3">3</ion-select-option>
@@ -30,57 +30,67 @@ export let modais = {
       <ion-select-option value="6">6</ion-select-option>
   </ion-select>
 </ion-item>
+<ion-button (click)="subUniform()" expand="block" color="medium">Fazer pedido</ion-button>
   </ion-list>
-  
-  <div>
-  <ion-button (click)="subUniform()" expand="block" color="medium">Fazer pedido</ion-button>
-</div>
-</div>
+
+
   `,
 
 
-  modulos: ` 
-    <ion-list> 
+  modulos: `
+  <ion-list>
     <ion-item>
-    <ion-label position="floating">Disponível</ion-label>
-    <ion-select placeholder="" >
-      <ion-select-option value="pais">Pais</ion-select-option>
-      <ion-select-option value="profissionais">Profissionais</ion-select-option>
-      <ion-select-option value="coordenacao">Coordenação</ion-select-option>
-    </ion-select>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Destinatário</ion-label>
-    <ion-select placeholder="Select One" >
-      <ion-select-option value="1">1</ion-select-option>
-      <ion-select-option value="2">2</ion-select-option>
-      <ion-select-option value="3">3</ion-select-option>
-      <ion-select-option value="4">4</ion-select-option>
-      <ion-select-option value="5">5</ion-select-option>
-      <ion-select-option value="6">6</ion-select-option>
-    </ion-select>
-  </ion-item>
-    </ion-list>`,
+      <ion-label [(ngModel)]="mod.aQnt" position="floating">Quantidade de atividades:</ion-label>
+      <ion-input type="text" maxlenght="3" placeholder="Ex: 3"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label [(ngModel)]="mod.tema" position="floating">Digite um tema (opcional):</ion-label>
+        <ion-input required maxlenght="30" class="plac" type="text" placeholder="Ex: Animais"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label [(ngModel)]="mod.elementos" position="floating">Elementos inclusos (comunicação):</ion-label>
+        <ion-input required maxlenght="20" type="text" placeholder="Ex: Sanduíche, celular..."></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label [(ngModel)]="mod.infoAd" position="floating">Informações adicionais:</ion-label>
+        <ion-input required maxlenght="50" type="text" placeholder="Ex: Letras maíusculas, cores fortes "></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Selecione:</ion-label>
+        <ion-select [(ngModel)]="mod.modulos" placeholder="Tipo de módulo">
+            <ion-select-option value="sobPos">Sobreposição</ion-select-option>
+            <ion-select-option value="duasEn">Duas Entradas</ion-select-option>
+            <ion-select-option value="parImg">Pareamento de Imagens</ion-select-option>
+            <ion-select-option value="enig">Enigmas</ion-select-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-button (click)="sub()" expand="block" color="medium">Fazer pedido</ion-button>
+    
+</ion-list>`,
   reunioes: `
-  <div style="padding-right: 14px">
+  
   <ion-list>
   <ion-item>
-  <ion-label [(ngModel)]="email" position="floating">Motivo:</ion-label>
+  <ion-label [(ngModel)]="reun.motivo" position="floating">Motivo:</ion-label>
       <ion-input maxlenght="100" placeholder="Ex: Mudança de turma"></ion-input>
     </ion-item>
 
   <ion-item>
-      <ion-label position="floating">Limitações de horário:</ion-label>
+      <ion-label [(ngModel)]="reun.limHorario" position="floating">Limitações de horário:</ion-label>
       <ion-input required maxlenght="30" class="plac" type="text" placeholder="Ex: Indisponível antes das 10h"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label position="floating">Limitações de datas:</ion-label>
+    <ion-label [(ngModel)]="reun.limData" position="floating">Limitações de datas:</ion-label>
     <ion-input required type="text" placeholder="Ex: Indisponível quinta"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-textarea rows="8" cols="30" placeholder="Mais detalhes"></ion-textarea>
+    <ion-textarea [(ngModel)]="reun.detalhes" rows="8" cols="30" placeholder="Mais detalhes"></ion-textarea>
   </ion-item>
 
     </ion-list>
@@ -89,7 +99,6 @@ export let modais = {
             <ion-icon name="checkmark"></ion-icon>
         </ion-fab-button>
     </ion-fab>
-    </div>
     `
 
 };
