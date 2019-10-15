@@ -13,19 +13,24 @@
   <ion-list>
     <ion-item>
       <ion-label>Destinatário</ion-label>
-      <ion-select placeholder="Select One" multiple>
+      <ion-select placeholder="Selecione" multiple>
         <ion-select-option *ngFor="let pessoa of pessoas | async">{{pessoa.nome}}</ion-select-option>
       </ion-select>
     </ion-item>
 
     <!-- Inputs with labels -->
     <ion-item>
-      <ion-input placeholder="Assunto"></ion-input>
+      <ion-input [(ngModel)]="asMens" placeholder="Assunto"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-textarea rows="10" cols="30" placeholder="Mensagem"></ion-textarea>
+      <ion-textarea [(ngModel)]="contMens" rows="10" cols="30" placeholder="Mensagem"></ion-textarea>
     </ion-item>
-
   </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="subMessage()">
+      <ion-icon name="send"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 </ion-content>

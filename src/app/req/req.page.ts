@@ -19,6 +19,27 @@ export class ReqPage implements OnInit {
 
   motivo: string;
 
+  fard = {
+    tamanho: '',
+    quantidade: '',
+  };
+
+  mod = {
+    aQnt: '',
+    tema: '',
+    elementos: '',
+    infoAd: '',
+    modulos: '',
+
+  };
+
+  reun = {
+    motivos: '',
+    limHorario: '',
+    limData: '',
+    datelhes: '',
+  };
+
   public fardamentos = modais.fardamentos;
   public reunioes = modais.reunioes;
   public modulos = modais.modulos;
@@ -54,6 +75,10 @@ export class ReqPage implements OnInit {
       var element = document.getElementById('reqModal');
       element.innerHTML = this.reunioes;
     }
+  }
+
+  sub() {
+    console.log(this.mod);
   }
 
   // Enviar pedido de reunião
