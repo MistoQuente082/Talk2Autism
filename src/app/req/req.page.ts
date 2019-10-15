@@ -17,35 +17,29 @@ export class ReqPage implements OnInit {
   tipo: any;
   banco: AngularFirestore;
   fardamento: any;
-  modulos: any;
   reuniao: any;
 
-  motivo: string;
 
-  fard = {
-    tamanho: '',
-    quantidade: '',
-  };
 
-  mod = {
-    aQnt: '',
-    tema: '',
-    elementos: '',
-    infoAd: '',
-    modulos: '',
 
-  };
+  public aQnt: string;
+  public tema: string;
+  public elementos: string;
+  public infoAd: string;
+  public modulos: string;
+  public motivo: string;
+  public limHorario: string;
+  public limData: string;
+  public detalhes: string;
+  public tamanho: string;
+  public quantidade: string;
 
-  reun = {
-    motivos: '',
-    limHorario: '',
-    limData: '',
-    datelhes: '',
-  };
+
+
 
   public fardamentos = modais.fardamentos;
   public reunioes = modais.reunioes;
-  public modulos = modais.modulos;
+  public moduloss = modais.modulos;
 
 
   constructor(
@@ -58,7 +52,7 @@ export class ReqPage implements OnInit {
 
   }
 
-  //Sair da página
+  // Sair da página
   async dismiss() {
     await this.modalCtrl.dismiss();
   }
@@ -73,7 +67,7 @@ export class ReqPage implements OnInit {
 
     if (this.tipo.nome === 'Módulos') {
       var element = document.getElementById('reqModal');
-      element.innerHTML = '<p>cdjcd</p>';
+      element.innerHTML = this.moduloss;
     }
 
     if (this.tipo.nome === 'Reuniões') {
@@ -83,21 +77,37 @@ export class ReqPage implements OnInit {
   }
 
   sub() {
-    console.log(this.mod);
+    this.subMeeting();
+
   }
 
   // Enviar pedido de reunião
-  subMeeting(tipo) {
+  subMeeting() {
+    const reun = {
+      motivos: this.motivo,
+      limHorario: this.limHorario,
+      limData: this.limData,
+      detalhes: this.detalhes,
+    };
+    console.log(reun);
   }
 
   // Enviar pedido de Modulos
   subModules() {
+    const mod = {
+      aQnt: this.aQnt,
+      tema: this.tema,
+      elementos: this.elementos,
+      infoAd: this.infoAd,
+      modulos: this.modulos,
+    };
   }
   // Enviar pedido de fardamento
   subUniform() {
-    this.banco.collection("requisicoes").doc("fardamentos").collection("pedidos").doc("PN1").set({
-      pedinte: "June 23, 1912",
-    });
+    const fard = {
+      tamanho: this.tamanho,
+      quantidade: this.quantidade,
+    };
   }
 
   async submit() {

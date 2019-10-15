@@ -9,7 +9,33 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content id="reqModal">
-  <ion-button (click)="sub()" expand="block" color="medium">Fazer pedido</ion-button>
+<ion-content>
+  <div id="reqModal">
+  </div>
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Motivo:</ion-label>
+      <ion-input [(ngModel)]="motivo" maxlenght="100" placeholder="Ex: Mudança de turma"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Limitações de horário:</ion-label>
+      <ion-input [(ngModel)]="limHorario" required maxlenght="30" class="plac" type="text"
+        placeholder="Ex: Indisponível antes das 10h"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Limitações de datas:</ion-label>
+      <ion-input [(ngModel)]="limData" required type="text" placeholder="Ex: Indisponível quinta"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-textarea [(ngModel)]="detalhes" rows="8" cols="30" placeholder="Mais detalhes"></ion-textarea>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-button (click)="subMeeting()" expand="block" color="medium">Fazer pedido</ion-button>
+
 
 </ion-content>

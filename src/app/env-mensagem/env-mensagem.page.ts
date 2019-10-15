@@ -30,6 +30,12 @@ export class EnvMensagemPage implements OnInit {
   }
 
   subMessage() {
+    const k = {
+      asMens: this.asMens,
+      contMens: this.contMens,
+    };
+
+    console.log(k);
     console.log(this.asMens);
     console.log(this.contMens);
     if (this.asMens === undefined || this.contMens === undefined || this.pessoas === undefined) {
