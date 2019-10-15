@@ -8,8 +8,8 @@
 
 <ion-content>
   <!--Mostra card para cada categoria-->
-  <ion-card *ngFor="let req of req" (click)="presentModal(req)">
+  <ion-card *ngFor="let req of req | async" (click)="presentModal(req)">
     <img class="img" src="{{req.img}}" />
-    <div class="card-title">{{req.tipo}}</div>
+    <div class="card-title">{{req.nome}}</div>
   </ion-card>
 </ion-content>

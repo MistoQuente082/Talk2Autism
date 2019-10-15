@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from 'src/assets/extra/item';
-import { ModalController, NavParams } from '@ionic/angular';
+import { ModalController, NavParams, AlertController } from '@ionic/angular';
 import { modais } from './modais.html';
 import { AngularFirestore } from '@angular/fire/firestore';
 
@@ -16,6 +16,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class ReqPage implements OnInit {
   tipo: any;
   banco: AngularFirestore;
+  fardamento: any;
+  modulos: any;
+  reuniao: any;
 
   motivo: string;
 
@@ -26,9 +29,11 @@ export class ReqPage implements OnInit {
   constructor(
     public modalCtrl: ModalController,
     public db: AngularFirestore,
+    public alertController: AlertController,
     public navParams: NavParams) {
     this.banco = db;
     this.tipo = navParams.get('tipo');
+
   }
 
   //Sair da página
@@ -39,17 +44,17 @@ export class ReqPage implements OnInit {
   ngOnInit() {
     console.log(this.tipo);
 
-    if (this.tipo.tipo === 'Fardamentos') {
+    if (this.tipo.nome === 'Fardamentos') {
       var element = document.getElementById('teste');
       element.innerHTML = this.fardamentos;
     }
 
-    if (this.tipo.tipo === 'Módulos') {
+    if (this.tipo.nome === 'Módulos') {
       var element = document.getElementById('teste');
       element.innerHTML = '<p>cdjcd</p>';
     }
 
-    if (this.tipo.tipo === 'Reuniões') {
+    if (this.tipo.nome === 'Reuniões') {
       var element = document.getElementById('teste');
       element.innerHTML = this.reunioes;
     }
@@ -65,5 +70,31 @@ export class ReqPage implements OnInit {
       pedinte: "June 23, 1912",
     });
   }
+
+  async submit() {
+    console.log('freeishk');
+    if (this.tipo.status === false) {
+      console.log('wueiwue');
+      const alert = await this.alertController.create({
+        header: "Algo deu errado",
+        message: "Pedidos de " + this.tipo.nome + "Não estão sendo disponibilizado no momento",
+        buttons: [
+          {
+            text: 'Fechar',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: (blah) => {
+              console.log('Confirm Cancel: blah');
+            }
+          }
+        ]
+      });
+      await alert.present();
+    } else {
+      console.log('ahdwwgd');
+      this.dismiss();
+    }
+  }
+
 
 }

@@ -5,7 +5,7 @@
         <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>{{tipo.tipo}}</ion-title>
+    <ion-title>{{tipo.nome}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,6 +13,9 @@
   <div id="teste">
 
 
+  </div>
+  <div>
+    <ion-button (click)="submit()" expand="block" color="medium">Fazer pedido</ion-button>
   </div>
 
 </ion-content>

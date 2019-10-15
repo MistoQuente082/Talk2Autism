@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ReqPage } from '../req/req.page';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-tab3',
@@ -10,31 +12,14 @@ import { ReqPage } from '../req/req.page';
 export class Tab3Page {
 
   // Dados para os cards
-  req: any[] = [
-    {
-      // O comentario abaixo, permite linha mais longa.
-      // tslint:disable-next-line: max-line-length
-      img: '../assets/uniforme.png',
-      tipo: 'Fardamentos',
-    },
+  req: Observable<any[]>;
 
-    {
-      // O comentario abaixo, permite linha mais longa.
-      // tslint:disable-next-line: max-line-length
-      img: '../assets/modulos.png',
-      tipo: 'Módulos',
-    },
-
-    {
-      // O comentario abaixo, permite linha mais longa.
-      // tslint:disable-next-line: max-line-length
-      img: '../assets/reunioes.jpg',
-      tipo: 'Reuniões',
-    },
-  ];
   constructor(
+    db: AngularFirestore,
     public modalCtrl: ModalController
-  ) { }
+  ) {
+    this.req = db.collection('requisicoes').valueChanges();
+  }
 
   async presentModal(tipo: any) {
     const modal = await this.modalCtrl.create({
