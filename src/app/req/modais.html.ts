@@ -9,7 +9,7 @@ export let modais = {
     </ion-list-header>
   <ion-item>
   <ion-label position="floating">Tamanhos disponíveis</ion-label>
-  <ion-select [(ngModel)]="fard.tamanho" placeholder="Tamanho" >
+  <ion-select [(ngModel)]="tamanho" placeholder="Tamanho" >
     <ion-select-option value="pp">PP</ion-select-option>
     <ion-select-option value="p">P</ion-select-option>
     <ion-select-option value="m">M</ion-select-option>
@@ -21,7 +21,7 @@ export let modais = {
 
 <ion-item>
   <ion-label position="floating">Quantas fardas deseja adquirir</ion-label>
-  <ion-select [(ngModel)]="fard.quantidade" placeholder="Quantidade" >
+  <ion-select [(ngModel)]="quantidade" placeholder="Quantidade" >
       <ion-select-option value="1">1</ion-select-option>
       <ion-select-option value="2">2</ion-select-option>
       <ion-select-option value="3">3</ion-select-option>
@@ -38,27 +38,27 @@ export let modais = {
   modulos: `
   <ion-list>
     <ion-item>
-      <ion-label [(ngModel)]="mod.aQnt" position="floating">Quantidade de atividades:</ion-label>
-      <ion-input type="text" maxlenght="3" placeholder="Ex: 3"></ion-input>
+      <ion-label  position="floating">Quantidade de atividades:</ion-label>
+      <ion-input [(ngModel)]="aQnt" type="text" maxlenght="3" placeholder="Ex: 3"></ion-input>
     </ion-item>
     <ion-item>
-        <ion-label [(ngModel)]="mod.tema" position="floating">Digite um tema (opcional):</ion-label>
-        <ion-input required maxlenght="30" class="plac" type="text" placeholder="Ex: Animais"></ion-input>
-    </ion-item>
-
-    <ion-item>
-        <ion-label [(ngModel)]="mod.elementos" position="floating">Elementos inclusos (comunicação):</ion-label>
-        <ion-input required maxlenght="20" type="text" placeholder="Ex: Sanduíche, celular..."></ion-input>
+        <ion-label  position="floating">Digite um tema (opcional):</ion-label>
+        <ion-input [(ngModel)]="tema" required maxlenght="30" class="plac" type="text" placeholder="Ex: Animais"></ion-input>
     </ion-item>
 
     <ion-item>
-        <ion-label [(ngModel)]="mod.infoAd" position="floating">Informações adicionais:</ion-label>
-        <ion-input required maxlenght="50" type="text" placeholder="Ex: Letras maíusculas, cores fortes "></ion-input>
+        <ion-label  position="floating">Elementos inclusos (comunicação):</ion-label>
+        <ion-input [(ngModel)]="elementos"required maxlenght="20" type="text" placeholder="Ex: Sanduíche, celular..."></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label  position="floating">Informações adicionais:</ion-label>
+        <ion-input [(ngModel)]="infoAd" required maxlenght="50" type="text" placeholder="Ex: Letras maíusculas, cores fortes "></ion-input>
     </ion-item>
 
     <ion-item>
         <ion-label position="floating">Selecione:</ion-label>
-        <ion-select [(ngModel)]="mod.modulos" placeholder="Tipo de módulo">
+        <ion-select [(ngModel)]="modulos" placeholder="Tipo de módulo">
             <ion-select-option value="sobPos">Sobreposição</ion-select-option>
             <ion-select-option value="duasEn">Duas Entradas</ion-select-option>
             <ion-select-option value="parImg">Pareamento de Imagens</ion-select-option>
@@ -70,25 +70,25 @@ export let modais = {
     
 </ion-list>`,
   reunioes: `
-  
-  <ion-list>
+    <ion-list>
   <ion-item>
-  <ion-label [(ngModel)]="reun.motivo" position="floating">Motivo:</ion-label>
-      <ion-input maxlenght="100" placeholder="Ex: Mudança de turma"></ion-input>
+  <ion-label  position="floating">Motivo:</ion-label>
+      <ion-input [(ngModel)]="motivo" maxlenght="100" placeholder="Ex: Mudança de turma"></ion-input>
     </ion-item>
 
   <ion-item>
-      <ion-label [(ngModel)]="reun.limHorario" position="floating">Limitações de horário:</ion-label>
-      <ion-input required maxlenght="30" class="plac" type="text" placeholder="Ex: Indisponível antes das 10h"></ion-input>
+      <ion-label  position="floating">Limitações de horário:</ion-label>
+      <ion-input [(ngModel)]="limHorario"
+       required maxlenght="30" class="plac" type="text" placeholder="Ex: Indisponível antes das 10h"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label [(ngModel)]="reun.limData" position="floating">Limitações de datas:</ion-label>
-    <ion-input required type="text" placeholder="Ex: Indisponível quinta"></ion-input>
+    <ion-label  position="floating">Limitações de datas:</ion-label>
+    <ion-input [(ngModel)]="limData" required type="text" placeholder="Ex: Indisponível quinta"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-textarea [(ngModel)]="reun.detalhes" rows="8" cols="30" placeholder="Mais detalhes"></ion-textarea>
+    <ion-textarea [(ngModel)]="detalhes" rows="8" cols="30" placeholder="Mais detalhes"></ion-textarea>
   </ion-item>
 
     </ion-list>

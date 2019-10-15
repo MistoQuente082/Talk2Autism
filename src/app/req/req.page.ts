@@ -17,33 +17,30 @@ import { ObjectUnsubscribedError } from 'rxjs';
 export class ReqPage implements OnInit {
   tipo: any;
   banco: AngularFirestore;
+  fardamento: any;
+  reuniao: any;
 
-  motivo: string;
 
-  fard = {
-    tamanho: '',
-    quantidade: '',
-  };
 
-  mod = {
-    aQnt: '',
-    tema: '',
-    elementos: '',
-    infoAd: '',
-    modulos: '',
 
-  };
+  public aQnt: string;
+  public tema: string;
+  public elementos: string;
+  public infoAd: string;
+  public modulos: string;
+  public motivo: string;
+  public limHorario: string;
+  public limData: string;
+  public detalhes: string;
+  public tamanho: string;
+  public quantidade: string;
 
-  reun = {
-    motivos: '',
-    limHorario: '',
-    limData: '',
-    datelhes: '',
-  };
+
+
 
   public fardamentos = modais.fardamentos;
   public reunioes = modais.reunioes;
-  public modulos = modais.modulos;
+  public moduloss = modais.modulos;
 
 
   constructor(
@@ -56,7 +53,7 @@ export class ReqPage implements OnInit {
 
   }
 
-  //Sair da página
+  // Sair da página
   async dismiss() {
     await this.modalCtrl.dismiss();
   }
@@ -71,7 +68,7 @@ export class ReqPage implements OnInit {
 
     if (this.tipo.nome === 'Módulos') {
       var element = document.getElementById('reqModal');
-      element.innerHTML = this.modulos;
+      element.innerHTML = this.moduloss;
     }
 
     if (this.tipo.nome === 'Reuniões') {
@@ -80,7 +77,40 @@ export class ReqPage implements OnInit {
     }
   }
 
-  // Enviar pedidos
+  sub() {
+    this.subMeeting();
+
+  }
+
+  // Enviar pedido de reunião
+  subMeeting() {
+    const reun = {
+      motivos: this.motivo,
+      limHorario: this.limHorario,
+      limData: this.limData,
+      detalhes: this.detalhes,
+    };
+    console.log(reun);
+  }
+
+  // Enviar pedido de Modulos
+  subModules() {
+    const mod = {
+      aQnt: this.aQnt,
+      tema: this.tema,
+      elementos: this.elementos,
+      infoAd: this.infoAd,
+      modulos: this.modulos,
+    };
+  }
+  // Enviar pedido de fardamento
+  subUniform() {
+    const fard = {
+      tamanho: this.tamanho,
+      quantidade: this.quantidade,
+    };
+  }
+
   async submit() {
     console.log('enviando');
     if (this.tipo.status === false) {
