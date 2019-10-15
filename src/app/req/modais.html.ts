@@ -30,39 +30,47 @@ export let modais = {
       <ion-select-option value="6">6</ion-select-option>
   </ion-select>
 </ion-item>
+<ion-button (click)="subUniform()" expand="block" color="medium">Fazer pedido</ion-button>
   </ion-list>
-  
-  <div>
-  <ion-button (click)="subUniform()" expand="block" color="medium">Fazer pedido</ion-button>
-</div>
-</div>
+
+
   `,
 
 
-  modulos: ` 
-    <ion-list> 
+  modulos: `
+  <ion-list>
     <ion-item>
-    <ion-label position="floating">Disponível</ion-label>
-    <ion-select placeholder="" >
-      <ion-select-option value="pais">Pais</ion-select-option>
-      <ion-select-option value="profissionais">Profissionais</ion-select-option>
-      <ion-select-option value="coordenacao">Coordenação</ion-select-option>
-    </ion-select>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Destinatário</ion-label>
-    <ion-select placeholder="Select One" >
-      <ion-select-option value="1">1</ion-select-option>
-      <ion-select-option value="2">2</ion-select-option>
-      <ion-select-option value="3">3</ion-select-option>
-      <ion-select-option value="4">4</ion-select-option>
-      <ion-select-option value="5">5</ion-select-option>
-      <ion-select-option value="6">6</ion-select-option>
-    </ion-select>
-  </ion-item>
-    </ion-list>`,
+      <ion-label [(ngModel)]="atividade" position="floating">Quantidade de atividades:</ion-label>
+      <ion-input type="text" maxlenght="3" placeholder="Ex: 3"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">Digite um tema (opcional):</ion-label>
+        <ion-input required maxlenght="30" class="plac" type="text" placeholder="Ex: Animais"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Elementos inclusos (comunicação):</ion-label>
+        <ion-input required maxlenght="20" type="text" placeholder="Ex: Sanduíche, celular..."></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Informações adicionais:</ion-label>
+        <ion-input required maxlenght="50" type="text" placeholder="Ex: Letras maíusculas, cores fortes "></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Selecione:</ion-label>
+        <ion-select placeholder="Tipo de módulo">
+            <ion-select-option value="sobPos">Sobreposição</ion-select-option>
+            <ion-select-option value="duasEn">Duas Entradas</ion-select-option>
+            <ion-select-option value="parImg">Pareamento de Imagens</ion-select-option>
+            <ion-select-option value="enig">Enigmas</ion-select-option>
+        </ion-select>
+    </ion-item>
+    <ion-button (click)="subModules()" expand="block" color="medium">Fazer pedido</ion-button>
+</ion-list>`,
   reunioes: `
-  <div style="padding-right: 14px">
+  
   <ion-list>
   <ion-item>
   <ion-label [(ngModel)]="email" position="floating">Motivo:</ion-label>
@@ -89,7 +97,6 @@ export let modais = {
             <ion-icon name="checkmark"></ion-icon>
         </ion-fab-button>
     </ion-fab>
-    </div>
     `
 
 };
