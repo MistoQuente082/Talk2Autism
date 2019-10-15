@@ -32,8 +32,6 @@ export let modais = {
 </ion-item>
 <ion-button (click)="subUniform()" expand="block" color="medium">Fazer pedido</ion-button>
   </ion-list>
-
-
   `,
 
 
@@ -94,11 +92,6 @@ export let modais = {
   </ion-item>
 
     </ion-list>
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button (click)="subMeeting()">
-            <ion-icon name="checkmark"></ion-icon>
-        </ion-fab-button>
-    </ion-fab>
     `
 
 };

@@ -3,6 +3,7 @@ import { Item } from 'src/assets/extra/item';
 import { ModalController, NavParams, AlertController } from '@ionic/angular';
 import { modais } from './modais.html';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { ObjectUnsubscribedError } from 'rxjs';
 
 
 
@@ -16,9 +17,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class ReqPage implements OnInit {
   tipo: any;
   banco: AngularFirestore;
-  fardamento: any;
-  modulos: any;
-  reuniao: any;
 
   motivo: string;
 
@@ -73,7 +71,7 @@ export class ReqPage implements OnInit {
 
     if (this.tipo.nome === 'Módulos') {
       var element = document.getElementById('reqModal');
-      element.innerHTML = '<p>cdjcd</p>';
+      element.innerHTML = this.modulos;
     }
 
     if (this.tipo.nome === 'Reuniões') {
@@ -82,48 +80,39 @@ export class ReqPage implements OnInit {
     }
   }
 
-  sub() {
-    console.log(this.mod);
-  }
-
-  // Enviar pedido de reunião
-  subMeeting(tipo) {
-  }
-
-  // Enviar pedido de Modulos
-  subModules() {
-  }
-  // Enviar pedido de fardamento
-  subUniform() {
-    this.banco.collection("requisicoes").doc("fardamentos").collection("pedidos").doc("PN1").set({
-      pedinte: "June 23, 1912",
-    });
-  }
-
+  // Enviar pedidos
   async submit() {
-    console.log('freeishk');
+    console.log('enviando');
     if (this.tipo.status === false) {
-      console.log('wueiwue');
+      console.log('status=false');
       const alert = await this.alertController.create({
         header: "Algo deu errado",
-        message: "Pedidos de " + this.tipo.nome + "Não estão sendo disponibilizado no momento",
+        message: "Pedidos de " + this.tipo.nome + " não estão sendo disponibilizado no momento",
         buttons: [
           {
             text: 'Fechar',
             role: 'cancel',
             cssClass: 'secondary',
             handler: (blah) => {
-              console.log('Confirm Cancel: blah');
+              console.log('triste fim');
+              this.dismiss();
             }
           }
         ]
       });
       await alert.present();
     } else {
-      console.log('ahdwwgd');
+      console.log('status=true');
+      if (this.tipo.nome === "Fardamentos") {
+        this.banco.collection("requisicoes").doc("fardamentos").collection("pedidos").add();
+      }
+      if (this.tipo.nome === "Reuniões") {
+        this.banco.collection("requisicoes").doc("reunioes").collection("pedidos").add();
+      }
+      if (this.tipo.nome === "Módulo") {
+        this.banco.collection("requisicoes").doc("modulos").collection("pedidos").add();
+      }
       this.dismiss();
     }
   }
-
-
 }
