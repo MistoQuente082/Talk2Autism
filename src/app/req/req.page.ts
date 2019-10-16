@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Item } from 'src/assets/extra/item';
 import { ModalController, NavParams, AlertController, ToastController } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { ObjectUnsubscribedError } from 'rxjs';
 
 
 
