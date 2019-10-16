@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from 'src/assets/extra/item';
-import { ModalController, NavParams, AlertController } from '@ionic/angular';
-import { modais } from './modais.html';
+import { ModalController, NavParams, AlertController, ToastController } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/firestore';
+
 
 
 
@@ -18,6 +18,8 @@ export class ReqPage implements OnInit {
   banco: AngularFirestore;
   fardamento: any;
   reuniao: any;
+
+  modais: number;
 
 
 
@@ -37,13 +39,9 @@ export class ReqPage implements OnInit {
 
 
 
-  public fardamentos = modais.fardamentos;
-  public reunioes = modais.reunioes;
-  public moduloss = modais.modulos;
-
-
   constructor(
     public modalCtrl: ModalController,
+    public toastCtrl: ToastController,
     public db: AngularFirestore,
     public alertController: AlertController,
     public navParams: NavParams) {
@@ -57,34 +55,52 @@ export class ReqPage implements OnInit {
     await this.modalCtrl.dismiss();
   }
 
+  // Mostra um aviso de envio
+  async presentToast(message: string) {
+    const toast = await this.toastCtrl.create({ message, duration: 2000 });
+    toast.present();
+  }
+
+  async presentAlert(message: string) {
+    const alert = await this.alertController.create({
+      header: 'Algo deu errado',
+      message,
+      buttons: [
+        {
+          text: 'Fechar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
   ngOnInit() {
     console.log(this.tipo);
 
     if (this.tipo.nome === 'Fardamentos') {
-      var element = document.getElementById('reqModal');
-      element.innerHTML = this.fardamentos;
+      this.modais = 1;
     }
 
     if (this.tipo.nome === 'Módulos') {
-      var element = document.getElementById('reqModal');
-      element.innerHTML = this.moduloss;
+      this.modais = 2;
     }
 
     if (this.tipo.nome === 'Reuniões') {
-      var element = document.getElementById('reqModal');
-      element.innerHTML = this.reunioes;
+      this.modais = 3;
     }
   }
 
-  sub() {
-    this.subMeeting();
 
-  }
 
   // Enviar pedido de reunião
   subMeeting() {
     const reun = {
-      motivos: this.motivo,
+      motivo: this.motivo,
       limHorario: this.limHorario,
       limData: this.limData,
       detalhes: this.detalhes,
@@ -103,37 +119,31 @@ export class ReqPage implements OnInit {
     };
   }
   // Enviar pedido de fardamento
-  subUniform() {
+  async subUniform() {
     const fard = {
       tamanho: this.tamanho,
       quantidade: this.quantidade,
     };
-  }
 
-  async submit() {
-    console.log('freeishk');
-    if (this.tipo.status === false) {
-      console.log('wueiwue');
-      const alert = await this.alertController.create({
-        header: "Algo deu errado",
-        message: "Pedidos de " + this.tipo.nome + "Não estão sendo disponibilizado no momento",
-        buttons: [
-          {
-            text: 'Fechar',
-            role: 'cancel',
-            cssClass: 'secondary',
-            handler: (blah) => {
-              console.log('Confirm Cancel: blah');
-            }
-          }
-        ]
-      });
-      await alert.present();
+    // VERIFICA SE PODE FAZER FAZER PEDIDO DE FARDAMENTO
+    if (this.tamanho !== undefined && this.quantidade !== undefined) {
+      if (this.tipo.status === false) {
+
+
+        // MOSTRA UMA ALERTA CASO NÃO TIVER DISPONÍVEL
+        this.presentAlert('Pedidos de fardamentos não estão disponíveis no momento');
+        console.log('Sem fardamento');
+
+      } else {
+        console.log('Fardamento foi pedido');
+        this.presentToast('Pedido Realizado com Sucesso!');
+        this.dismiss();
+      }
     } else {
-      console.log('ahdwwgd');
-      this.dismiss();
+      this.presentAlert('Preencha os campos!');
     }
   }
+
 
 
 }
