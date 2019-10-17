@@ -28,7 +28,7 @@ export class Tab2Page {
     public modalCtrl: ModalController,
     public alertController: AlertController) {
     let currentUser = firebase.auth().currentUser; //Consegue o ID do usuário logago
-    this.informes = db.collection('pais').doc(currentUser.uid).collection('informes').valueChanges(); //consegue os valores dos documentos do usuario logado entrando na pasta pais, documento do pai logado, coleção mensagens
+    this.informes = db.collection('pais').doc(currentUser.email).collection('informes').valueChanges(); //consegue os valores dos documentos do usuario logado entrando na pasta pais, documento do pai logado, coleção mensagens
     this.banco = db;
   }
 
