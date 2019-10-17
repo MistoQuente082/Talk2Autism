@@ -13,17 +13,17 @@
   <ion-list>
     <ion-item>
       <ion-label>Destinatário</ion-label>
-      <ion-select placeholder="Selecione" multiple>
+      <ion-select [(ngModel)]="mDestino" placeholder="Selecione" multiple>
         <ion-select-option *ngFor="let pessoa of pessoas | async">{{pessoa.nome}}</ion-select-option>
       </ion-select>
     </ion-item>
 
     <!-- Inputs with labels -->
     <ion-item>
-      <ion-input [(ngModel)]="asMens" placeholder="Assunto"></ion-input>
+      <ion-input [(ngModel)]="mAssunto" placeholder="Assunto"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-textarea [(ngModel)]="contMens" rows="10" cols="30" placeholder="Mensagem"></ion-textarea>
+      <ion-textarea [(ngModel)]="mConteudo" rows="10" cols="30" placeholder="Mensagem"></ion-textarea>
     </ion-item>
   </ion-list>
 

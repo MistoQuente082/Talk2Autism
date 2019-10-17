@@ -16,7 +16,8 @@ export class EnvMensagemPage implements OnInit {
 
   public mAssunto: string;
   public mConteudo: string;
-  public destMens: string;
+  public mDestino: any;
+  public banco: any;
 
 
   constructor(
@@ -24,33 +25,45 @@ export class EnvMensagemPage implements OnInit {
     public toastCtrl: ToastController,
     navParams: NavParams,
     db: AngularFirestore
-
   ) {
-    let currentUser = firebase.auth().currentUser; //Consegue o ID do usuário logado
+    this.banco = db;
     this.pessoas = db.collection('pais').valueChanges(); //consegue os valores da coelção noticias
   }
 
   // ENVIA MENSAGEM
   subMessage() {
     // VERIFICA SE OS CAMPOS FORAM DEFINIDOS
-    if (this.mAssunto === undefined || this.mConteudo === undefined || this.pessoas === undefined) {
+    if (this.mAssunto === undefined || this.mConteudo === undefined || this.mDestino === undefined) {
       // MOSTRA UM TOAST CASO OS CAMPOS NÃO SÃO PREENCHIDOS
       this.presentToast('Preencha os campos!');
     } else {
       const mensagem = {
         mAssunto: this.mAssunto,
         mConteudo: this.mConteudo,
+        mDestino: this.mDestino,
       };
+
+      let currentUser = firebase.auth().currentUser;
 
       console.log(mensagem);
 
-      // MOSTRA UM TOAST CASO TUDO CERTO E FECHa O MODAL 
-      this.presentToast('Mensagem enviada com sucesso!');
-      this.dismiss();
-
+      this.banco.collection("pais").doc(currentUser.email).collection("mensagens_e").add(
+        mensagem).then(ref => {
+          console.log(ref);
+          console.log('Uniforme foi pedido com document with ID: ', ref.id);
+          this.presentToast('Pedido Realizado com Sucesso!');
+          this.dismiss();
+        });
     }
 
+
+    // MOSTRA UM TOAST CASO TUDO CERTO E FECHa O MODAL 
+    this.presentToast('Mensagem enviada com sucesso!');
+    this.dismiss();
+
   }
+
+
 
   // FECHAR O MODAL
   async dismiss() {
@@ -66,6 +79,7 @@ export class EnvMensagemPage implements OnInit {
 
     toast.present();
   }
+
 
   ngOnInit() {
     //console.log(this.pessoas.email)
