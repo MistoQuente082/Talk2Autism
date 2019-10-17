@@ -62,6 +62,7 @@ export class ReqPage implements OnInit {
     toast.present();
   }
 
+  // MOSTRA UMA ALERTA NA TELA
   async presentAlert(message: string) {
     const alert = await this.alertController.create({
       header: 'Algo deu errado',
@@ -80,6 +81,7 @@ export class ReqPage implements OnInit {
     alert.present();
   }
 
+  // VERIFICA O TIPO DE REQUISIÇÃO E ABRE O MODAL CORRESPONDENTE
   ngOnInit() {
     console.log(this.tipo);
 
@@ -165,6 +167,7 @@ export class ReqPage implements OnInit {
           this.dismiss();
         });
     } else {
+      // MOSTRA UMA ALERTA CASO NÃO PREENCHEU OS CAMPOS
       this.presentAlert('Preencha os campos!');
 
     }

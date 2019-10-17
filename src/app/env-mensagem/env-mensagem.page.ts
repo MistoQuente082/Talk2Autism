@@ -14,8 +14,8 @@ export class EnvMensagemPage implements OnInit {
 
   pessoas: Observable<any[]>;
 
-  public asMens: string;
-  public contMens: string;
+  public mAssunto: string;
+  public mConteudo: string;
   public destMens: string;
 
 
@@ -30,18 +30,21 @@ export class EnvMensagemPage implements OnInit {
     this.pessoas = db.collection('pais').valueChanges(); //consegue os valores da coelção noticias
   }
 
+  // ENVIA MENSAGEM
   subMessage() {
-    const k = {
-      asMens: this.asMens,
-      contMens: this.contMens,
-    };
-
-    console.log(k);
-    console.log(this.asMens);
-    console.log(this.contMens);
-    if (this.asMens === undefined || this.contMens === undefined || this.pessoas === undefined) {
+    // VERIFICA SE OS CAMPOS FORAM DEFINIDOS
+    if (this.mAssunto === undefined || this.mConteudo === undefined || this.pessoas === undefined) {
+      // MOSTRA UM TOAST CASO OS CAMPOS NÃO SÃO PREENCHIDOS
       this.presentToast('Preencha os campos!');
     } else {
+      const mensagem = {
+        mAssunto: this.mAssunto,
+        mConteudo: this.mConteudo,
+      };
+
+      console.log(mensagem);
+
+      // MOSTRA UM TOAST CASO TUDO CERTO E FECHa O MODAL 
       this.presentToast('Mensagem enviada com sucesso!');
       this.dismiss();
 
@@ -49,16 +52,23 @@ export class EnvMensagemPage implements OnInit {
 
   }
 
+  // FECHAR O MODAL
   async dismiss() {
     await this.modalCtrl.dismiss();
   }
 
+
   async presentToast(message: string) {
-    const toast = await this.toastCtrl.create({ message, duration: 2000 });
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 2000
+    });
+
     toast.present();
   }
 
   ngOnInit() {
+    //console.log(this.pessoas.email)
   }
 
 }
