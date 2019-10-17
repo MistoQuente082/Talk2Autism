@@ -24,7 +24,7 @@ export class ReqPage implements OnInit {
 
 
 
-
+  
   public aQnt: string;
   public tema: string;
   public elementos: string;
@@ -62,6 +62,7 @@ export class ReqPage implements OnInit {
     toast.present();
   }
 
+  // MOSTRA UMA ALERTA NA TELA
   async presentAlert(message: string) {
     const alert = await this.alertController.create({
       header: 'Algo deu errado',
@@ -80,6 +81,7 @@ export class ReqPage implements OnInit {
     alert.present();
   }
 
+  // VERIFICA O TIPO DE REQUISIÇÃO E ABRE O MODAL CORRESPONDENTE
   ngOnInit() {
     console.log(this.tipo);
 
@@ -127,20 +129,21 @@ export class ReqPage implements OnInit {
     };
 
     // VERIFICA SE PODE FAZER FAZER PEDIDO DE FARDAMENTO
+    // VERIFICA SE OS CAMPOS FORAM PREENCHIDOS 
     if (this.tamanho !== undefined && this.quantidade !== undefined) {
       if (this.tipo.status === false) {
-
-
         // MOSTRA UMA ALERTA CASO NÃO TIVER DISPONÍVEL
         this.presentAlert('Pedidos de fardamentos não estão disponíveis no momento');
         console.log('Sem fardamento');
 
       } else {
+        // MOSTRA UM TOAST SE O PEDIDO FOI FEITO E FECHA O MODAL
         console.log('Fardamento foi pedido');
         this.presentToast('Pedido Realizado com Sucesso!');
         this.dismiss();
       }
     } else {
+      // MOSTRA UMA ALERTA CASO NÃO PREENCHEU OS CAMPOS
       this.presentAlert('Preencha os campos!');
     }
   }
