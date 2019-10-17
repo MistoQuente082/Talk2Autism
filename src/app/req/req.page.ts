@@ -100,51 +100,73 @@ export class ReqPage implements OnInit {
 
   // Enviar pedido de reunião
   subMeeting() {
-    const reun = {
-      motivo: this.motivo,
-      limHorario: this.limHorario,
-      limData: this.limData,
-      detalhes: this.detalhes,
-    };
-    console.log(reun);
+    if (this.motivo !== undefined && this.limHorario !== undefined
+      && this.limData !== undefined && this.detalhes !== undefined) {
+      const reun = {
+        motivo: this.motivo,
+        limHorario: this.limHorario,
+        limData: this.limData,
+        detalhes: this.detalhes,
+      };
+      console.log(reun);
+      this.banco.collection("requisicoes").doc(this.tipo.id).collection("pedidos").add(
+        reun).then(ref => {
+          console.log(ref);
+          console.log('Reunião foi pedida com document with ID: ', ref.id);
+          this.presentToast('Pedido Realizado com Sucesso!');
+          this.dismiss();
+        });
+    } else {
+      this.presentAlert('Preencha os campos!');
+
+    }
   }
 
   // Enviar pedido de Modulos
   subModules() {
-    const mod = {
-      aQnt: this.aQnt,
-      tema: this.tema,
-      elementos: this.elementos,
-      infoAd: this.infoAd,
-      modulos: this.modulos,
-    };
-  }
-  // Enviar pedido de fardamento
-  async subUniform() {
-    const fard = {
-      tamanho: this.tamanho,
-      quantidade: this.quantidade,
-    };
+    if (this.aQnt !== undefined && this.tema !== undefined
+      && this.elementos !== undefined && this.infoAd !== undefined && this.modulos !== undefined) {
+      const mod = {
+        aQnt: this.aQnt,
+        tema: this.tema,
+        elementos: this.elementos,
+        infoAd: this.infoAd,
+        modulos: this.modulos,
+      };
 
-    // VERIFICA SE PODE FAZER FAZER PEDIDO DE FARDAMENTO
-    if (this.tamanho !== undefined && this.quantidade !== undefined) {
-      if (this.tipo.status === false) {
-
-
-        // MOSTRA UMA ALERTA CASO NÃO TIVER DISPONÍVEL
-        this.presentAlert('Pedidos de fardamentos não estão disponíveis no momento');
-        console.log('Sem fardamento');
-
-      } else {
-        console.log('Fardamento foi pedido');
-        this.presentToast('Pedido Realizado com Sucesso!');
-        this.dismiss();
-      }
+      console.log(mod);
+      this.banco.collection("requisicoes").doc(this.tipo.id).collection("pedidos").add(
+        mod).then(ref => {
+          console.log(ref);
+          console.log('Modulos foi pedido com document with ID: ', ref.id);
+          this.presentToast('Pedido Realizado com Sucesso!');
+          this.dismiss();
+        });
     } else {
       this.presentAlert('Preencha os campos!');
+
     }
   }
 
+  // Enviar pedido de fardamento
+  async subUniform() {
+    if (this.tamanho !== undefined && this.quantidade !== undefined) {
+      const fard = {
+        tamanho: this.tamanho,
+        quantidade: this.quantidade,
+      };
 
+      console.log(fard);
+      this.banco.collection("requisicoes").doc(this.tipo.id).collection("pedidos").add(
+        fard).then(ref => {
+          console.log(ref);
+          console.log('Uniforme foi pedido com document with ID: ', ref.id);
+          this.presentToast('Pedido Realizado com Sucesso!');
+          this.dismiss();
+        });
+    } else {
+      this.presentAlert('Preencha os campos!');
 
+    }
+  }
 }

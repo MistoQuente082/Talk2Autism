@@ -16,6 +16,7 @@ export class EnvMensagemPage implements OnInit {
 
   public asMens: string;
   public contMens: string;
+  public destMens: string;
 
 
   constructor(
