@@ -57,9 +57,6 @@ export class EnvMensagemPage implements OnInit {
     }
 
 
-    // MOSTRA UM TOAST CASO TUDO CERTO E FECHa O MODAL 
-    this.presentToast('Mensagem enviada com sucesso!');
-    this.dismiss();
 
   }
 

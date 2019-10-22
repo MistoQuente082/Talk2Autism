@@ -137,7 +137,7 @@ export class ReqPage implements OnInit {
       };
 
       console.log(mod);
-      this.banco.collection("requisicoes").doc(this.tipo.id).collection("pedidos").add(
+      this.banco.collection('requisicoes').doc(this.tipo.id).collection("pedidos").add(
         mod).then(ref => {
           console.log(ref);
           console.log('Modulos foi pedido com document with ID: ', ref.id);
