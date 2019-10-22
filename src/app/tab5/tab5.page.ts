@@ -50,8 +50,8 @@ export class Tab5Page implements OnInit {
   //Função que chama um alert
   async presentAlertConfirm(mensagem) {
     const alert = await this.alertController.create({
-      header: mensagem.remetente + ':',
-      message: mensagem.mensagem,
+      header: mensagem.mRemetente + ':' + mensagem.mAssunto,
+      message: mensagem.mConteudo,
       buttons: [
         {
           text: 'Fechar',

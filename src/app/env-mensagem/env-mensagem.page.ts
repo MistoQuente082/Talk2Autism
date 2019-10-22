@@ -19,7 +19,6 @@ export class EnvMensagemPage implements OnInit {
   public mDestino: any;
   public banco: any;
 
-
   constructor(
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
@@ -32,6 +31,7 @@ export class EnvMensagemPage implements OnInit {
 
   // ENVIA MENSAGEM
   subMessage() {
+    let currentUser = firebase.auth().currentUser;
     // VERIFICA SE OS CAMPOS FORAM DEFINIDOS
     if (this.mAssunto === undefined || this.mConteudo === undefined || this.mDestino === undefined) {
       // MOSTRA UM TOAST CASO OS CAMPOS NÃO SÃO PREENCHIDOS
@@ -41,9 +41,23 @@ export class EnvMensagemPage implements OnInit {
         mAssunto: this.mAssunto,
         mConteudo: this.mConteudo,
         mDestino: this.mDestino,
+        mRemetente: currentUser.email,
       };
+      console.log(this.mDestino)
 
-      let currentUser = firebase.auth().currentUser;
+
+      for (var i = 0; i < mensagem.mDestino.length; i++) {
+        var dest = mensagem.mDestino[i].split(": ")[1]
+        console.log(i, dest); // i é o índice, matriz[i] é o valor
+        this.banco.collection("pais").doc(dest).collection("mensagens_r").add(
+          mensagem).then(ref => {
+            console.log(ref);
+            console.log('Uniforme foi pedido com document with ID: ', ref.id);
+            // MOSTRA UM TOAST CASO TUDO CERTO E FECHa O MODAL 
+            this.presentToast('Mensagem enviada com sucesso!');
+            this.dismiss();
+          });
+      }
 
       console.log(mensagem);
 
@@ -51,15 +65,14 @@ export class EnvMensagemPage implements OnInit {
         mensagem).then(ref => {
           console.log(ref);
           console.log('Uniforme foi pedido com document with ID: ', ref.id);
-          this.presentToast('Pedido Realizado com Sucesso!');
+          // MOSTRA UM TOAST CASO TUDO CERTO E FECHa O MODAL 
+          this.presentToast('Mensagem enviada com sucesso!');
           this.dismiss();
         });
     }
 
 
-    // MOSTRA UM TOAST CASO TUDO CERTO E FECHa O MODAL 
-    this.presentToast('Mensagem enviada com sucesso!');
-    this.dismiss();
+
 
   }
 

@@ -14,7 +14,7 @@
     <ion-item>
       <ion-label>Destinatário</ion-label>
       <ion-select [(ngModel)]="mDestino" placeholder="Selecione" multiple>
-        <ion-select-option *ngFor="let pessoa of pessoas | async">{{pessoa.nome}}</ion-select-option>
+        <ion-select-option *ngFor="let pessoa of pessoas | async">{{pessoa.nome}}: {{pessoa.email}}</ion-select-option>
       </ion-select>
     </ion-item>
 
