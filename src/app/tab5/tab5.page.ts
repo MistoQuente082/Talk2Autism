@@ -15,8 +15,7 @@ import { EnvMensagemPage } from '../env-mensagem/env-mensagem.page';
   styleUrls: ['./tab5.page.scss'],
 })
 export class Tab5Page implements OnInit {
-  //@ViewChild(IonSlides) 
-  slides: IonSlides;
+  @ViewChild(IonSlides) slides: IonSlides;
   public wavesPosition: 0;
   private wavesDifference: 100;
 
