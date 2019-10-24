@@ -5,10 +5,10 @@ import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-tabs',
-  templateUrl: 'tabs.page.html',
-  styleUrls: ['tabs.page.scss']
+  templateUrl: 'tabs2.page.html',
+  styleUrls: ['tabs2.page.scss']
 })
-export class TabsPage {
+export class Tabs2Page {
   usuario: any;
   user: any;
 

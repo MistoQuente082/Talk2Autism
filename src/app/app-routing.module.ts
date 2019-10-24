@@ -13,6 +13,11 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
 
+  {
+    path: '',
+    loadChildren: () => import('./tabs2/tabs2.module').then(m => m.Tabs2PageModule)
+  },
+
 
 
   { path: 'tab4', loadChildren: './tab4/tab4.module#Tab4PageModule' },
@@ -21,8 +26,12 @@ const routes: Routes = [
   { path: 'informe', loadChildren: './informe/informe.module#InformePageModule' },
   { path: 'noticias', loadChildren: './noticias/noticias.module#NoticiasPageModule' },
   { path: 'mensagem', loadChildren: './mensagem/mensagem.module#MensagemPageModule' },
-  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },  { path: 'env-mensagem', loadChildren: './env-mensagem/env-mensagem.module#EnvMensagemPageModule' },
-  { path: 'req', loadChildren: './req/req.module#ReqPageModule' }
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  { path: 'env-mensagem', loadChildren: './env-mensagem/env-mensagem.module#EnvMensagemPageModule' },
+  { path: 'req', loadChildren: './req/req.module#ReqPageModule' },
+  { path: 'tab6', loadChildren: './tab6/tab6.module#Tab6PageModule' },
+  { path: 'tab7', loadChildren: './tab7/tab7.module#Tab7PageModule' },
+  { path: 'tab8', loadChildren: './tab8/tab8.module#Tab8PageModule' }
 
 ];
 @NgModule({
