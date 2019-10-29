@@ -18,7 +18,7 @@ import * as firebase from 'firebase/app';
 export class Tab2Page {
   //myDate: string;
   //customPickerOptions: any;
- 
+
   //Só declaração de uma lista de variáveis
   informes: Observable<any[]>;
 
@@ -33,7 +33,7 @@ export class Tab2Page {
     public alertController: AlertController) {
     let currentUser = firebase.auth().currentUser; // Consegue o ID do usuário logago
     // consegue os valores dos documentos do usuario logado entrando na pasta pais, documento do pai logado, coleção mensagens
-    this.informes = db.collection('pais').doc(currentUser.email).collection('informes').valueChanges();
+    this.informes = db.collection('indices').doc(currentUser.email).collection('informes').valueChanges();
     this.banco = db;
 
     console.log()

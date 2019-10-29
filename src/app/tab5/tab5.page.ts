@@ -31,8 +31,8 @@ export class Tab5Page implements OnInit {
     public alertController: AlertController) {
     const currentUser = firebase.auth().currentUser; // Consegue o ID do usuário logago
     // consegue os valores dos documentos do usuario logado entrando na pasta pais, documento do pai logado, coleção mensagens
-    this.mensagensrec = db.collection('pais').doc(currentUser.email).collection('mensagens_r').valueChanges();
-    this.mensagensenv = db.collection('pais').doc(currentUser.email).collection('mensagens_e').valueChanges();
+    this.mensagensrec = db.collection('indices').doc(currentUser.email).collection('mensagens_r').valueChanges();
+    this.mensagensenv = db.collection('indices').doc(currentUser.email).collection('mensagens_e').valueChanges();
   }
   ngOnInit() { }
 

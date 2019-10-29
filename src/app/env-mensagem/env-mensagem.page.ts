@@ -26,7 +26,7 @@ export class EnvMensagemPage implements OnInit {
     db: AngularFirestore
   ) {
     this.banco = db;
-    this.pessoas = db.collection('pais').valueChanges(); //consegue os valores da coelção noticias
+    this.pessoas = db.collection('indices').valueChanges(); //consegue os valores da coelção noticias
   }
 
   // ENVIA MENSAGEM
