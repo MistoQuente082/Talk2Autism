@@ -26,7 +26,7 @@ export class EnvMensagemPage implements OnInit {
     db: AngularFirestore
   ) {
     this.banco = db;
-    this.pessoas = db.collection('pais').valueChanges(); //consegue os valores da coelção noticias
+    this.pessoas = db.collection('indice').valueChanges(); //consegue os valores da coelção noticias
   }
 
   // ENVIA MENSAGEM
@@ -49,7 +49,7 @@ export class EnvMensagemPage implements OnInit {
       for (var i = 0; i < mensagem.mDestino.length; i++) {
         var dest = mensagem.mDestino[i].split(": ")[1]
         console.log(i, dest); // i é o índice, matriz[i] é o valor
-        this.banco.collection("pais").doc(dest).collection("mensagens_r").add(
+        this.banco.collection('indice').doc(dest).collection("mensagens_r").add(
           mensagem).then(ref => {
             console.log(ref);
             console.log('Uniforme foi pedido com document with ID: ', ref.id);
@@ -61,7 +61,7 @@ export class EnvMensagemPage implements OnInit {
 
       console.log(mensagem);
 
-      this.banco.collection("pais").doc(currentUser.email).collection("mensagens_e").add(
+      this.banco.collection('indice').doc(currentUser.email).collection("mensagens_e").add(
         mensagem).then(ref => {
           console.log(ref);
           console.log('Uniforme foi pedido com document with ID: ', ref.id);

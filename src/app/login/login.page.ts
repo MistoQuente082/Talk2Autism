@@ -53,22 +53,27 @@ export class LoginPage implements OnInit {
       await this.fAuth.auth.signInWithEmailAndPassword(email, senha);
       this.usuario = this.banco.collection('indice').doc(email)
       const currentUser = firebase.auth().currentUser;
-      this.banco.collection('indice').doc(currentUser.email).get().toPromise().then(doc => {
-        if (!doc.exists) {
-          this.typo = 'No such document!';
-        } else {
-          this.typo = doc.data().tipo;
-          console.log('Document data:', doc.data(), this.typo);
-          if (this.typo === 'pai') {
-            this.router.navigate(['/tabs']);
-            console.log('yeetz')
+      this.banco.collection('indice').doc(currentUser.email).get().toPromise()
+        .then(doc => {
+          if (!doc.exists) {
+            this.typo = 'No such document!';
+          } else {
+            this.typo = doc.data().tipo;
+            console.log('Document data:', doc.data(), this.typo);
+            if (this.typo === 'pai') {
+              this.router.navigate(['/tabs']);
+              console.log('yeetz')
+            }
+            if (this.typo === 'terapeuta') {
+              this.router.navigate(['/tabs2']);
+              console.log('yeetz')
+            }
+            if (this.typo === 'adm') {
+              this.router.navigate(['/tabs3']);
+              console.log('yeetz')
+            }
           }
-          if (this.typo === 'terapeuta') {
-            this.router.navigate(['/tabs2']);
-            console.log('yeetz')
-          }
-        }
-      })
+        })
         .catch(err => {
           this.typo = 'Error getting document' + err;
         });
