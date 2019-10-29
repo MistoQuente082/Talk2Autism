@@ -1,4 +1,4 @@
-import { NgModule, InjectionToken } from '@angular/core';
+import { NgModule, InjectionToken, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -34,6 +34,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth'; //Autenticação
     StatusBar,
     SplashScreen,
     DatePicker,
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
 

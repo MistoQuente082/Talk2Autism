@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-agenda',
@@ -7,7 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AgendaPage implements OnInit {
 
-  constructor() { }
+  public dateAtend: Date = new Date();
+  constructor(
+    public modalCtrl: ModalController) {
+
+  }
+
+  async dismiss() {
+    await this.modalCtrl.dismiss();
+  }
+
+  mudaData(event) {
+    console.log('Data: ', new Date(event.detail.value));
+  }
 
   ngOnInit() {
   }

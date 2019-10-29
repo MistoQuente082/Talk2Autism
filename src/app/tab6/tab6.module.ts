@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { Tab6Page } from './tab6.page';
+import { AgendaPage } from '../agenda/agenda.page';
 
 const routes: Routes = [
   {
@@ -15,12 +16,18 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  entryComponents: [
+    AgendaPage
+  ],
+
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [Tab6Page]
+  declarations: [
+    Tab6Page,
+    AgendaPage]
 })
-export class Tab6PageModule {}
+export class Tab6PageModule { }
