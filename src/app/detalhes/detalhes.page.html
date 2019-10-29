@@ -1,5 +1,3 @@
-<!--Página de detalhes dos eventos da página de eventos-->
-
 <ion-header>
   <ion-toolbar [color]="colorStatus?'toolbar-color':'medium'">
     <ion-buttons slot="end">
@@ -7,12 +5,39 @@
         <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>{{this.info.nome}}</ion-title>
+    <ion-title class=ion-text-left>Detalhes do Evento</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <h2>{{ this.info.data }}</h2>
-  <h1>{{ this.info.mensagem }}</h1>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Descrição:</ion-card-subtitle>
+      <ion-card-title>{{this.info.nome}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-header>
+      <ion-card-subtitle>Realização:</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      Data: {{ this.info.datainicio.toDate() | date: 'dd/MM/yyyy' }} <br>
+      Hora: {{ this.info.datainicio.toDate() | date: 'HH:mm' }} às {{ this.info.datafim.toDate() | date: 'HH:mm' }}
+    </ion-card-content>
+
+
+    <ion-card-header>
+      <ion-card-subtitle>Mais detalhes:</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      {{this.info.detalhes}}
+    </ion-card-content>
+  </ion-card>
+
+
+
+
+
+
 
 </ion-content>

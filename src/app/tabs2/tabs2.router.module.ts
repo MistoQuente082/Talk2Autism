@@ -18,22 +18,22 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab7',
+        path: 'tab4',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab7/tab7.module').then(m => m.Tab7PageModule)
+              import('../tab4/tab4.module').then(m => m.Tab4PageModule)
           }
         ]
       },
       {
-        path: 'tab8',
+        path: 'tab5',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab8/tab8.module').then(m => m.Tab8PageModule)
+              import('../tab5/tab5.module').then(m => m.Tab5PageModule)
           }
         ]
       },

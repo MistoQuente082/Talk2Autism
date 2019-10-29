@@ -15,7 +15,6 @@ import { EnvMensagemPage } from '../env-mensagem/env-mensagem.page';
   styleUrls: ['./tab5.page.scss'],
 })
 export class Tab5Page implements OnInit {
-  //@ViewChild(IonSlides) 
   slides: IonSlides;
   public wavesPosition: 0;
   private wavesDifference: 100;
@@ -24,6 +23,7 @@ export class Tab5Page implements OnInit {
 
   mensagensrec: Observable<any[]>; // Só declaração de uma lista de variáveis
   mensagensenv: Observable<any[]>; // Só declaração de uma lista de variáveis
+  tipo: string;
 
   constructor(
     db: AngularFirestore, // Confira App.components.ts
@@ -37,17 +37,20 @@ export class Tab5Page implements OnInit {
   ngOnInit() { }
 
   segmentChanged(event: any) {
+
     if (event.detail.value === 'recebidos') {
+      this.tipo = 'recebidos';
       this.slides.slidePrev();
       this.wavesPosition += this.wavesDifference;
     } else {
+      this.tipo = 'enviados';
       this.slides.slideNext();
       this.wavesPosition -= this.wavesDifference;
     }
   }
 
 
-  //Função que chama um alert
+  // Função que chama um alert
   async presentAlertConfirm(mensagem) {
     const alert = await this.alertController.create({
       header: mensagem.mRemetente + ' :  ' + mensagem.mAssunto,

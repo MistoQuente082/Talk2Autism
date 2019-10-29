@@ -24,7 +24,7 @@
         </div>
 
         <ion-slides>
-            <ion-slide>
+            <ion-slide *ngIf="tipo == 'recebidos'">
                 <div style=" width: 100%" class="slide-inner ion-padding">
                     <span>Recebidos</span>
                     <ion-list>
@@ -38,7 +38,7 @@
                 </div>
             </ion-slide>
 
-            <ion-slide>
+            <ion-slide *ngIf="tipo == 'enviados'">
                 <div style=" width: 100%" class="slide-inner ion-padding">
                     <span>Enviados</span>
                     <ion-list>

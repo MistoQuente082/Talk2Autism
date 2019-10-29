@@ -1,6 +1,9 @@
+
+
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { DetalhesPage } from '../detalhes/detalhes.page';
+
 import { Item } from 'src/assets/extra/item';
 
 import { Observable } from 'rxjs';
@@ -20,7 +23,8 @@ export class Tab4Page implements OnInit {
 
   constructor(
     db: AngularFirestore, // Confira App.components.ts
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    public alertCtrl: AlertController
   ) {
     const currentUser = firebase.auth().currentUser; // Consegue o ID do usuário logago
     this.eventos = db.collection('eventos').valueChanges(); // consegue os valores da coelção noticias
@@ -36,7 +40,11 @@ export class Tab4Page implements OnInit {
     return await modal.present();
   }
 
+
+
   ngOnInit() {
+    console.log();
+    // Impressão da hora padrão: 09/02/2017 10:17:06
   }
 
 }
