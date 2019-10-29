@@ -33,7 +33,7 @@ export class Tab2Page {
     public alertController: AlertController) {
     let currentUser = firebase.auth().currentUser; // Consegue o ID do usuário logago
     // consegue os valores dos documentos do usuario logado entrando na pasta pais, documento do pai logado, coleção mensagens
-    this.informes = db.collection('indices').doc(currentUser.email).collection('informes').valueChanges();
+    this.informes = db.collection('indice').doc(currentUser.email).collection('informes').valueChanges();
     this.banco = db;
 
     console.log()
