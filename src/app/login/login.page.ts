@@ -68,6 +68,10 @@ export class LoginPage implements OnInit {
               this.router.navigate(['/tabs2']);
               console.log('yeetz')
             }
+            if (this.typo === 'adm') {
+              this.router.navigate(['/tabs3']);
+              console.log('yeetz')
+            }
           }
         })
         .catch(err => {
