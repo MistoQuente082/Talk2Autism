@@ -4,6 +4,7 @@ import { AgendaPage } from '../agenda/agenda.page';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
+import { Item } from 'src/assets/extra/item';
 
 @Component({
   selector: 'app-tab6',
@@ -25,9 +26,12 @@ export class Tab6Page implements OnInit {
 
 
 
-  async presentModal() {
+  async presentModal(item: Item) {
     const modal = await this.modalCtrl.create({
-      component: AgendaPage
+      component: AgendaPage,
+      componentProps: {
+        item
+      }
     });
     return await modal.present();
   }

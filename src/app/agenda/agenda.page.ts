@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, ToastController, AlertController } from '@ionic/angular';
+import { ModalController, ToastController, AlertController, NavDelegate, NavParams } from '@ionic/angular';
+import { Item } from 'src/assets/extra/item';
 
 
 @Component({
@@ -14,11 +15,14 @@ export class AgendaPage implements OnInit {
   public pOutput: Date;
   public comeu: boolean;
   public nTime: number;
+
+  info: Item;
   constructor(
     public toastCtrl: ToastController,
     public modalCtrl: ModalController,
-    public alertController: AlertController) {
-
+    public alertController: AlertController,
+    public navParams: NavParams) {
+    this.info = navParams.get('item');
   }
 
   async dismiss() {

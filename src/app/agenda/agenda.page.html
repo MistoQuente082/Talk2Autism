@@ -5,7 +5,7 @@
         <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class=ion-text-left>Nome da criança</ion-title>
+    <ion-title class=ion-text-left>{{ this.info.Nome}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -68,5 +68,5 @@
     </ion-item>
   </ion-list>
 
-  <ion-button (click)="send()" expand="block" color="medium">Ver Modal</ion-button>
+  <ion-button (click)="send()" expand="block" color="medium">Enviar Informe</ion-button>
 </ion-content>
