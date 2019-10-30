@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController, AlertController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-agenda',
@@ -7,10 +8,16 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./agenda.page.scss'],
 })
 export class AgendaPage implements OnInit {
-
+  public conduct: number;
   public dateAtend: Date = new Date();
+  public pInput: Date;
+  public pOutput: Date;
+  public comeu: boolean;
+  public nTime: number;
   constructor(
-    public modalCtrl: ModalController) {
+    public toastCtrl: ToastController,
+    public modalCtrl: ModalController,
+    public alertController: AlertController) {
 
   }
 
@@ -19,8 +26,80 @@ export class AgendaPage implements OnInit {
   }
 
   mudaData(event) {
-    console.log('Data: ', new Date(event.detail.value));
+    this.dateAtend = new Date(event.detail.value);
+    console.log('DIA', this.dateAtend);
+
   }
+
+  mudaIn(event) {
+    this.pInput = new Date(event.detail.value);
+    console.log('Chegada:', this.pInput);
+  }
+
+  mudaOut(event) {
+    this.pOutput = new Date(event.detail.value);
+    console.log('Saida:', this.pInput);
+  }
+
+  send() {
+    if (this.pInput === undefined || this.pOutput === undefined ||
+      this.nTime === undefined) {
+      this.presentToast('Preencha os campos!');
+    }
+
+    else {
+      this.presentAlert();
+    }
+  }
+
+  subInform() {
+    const informe = {
+      conduct: this.conduct,
+      dateAtend: this.dateAtend,
+      pInput: this.pInput,
+      pOutput: this.pOutput,
+      comeu: this.comeu,
+      nTime: this.nTime,
+    };
+    console.log(informe);
+  }
+  // Função que chama um alert
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'ATENÇÃO!',
+      message: 'Confirma os dados?',
+      buttons: [
+        {
+          text: 'Fechar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Enviar',
+          handler: () => {
+            this.subInform();
+            console.log('Yeetz!');
+            this.presentToast('Informe enviado com sucesso');
+            this.dismiss();
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+
+  async presentToast(message: string) {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 2000
+    });
+
+    toast.present();
+  }
+
 
   ngOnInit() {
   }

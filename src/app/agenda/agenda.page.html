@@ -10,43 +10,42 @@
 </ion-header>
 
 <ion-content>
+  <ion-item>
+    <ion-label>
+      <h3>
+        Preencha os dados abaixo
+      </h3>
+    </ion-label>
+  </ion-item>
+
   <ion-list>
     <ion-item>
       <ion-label>Data de Atendimento</ion-label>
-      <ion-datetime 
-      display-format="DD MMM YYYY"
-      strin
-      cancelText="Cancelar" 
-      doneText="Escolher"
-      [ngModel]="dateAtend.toISOString()"
-      placeholder="Seleciona a data"
-      (ionChange)="mudaData( $event )"></ion-datetime>
+      <ion-datetime display-format="DD MMM YYYY" strin cancelText="Cancelar" doneText="Escolher"
+        [ngModel]="dateAtend.toISOString()" placeholder="Seleciona a data" (ionChange)="mudaData( $event )">
+      </ion-datetime>
     </ion-item>
   </ion-list>
 
   <ion-list>
-    <ion-list-header>
-      Preencha os dados abaixo
-    </ion-list-header>
-
     <ion-item>
       <ion-label position="floating">PERÍODO</ion-label>
-      <ion-row wrap>
-        <ion-col size="5.5">
-          <ion-input [(ngModel)]="pInput" placeholder="Chegada:"></ion-input>
-        </ion-col>
 
-        <ion-col size="5.5">
-          <ion-input [(ngModel)]="pOutput" placeholder="Saída:"></ion-input>
-        </ion-col>
-      </ion-row>
+      <ion-datetime display-format="HH:mm" cancelText="Cancelar" doneText="Escolher" ([ngModel])="pInput"
+        placeholder="Hora de Chegada" (ionChange)="mudaIn( $event )">
+      </ion-datetime>
+
+      <ion-datetime display-format="HH:mm" cancelText="Cancelar" doneText="Escolher" ([ngModel])="pOutput"
+        placeholder="Hora de Saída" (ionChange)="mudaOut( $event )">
+      </ion-datetime>
+
     </ion-item>
 
 
 
     <ion-item>
       <ion-label position="floating">NECESSIDADES FISIOLÓGICAS</ion-label>
-      <ion-input [(ngModel)]="nTimes" placeholder="Vezes:"></ion-input>
+      <ion-input [(ngModel)]="nTime" type="number" maxlength="2" placeholder="Número de vezes:"></ion-input>
     </ion-item>
 
 
@@ -59,7 +58,6 @@
     <ion-item>
       <ion-label position="floating">COMPORTAMENTO:</ion-label>
       <ion-range min="0" max="10" pin="true" [(ngModel)]="conduct" color="medium">
-
         <ion-icon slot="start" name="sad"></ion-icon>
         <ion-icon slot="end" name="happy"></ion-icon>
         <ion-note color="dark" slot="end">
@@ -69,4 +67,6 @@
       </ion-range>
     </ion-item>
   </ion-list>
+
+  <ion-button (click)="send()" expand="block" color="medium">Ver Modal</ion-button>
 </ion-content>
