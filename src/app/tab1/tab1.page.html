@@ -1,5 +1,10 @@
 <ion-header>
     <ion-toolbar [color]="colorStatus?'toolbar-color':'medium'">
+        <ion-buttons slot="end">
+            <ion-button (click)="perfil()">
+                <ion-icon slot="icon-only" name="contact"></ion-icon>
+            </ion-button>
+        </ion-buttons>
         <ion-title>
             Notícias
         </ion-title>

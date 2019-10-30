@@ -12,12 +12,16 @@
 
     <ion-card>
       <ion-item>
+        <ion-buttons slot="end">
+          <ion-button (click)="hideShow()">
+            <ion-icon slot="icon-only" color="dark" [name]="tipo ? 'md-eye-off' : 'md-eye'">
+            </ion-icon>
+          </ion-button>
+        </ion-buttons>
+
         <ion-input [type]="tipo ? 'text' : 'password'" type="password" placeholder="Senha" [(ngModel)]="senha">
         </ion-input>
-        <button expand="block" (click)="hideShow()">
-          <ion-icon [name]="tipo ? 'eye-off' : 'eye'">
-          </ion-icon>
-        </button>
+
       </ion-item>
     </ion-card>
 

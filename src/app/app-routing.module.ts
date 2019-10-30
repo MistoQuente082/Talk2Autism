@@ -35,8 +35,8 @@ const routes: Routes = [
   { path: 'req', loadChildren: './req/req.module#ReqPageModule' },
   { path: 'tab6', loadChildren: './tab6/tab6.module#Tab6PageModule' },
   { path: 'tab7', loadChildren: './tab7/tab7.module#Tab7PageModule' },
-  { path: 'tab8', loadChildren: './tab8/tab8.module#Tab8PageModule' },
   { path: 'agenda', loadChildren: './agenda/agenda.module#AgendaPageModule' }
+  
 
 ];
 @NgModule({
