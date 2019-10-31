@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController, AlertController } from '@ionic/angular';
+import { ModalController, AlertController, PopoverController, NavController } from '@ionic/angular';
 import { NoticiasPage } from '../noticias/noticias.page';
 import { Item } from 'src/assets/extra/item';
 
@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-tab1',
@@ -19,12 +21,19 @@ export class Tab1Page {
 
   constructor(
     db: AngularFirestore, //Confira App.components.ts
-    public modalCtrl: ModalController,
-    public alertController: AlertController) {
+    public fAuth: AngularFireAuth,
+    public router: Router,
+    public alertController: AlertController,
+    public popoverCtrl: PopoverController,
+    public modalCtrl: ModalController) {
     const currentUser = firebase.auth().currentUser; // Consegue o ID do usuário logado
     this.noticias = db.collection('noticias').valueChanges(); //consegue os valores da coelção noticias
     this.banco = db;
   }
+
+
+
+
 
   // Função que chama a pagina na forma de um modal, enviando dados a ela
   async presentModal(item: any) {
@@ -65,7 +74,34 @@ export class Tab1Page {
     await alert.present();
   }
 
-  perfil() {
+  //Função que chama um alert
+  async presentAlert2(mensagem) {
+    const alert = await this.alertController.create({
+      header: 'Atenção',
+      message: mensagem,
+      buttons: [
+        {
+          text: 'Fechar',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Sair',
+          handler: async () => {
+            console.log('Saiu!');
+            await this.fAuth.auth.signOut();
+            this.router.navigate(['/']);
+
+
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+
+  sair() {
+    this.presentAlert2('Realmente quer sair?');
 
   }
 

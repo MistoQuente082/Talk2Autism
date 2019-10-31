@@ -16,6 +16,7 @@ import { ObjectUnsubscribedError } from 'rxjs';
 })
 export class ReqPage implements OnInit {
   tipo: any;
+  typo: any;
   banco: AngularFirestore;
   fardamento: any;
   reuniao: any;
@@ -48,6 +49,7 @@ export class ReqPage implements OnInit {
     public navParams: NavParams) {
     this.banco = db;
     this.tipo = navParams.get('tipo');
+    this.typo = navParams.get('k');
 
   }
 
@@ -83,18 +85,23 @@ export class ReqPage implements OnInit {
 
   // VERIFICA O TIPO DE REQUISIÇÃO E ABRE O MODAL CORRESPONDENTE
   ngOnInit() {
-    console.log(this.tipo);
+
 
     if (this.tipo.nome === 'Fardamentos') {
       this.modais = 1;
+      // console.log('isso láaaaaa', this.typo);
     }
 
     if (this.tipo.nome === 'Módulos') {
       this.modais = 2;
+      // console.log('isso láaaaaa', this.typo);
+
     }
 
     if (this.tipo.nome === 'Reuniões') {
       this.modais = 3;
+      // console.log('isso láaaaaa', this.typo);
+
     }
   }
 

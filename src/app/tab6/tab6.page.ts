@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { AgendaPage } from '../agenda/agenda.page';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import { Item } from 'src/assets/extra/item';
+import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-tab6',
@@ -18,7 +20,10 @@ export class Tab6Page implements OnInit {
 
   constructor(
     public modalCtrl: ModalController,
-    db: AngularFirestore
+    db: AngularFirestore,
+    public fAuth: AngularFireAuth,
+    public router: Router,
+    public alertController: AlertController
   ) {
     const currentUser = firebase.auth().currentUser;
     this.atendidos = db.collection('atendidos').valueChanges();
@@ -35,6 +40,39 @@ export class Tab6Page implements OnInit {
     });
     return await modal.present();
   }
+
+  //Função que chama um alert
+  async presentAlert2(mensagem) {
+    const alert = await this.alertController.create({
+      header: 'Atenção',
+      message: mensagem,
+      buttons: [
+        {
+          text: 'Fechar',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Sair',
+          handler: async () => {
+            console.log('Saiu!');
+            await this.fAuth.auth.signOut();
+            this.router.navigate(['/']);
+
+
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+
+  sair() {
+    this.presentAlert2('Realmente quer sair?');
+
+  }
+
+
   ngOnInit() {
   }
 
