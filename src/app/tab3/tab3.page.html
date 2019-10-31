@@ -8,8 +8,33 @@
 
 <ion-content>
   <!--Mostra card para cada categoria-->
-  <ion-card *ngFor="let req of req | async" (click)="presentModal(req)">
-    <img class="img" src="{{req.img}}" />
-    <div class="card-title">{{req.nome}}</div>
-  </ion-card>
+
+  <div *ngIf="typo == 'adm'">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Permitir pedidos de Fardamento</ion-label>
+        <ion-toggle color="medium"></ion-toggle>
+
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Permitir pedidos de Módulos</ion-label>
+        <ion-toggle color="medium"></ion-toggle>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Permitir pedidos de Reuniões</ion-label>
+        <ion-toggle color="medium"></ion-toggle>
+
+      </ion-item>
+    </ion-list>
+  </div>
+  <div *ngIf="typo == 'pai'">
+    <ion-card *ngFor="let req of req | async" (click)="presentModal(req)">
+      <img class="img" src="{{req.img}}" />
+      <div class="card-title">{{req.nome}}</div>
+    </ion-card>
+  </div>
 </ion-content>
