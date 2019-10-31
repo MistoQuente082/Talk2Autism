@@ -17,6 +17,10 @@ import { AngularFirestoreModule } from '@angular/fire/firestore'; //O Database
 import { AngularFireStorageModule } from '@angular/fire/storage'; //Inútil, porém não sei
 import { AngularFireAuthModule } from '@angular/fire/auth'; //Autenticação
 
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+registerLocaleData(localePt);
+
 @NgModule({
   declarations: [
     AppComponent,

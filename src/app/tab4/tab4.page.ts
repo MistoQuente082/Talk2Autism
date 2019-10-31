@@ -11,6 +11,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+registerLocaleData(localePt);
 
 @Component({
   selector: 'app-tab4',

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController, AlertController, NavDelegate, NavParams } from '@ionic/angular';
 import { Item } from 'src/assets/extra/item';
+import { AngularFirestore } from '@angular/fire/firestore';
 
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-agenda',
@@ -16,8 +18,11 @@ export class AgendaPage implements OnInit {
   public comeu: boolean;
   public nTime: number;
 
-  info: Item;
+
+
+  info: any;
   constructor(
+    public db: AngularFirestore,
     public toastCtrl: ToastController,
     public modalCtrl: ModalController,
     public alertController: AlertController,
@@ -57,6 +62,9 @@ export class AgendaPage implements OnInit {
   }
 
   subInform() {
+    if (this.comeu != true) {
+      this.comeu = false;
+    }
     const informe = {
       conduct: this.conduct,
       dateAtend: this.dateAtend,
@@ -64,8 +72,47 @@ export class AgendaPage implements OnInit {
       pOutput: this.pOutput,
       comeu: this.comeu,
       nTime: this.nTime,
+      terapeutas: 1,
     };
+
+    //get os dados em atendidos -> this.info.Nome -> informes -> data
+    //Se houver um doc lá puxa os dados e soma
+    //Se não, apenas cria o doc
+    let data = moment(informe.dateAtend).format('DD-MM-YYYY');
+    console.log(this.info.ID);
+    this.db.collection('atendidos').doc(this.info.ID).collection('informes').doc(data).get().toPromise()
+      .then(doc => {
+        if (!doc.exists) {
+          this.db.collection('atendidos').doc(this.info.ID).collection('informes').doc(data).set(informe);
+          console.log('ainda não há dados para esse dia');
+        } else {
+          const dadosExistentes = doc.data();
+          if (this.pInput < dadosExistentes.pInput) {
+            this.pInput = dadosExistentes.pInput;
+          }
+          if (this.pOutput > dadosExistentes.pOutput) {
+            this.pOutput = dadosExistentes.pOutput;
+          }
+          if (this.comeu === false) {
+            this.comeu = dadosExistentes.comeu;
+          }
+          informe.terapeutas += dadosExistentes.terapeutas;
+          const informeFinal = {
+            conduct: ((dadosExistentes.conduct * dadosExistentes.terapeutas) + informe.conduct) / informe.terapeutas,
+            pOutput: this.pOutput,
+            pInput: this.pInput,
+            comeu: this.comeu,
+            nTime: this.nTime + dadosExistentes.nTime,
+            dateAtend: this.dateAtend,
+            terapeutas: informe.terapeutas
+          }
+          this.db.collection('atendidos').doc(this.info.ID).collection('informes').doc(data).set(informeFinal);
+          console.log('Já há dados para esse dia');
+        }
+      })
+    console.log(data)
     console.log(informe);
+
   }
   // Função que chama um alert
   async presentAlert() {
