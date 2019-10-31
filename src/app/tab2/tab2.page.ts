@@ -26,6 +26,8 @@ export class Tab2Page {
 
   banco: AngularFirestore;
 
+  user: any;
+
   constructor(
     db: AngularFirestore, // Confira App.components.ts  
     // private datePicker: DatePicker,//Útil para a visão dos psicólogos
@@ -33,7 +35,15 @@ export class Tab2Page {
     public alertController: AlertController) {
     let currentUser = firebase.auth().currentUser; // Consegue o ID do usuário logago
     // consegue os valores dos documentos do usuario logado entrando na pasta pais, documento do pai logado, coleção mensagens
-    this.informes = db.collection('indice').doc(currentUser.email).collection('informes').valueChanges();
+    this.user = db.collection('indice').doc(currentUser.email).get().toPromise()
+      .then(doc => {
+        this.user = doc.data();
+        for (var filho in this.user.atendido) {
+          let filhoo = this.user.atendido[filho]
+          console.log('filho:', filhoo);
+          this.informes = db.collection('atendidos').doc(filhoo).collection('informes').valueChanges();
+        }
+      })
     this.banco = db;
 
     console.log()
