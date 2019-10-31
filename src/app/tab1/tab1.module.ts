@@ -6,9 +6,11 @@ import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 import { NoticiasPage } from '../noticias/noticias.page';
 
+
 @NgModule({
   entryComponents: [
     NoticiasPage
+
   ],
 
   imports: [
@@ -17,6 +19,7 @@ import { NoticiasPage } from '../noticias/noticias.page';
     FormsModule,
     RouterModule.forChild([{ path: '', component: Tab1Page }])
   ],
+
   declarations: [
     Tab1Page,
     NoticiasPage]
