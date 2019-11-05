@@ -22,6 +22,12 @@ export class Tab3Page {
   banco: AngularFirestore;
   typo: any;
 
+  status = {
+    fard: false,
+    mod: false,
+    reun: false
+  };
+
 
   constructor(
     db: AngularFirestore,
@@ -32,6 +38,7 @@ export class Tab3Page {
   ) {
     this.banco = db;
     this.req = db.collection('requisicoes').valueChanges();
+    this.verifiUser();
   }
 
   async presentAlert(message: string) {
@@ -53,28 +60,25 @@ export class Tab3Page {
   }
 
   async presentModal(tipo: any) {
-    this.verifiUser();
+
 
     if (this.typo === 'adm') {
       const modal = await this.modalCtrl.create({
         component: ReqPage,
         componentProps: {
           tipo,
-          k: 'entrou como adm'
+          typo: this.typo
         }
       });
 
       return await modal.present();
 
-    }
-
-    else {
+    } else {
 
       if (tipo.status === false) {
         this.presentAlert('Pedidos de ' + tipo.nome + ' não estão disponíveis no momento');
         console.log('Sem Reunião');
-      }
-      else {
+      } else {
         const modal = await this.modalCtrl.create({
           component: ReqPage,
           componentProps: {
@@ -86,6 +90,7 @@ export class Tab3Page {
       }
     }
   }
+
   verifiUser() {
     try {
       const currentUser = firebase.auth().currentUser;
@@ -98,9 +103,7 @@ export class Tab3Page {
         .catch(err => {
           this.typo = 'Error getting document' + err;
         });
-    }
-
-    finally {
+    } finally {
       console.log('Deu super certo!');
     }
   }
@@ -137,7 +140,7 @@ export class Tab3Page {
   }
 
   ngOnInit() {
-    // console.log('hola mundo');
+    console.log(this.typo);
   }
 
 }

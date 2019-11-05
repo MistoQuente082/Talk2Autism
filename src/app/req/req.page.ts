@@ -5,11 +5,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ObjectUnsubscribedError } from 'rxjs';
 import * as firebase from 'firebase';
 
-
-
-
-
-
 @Component({
   selector: 'app-req',
   templateUrl: './req.page.html',
@@ -22,6 +17,11 @@ export class ReqPage implements OnInit {
   fardamento: any;
   reuniao: any;
   pai: any;
+
+  sMod: boolean;
+  sFar: boolean;
+  sReu: boolean;
+
 
   modais: number;
 
@@ -53,7 +53,7 @@ export class ReqPage implements OnInit {
     this.currentUser = firebase.auth().currentUser;
     this.banco = db;
     this.tipo = navParams.get('tipo');
-    this.typo = navParams.get('k');
+    this.typo = navParams.get('typo');
 
   }
 
@@ -87,10 +87,38 @@ export class ReqPage implements OnInit {
     alert.present();
   }
 
+  // MOSTRA UMA ALERTA NA TELA
+  async subStatus() {
+    const alert = await this.alertController.create({
+      header: 'Atenção',
+      message: 'Deseja realizar as modificações?',
+      buttons: [
+        {
+          text: 'Fechar',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Confirmar',
+          handler: async () => {
+            console.log('Enviou!');
+            const status = {
+              reun: this.sReu,
+              mod: this.sMod,
+              fard: this.sFar
+            };
+            console.log(status);
+            this.dismiss();
+          }
+        }
+
+      ]
+    });
+    alert.present();
+  }
+
   // VERIFICA O TIPO DE REQUISIÇÃO E ABRE O MODAL CORRESPONDENTE
   ngOnInit() {
-
-
+    console.log(this.typo);
     if (this.tipo.nome === 'Fardamentos') {
       this.modais = 1;
       // console.log('isso láaaaaa', this.typo);

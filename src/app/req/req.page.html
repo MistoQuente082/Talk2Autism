@@ -5,11 +5,42 @@
         <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
+
+
     <ion-title>{{tipo.nome}}</ion-title>
+
   </ion-toolbar>
 </ion-header>
 
+
+
 <ion-content>
+  <div *ngIf="typo == 'adm'">
+    <ion-list>
+      <ion-list-header>Ativar ou desativar</ion-list-header>
+      <ion-item>
+        <ion-label>Pedidos de Fardamento</ion-label>
+        <ion-toggle [(ngModel)]="sFar" color="medium"></ion-toggle>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item>
+        <ion-label>Pedidos de Módulos</ion-label>
+        <ion-toggle [(ngModel)]="sMod" color="medium"></ion-toggle>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item>
+        <ion-label>Pedidos de Reuniões</ion-label>
+        <ion-toggle [(ngModel)]="sReu" color="medium"></ion-toggle>
+
+      </ion-item>
+    </ion-list>
+
+    <ion-button (click)="subStatus()" expand="block" color="medium">Modificar</ion-button>
+
+  </div>
+
 
   <!-- Mostra a tela de Modal Fardamento-->
   <div *ngIf="modais == 1">
@@ -40,14 +71,14 @@
           <ion-select-option value="6">6</ion-select-option>
         </ion-select>
       </ion-item>
-      
+
       <ion-button (click)="subUniform()" expand="block" color="medium">Fazer pedido</ion-button>
 
     </ion-list>
   </div>
 
 
-<!-- Mostra a tela de Modal Modulos-->
+  <!-- Mostra a tela de Modal Modulos-->
   <div *ngIf="modais == 2">
     <ion-list>
       <ion-item>
@@ -115,4 +146,6 @@
 
     <ion-button (click)="subMeeting()" expand="block" color="medium">Marcar Reunião</ion-button>
   </div>
+
+
 </ion-content>

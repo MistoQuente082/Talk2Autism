@@ -11,10 +11,48 @@
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
   <!--Mostra card para cada categoria-->
-  <ion-card *ngFor="let req of req | async" (click)="presentModal(req)">
-    <img class="img" src="{{req.img}}" />
-    <div class="card-title">{{req.nome}}</div>
-  </ion-card>
+
+  <div *ngIf="typo == 'adm'">
+    <ion-list>
+      <ion-list-header>
+        Status das Requisições
+      </ion-list-header>
+      <ion-item>
+        <ion-label>Pedidos de Fardamento</ion-label>
+        <ion-note *ngIf="status.fard == false" color="danger">Desativado</ion-note>
+        <ion-note *ngIf="status.fard == true" color="success">Ativo</ion-note>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item>
+        <ion-label>Pedidos de Módulos</ion-label>
+        <ion-note *ngIf="status.mod == false" color="danger">Desativado</ion-note>
+        <ion-note *ngIf="status.mod == true" color="success">Ativo</ion-note>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item>
+        <ion-label>Pedidos de Reuniões</ion-label>
+        <ion-note *ngIf="status.reun == false" color="danger">Desativado</ion-note>
+        <ion-note *ngIf="status.reun == true" color="success">Ativo</ion-note>
+
+      </ion-item>
+      <ion-button expand="small" slot="end" fill="outline" (click)="presentModal('req')">Alterar</ion-button>
+
+    </ion-list>
+
+
+
+
+  </div>
+
+  <div *ngIf="typo == 'pai'">
+    <ion-card *ngFor="let req of req | async" (click)="presentModal(req)">
+      <img class="img" src="{{req.img}}" />
+      <div class="card-title">{{req.nome}}</div>
+    </ion-card>
+  </div>
 </ion-content>
