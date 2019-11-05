@@ -1,14 +1,39 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>tab7</ion-title>
+  <ion-toolbar [color]="colorStatus?'toolbar-color':'medium'">
+    <ion-title>Usuários</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="perfil()">
-        <ion-icon slot="icon-only" name="contact"></ion-icon>
+      <ion-button (click)="sair()">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <h6>pais</h6>
+    <ion-item *ngFor="let pai of pais | async">
+      <ion-label>
+        <h3>{{pai.nome}}: {{pai.email}}</h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <h6>Terapeutas</h6>
+    <ion-item *ngFor="let terapeuta of terapeutas | async">
+      <ion-label>
+        <h3>{{terapeuta.nome}}: {{terapeuta.email}}</h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <h6>Administradores</h6>
+    <ion-item *ngFor="let adm of admins | async">
+      <ion-label>
+        <h3>{{adm.nome}}: {{adm.email}}</h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
 </ion-content>

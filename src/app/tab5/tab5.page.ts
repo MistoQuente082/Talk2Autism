@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import { EnvMensagemPage } from '../env-mensagem/env-mensagem.page';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab5',
@@ -26,6 +28,8 @@ export class Tab5Page implements OnInit {
   tipo: string;
 
   constructor(
+    public fAuth: AngularFireAuth,
+    public router: Router,
     db: AngularFirestore, // Confira App.components.ts
     public modalCtrl: ModalController,
     public alertController: AlertController) {
@@ -90,6 +94,37 @@ export class Tab5Page implements OnInit {
       component: EnvMensagemPage
     });
     return await modal.present();
+  }
+
+  //Função que chama um alert
+  async presentAlert2(mensagem) {
+    const alert = await this.alertController.create({
+      header: 'Atenção',
+      message: mensagem,
+      buttons: [
+        {
+          text: 'Fechar',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Sair',
+          handler: async () => {
+            console.log('Saiu!');
+            await this.fAuth.auth.signOut();
+            this.router.navigate(['/']);
+
+
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+
+  sair() {
+    this.presentAlert2('Realmente quer sair?');
+
   }
 
 }

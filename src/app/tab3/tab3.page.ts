@@ -5,6 +5,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 import * as firebase from 'firebase/app';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -24,7 +26,9 @@ export class Tab3Page {
   constructor(
     db: AngularFirestore,
     public modalCtrl: ModalController,
-    public alertController: AlertController
+    public alertController: AlertController,
+    public fAuth: AngularFireAuth,
+    public router: Router,
   ) {
     this.banco = db;
     this.req = db.collection('requisicoes').valueChanges();
@@ -76,22 +80,12 @@ export class Tab3Page {
           componentProps: {
             tipo,
             typo: 'entrou como pai'
-
           }
         });
-
-
-
         return await modal.present();
-
       }
-
     }
-
-
   }
-
-
   verifiUser() {
     try {
       const currentUser = firebase.auth().currentUser;
@@ -109,12 +103,38 @@ export class Tab3Page {
     finally {
       console.log('Deu super certo!');
     }
-
-
-
-
   }
 
+  //Função que chama um alert
+  async presentAlert2(mensagem) {
+    const alert = await this.alertController.create({
+      header: 'Atenção',
+      message: mensagem,
+      buttons: [
+        {
+          text: 'Fechar',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Sair',
+          handler: async () => {
+            console.log('Saiu!');
+            await this.fAuth.auth.signOut();
+            this.router.navigate(['/']);
+
+
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+
+  sair() {
+    this.presentAlert2('Realmente quer sair?');
+
+  }
 
   ngOnInit() {
     // console.log('hola mundo');

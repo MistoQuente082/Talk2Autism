@@ -7,6 +7,8 @@ import { Item } from 'src/assets/extra/item';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -32,6 +34,8 @@ export class Tab2Page {
     db: AngularFirestore, // Confira App.components.ts  
     // private datePicker: DatePicker,//Útil para a visão dos psicólogos
     public modalCtrl: ModalController,
+    public fAuth: AngularFireAuth,
+    public router: Router,
     public alertController: AlertController) {
     let currentUser = firebase.auth().currentUser; // Consegue o ID do usuário logago
     // consegue os valores dos documentos do usuario logado entrando na pasta pais, documento do pai logado, coleção mensagens
@@ -82,6 +86,37 @@ export class Tab2Page {
       ]
     });
     await alert.present();
+  }
+
+  //Função que chama um alert
+  async presentAlert2(mensagem) {
+    const alert = await this.alertController.create({
+      header: 'Atenção',
+      message: mensagem,
+      buttons: [
+        {
+          text: 'Fechar',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Sair',
+          handler: async () => {
+            console.log('Saiu!');
+            await this.fAuth.auth.signOut();
+            this.router.navigate(['/']);
+
+
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+
+  sair() {
+    this.presentAlert2('Realmente quer sair?');
+
   }
 
   // showDatepicker() {

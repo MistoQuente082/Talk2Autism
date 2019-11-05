@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, AlertController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +18,9 @@ import { Observable } from 'rxjs';
 export class AppComponent {
   items: Observable<any[]>;
   constructor(
+    public fAuth: AngularFireAuth,
+    public router: Router,
+    public alertController: AlertController,
     db: AngularFirestore, //Coloca em cada pg q for usar o banco de dados
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -40,6 +45,32 @@ export class AppComponent {
   }
   customDayShortNames = ['sábado', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'domingo'];
   customPickerOptions: any;
+
+  async presentAlert2(mensagem) {
+    const alert = await this.alertController.create({
+      header: 'Atenção',
+      message: mensagem,
+      buttons: [
+        {
+          text: 'Fechar',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Sair',
+          handler: async () => {
+            console.log('Saiu!');
+            await this.fAuth.auth.signOut();
+            this.router.navigate(['/']);
+
+
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+
 
   initializeApp() {
     this.platform.ready().then(() => {

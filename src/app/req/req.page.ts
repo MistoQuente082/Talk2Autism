@@ -3,6 +3,7 @@ import { Item } from 'src/assets/extra/item';
 import { ModalController, NavParams, AlertController, ToastController } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ObjectUnsubscribedError } from 'rxjs';
+import * as firebase from 'firebase';
 
 
 
@@ -20,6 +21,7 @@ export class ReqPage implements OnInit {
   banco: AngularFirestore;
   fardamento: any;
   reuniao: any;
+  pai: any;
 
   modais: number;
 
@@ -37,6 +39,7 @@ export class ReqPage implements OnInit {
   public detalhes: string;
   public tamanho: string;
   public quantidade: string;
+  public currentUser: any;
 
 
 
@@ -47,6 +50,7 @@ export class ReqPage implements OnInit {
     public db: AngularFirestore,
     public alertController: AlertController,
     public navParams: NavParams) {
+    this.currentUser = firebase.auth().currentUser;
     this.banco = db;
     this.tipo = navParams.get('tipo');
     this.typo = navParams.get('k');
@@ -109,6 +113,7 @@ export class ReqPage implements OnInit {
 
   // Enviar pedido de reunião
   subMeeting() {
+
     if (this.motivo !== undefined && this.limHorario !== undefined
       && this.limData !== undefined && this.detalhes !== undefined) {
       const reun = {
@@ -116,12 +121,13 @@ export class ReqPage implements OnInit {
         limHorario: this.limHorario,
         limData: this.limData,
         detalhes: this.detalhes,
+        pai: this.currentUser.email
       };
       console.log(reun);
       this.banco.collection("requisicoes").doc(this.tipo.id).collection("pedidos").add(
         reun).then(ref => {
           console.log(ref);
-          console.log('Reunião foi pedida com document with ID: ', ref.id);
+          console.log('Reunião foi pedida com ID: ', ref.id);
           this.presentToast('Pedido Realizado com Sucesso!');
           this.dismiss();
         });
@@ -141,6 +147,7 @@ export class ReqPage implements OnInit {
         elementos: this.elementos,
         infoAd: this.infoAd,
         modulos: this.modulos,
+        pai: this.currentUser.email
       };
 
       console.log(mod);

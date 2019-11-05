@@ -13,6 +13,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { Router } from '@angular/router';
 registerLocaleData(localePt);
 
 @Component({
@@ -27,7 +28,9 @@ export class Tab4Page implements OnInit {
   constructor(
     db: AngularFirestore, // Confira App.components.ts
     public modalCtrl: ModalController,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public fAuth: AngularFireAuth,
+    public router: Router,
   ) {
     const currentUser = firebase.auth().currentUser; // Consegue o ID do usuário logago
     this.eventos = db.collection('eventos').valueChanges(); // consegue os valores da coelção noticias
@@ -41,6 +44,37 @@ export class Tab4Page implements OnInit {
       }
     });
     return await modal.present();
+  }
+
+  //Função que chama um alert
+  async presentAlert2(mensagem) {
+    const alert = await this.alertCtrl.create({
+      header: 'Atenção',
+      message: mensagem,
+      buttons: [
+        {
+          text: 'Fechar',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Sair',
+          handler: async () => {
+            console.log('Saiu!');
+            await this.fAuth.auth.signOut();
+            this.router.navigate(['/']);
+
+
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+
+  sair() {
+    this.presentAlert2('Realmente quer sair?');
+
   }
 
 
