@@ -22,11 +22,7 @@ export class ReqPage implements OnInit {
   sFar: boolean;
   sReu: boolean;
 
-
   modais: number;
-
-
-
 
   public aQnt: string;
   public tema: string;
@@ -41,9 +37,6 @@ export class ReqPage implements OnInit {
   public quantidade: string;
   public currentUser: any;
 
-
-
-
   constructor(
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
@@ -55,6 +48,17 @@ export class ReqPage implements OnInit {
     this.tipo = navParams.get('tipo');
     this.typo = navParams.get('typo');
 
+    db.collection('requisicoes').doc('modulos').get().toPromise().then(doc => {
+      this.sMod = doc.data().status;
+    });
+
+    db.collection('requisicoes').doc('modulos').get().toPromise().then(doc => {
+      this.sFar = doc.data().status;
+    });
+
+    db.collection('requisicoes').doc('modulos').get().toPromise().then(doc => {
+      this.sReu = doc.data().status;
+    });
   }
 
   // Sair da página
@@ -106,6 +110,19 @@ export class ReqPage implements OnInit {
               mod: this.sMod,
               fard: this.sFar
             };
+
+            this.db.collection('requisicoes').doc('fardamento').update({
+              status: this.sFar,
+            })
+
+            this.db.collection('requisicoes').doc('modulos').update({
+              status: this.sMod,
+            })
+
+            this.db.collection('requisicoes').doc('reunioes').update({
+              status: this.sReu,
+            })
+
             console.log(status);
             this.dismiss();
           }
@@ -127,21 +144,16 @@ export class ReqPage implements OnInit {
     if (this.tipo.nome === 'Módulos') {
       this.modais = 2;
       // console.log('isso láaaaaa', this.typo);
-
     }
 
     if (this.tipo.nome === 'Reuniões') {
       this.modais = 3;
       // console.log('isso láaaaaa', this.typo);
-
     }
   }
 
-
-
   // Enviar pedido de reunião
   subMeeting() {
-
     if (this.motivo !== undefined && this.limHorario !== undefined
       && this.limData !== undefined && this.detalhes !== undefined) {
       const reun = {

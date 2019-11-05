@@ -31,10 +31,6 @@ export class Tab1Page {
     this.banco = db;
   }
 
-
-
-
-
   // Função que chama a pagina na forma de um modal, enviando dados a ela
   async presentModal(item: any) {
     const modal = await this.modalCtrl.create({

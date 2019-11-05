@@ -22,6 +22,10 @@ export class Tab3Page {
   banco: AngularFirestore;
   typo: any;
 
+  sMod: boolean;
+  sFar: boolean;
+  sReu: boolean;
+
   status = {
     fard: false,
     mod: false,
@@ -39,6 +43,18 @@ export class Tab3Page {
     this.banco = db;
     this.req = db.collection('requisicoes').valueChanges();
     this.verifiUser();
+
+    db.collection('requisicoes').doc('modulos').get().toPromise().then(doc => {
+      this.sMod = doc.data().status;
+    });
+
+    db.collection('requisicoes').doc('modulos').get().toPromise().then(doc => {
+      this.sFar = doc.data().status;
+    });
+
+    db.collection('requisicoes').doc('modulos').get().toPromise().then(doc => {
+      this.sReu = doc.data().status;
+    });
   }
 
   async presentAlert(message: string) {
