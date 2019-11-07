@@ -13,13 +13,23 @@
 
 <ion-content>
 
-    <ion-card class="aviso" *ngFor="let noticia of noticias | async" (click)="presentAlert(noticia)">
+    <ion-card class="aviso" *ngFor="let noticia of noticias | async" >
         <ion-card-header>
             <ion-card-subtitle>{{noticia.nome}}</ion-card-subtitle>
+            <ion-fab horizontal="end" (click)='editarNoticia(noticia)'>
+                <ion-fab-button>
+                    <ion-icon horizontal="end" (click)='editarNoticia(noticia)' name="create"></ion-icon>
+                </ion-fab-button>
+            </ion-fab>
         </ion-card-header>
-        <ion-card-content>
+        <ion-card-content (click)="presentAlert(noticia)" >
             <p>{{noticia.mensagem}}</p>
         </ion-card-content>
     </ion-card>
 
+    <ion-fab *ngIf="typo == 'adm'" vertical="bottom" horizontal="end" slot="fixed">
+            <ion-fab-button (click)="editarNoticia()">
+                <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
 </ion-content>

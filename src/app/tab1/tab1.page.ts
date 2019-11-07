@@ -8,6 +8,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { NovaNoticiaPage } from '../nova-noticia/nova-noticia.page';
 
 
 @Component({
@@ -19,6 +20,8 @@ export class Tab1Page {
   noticias: Observable<any[]>; //Só declaração de uma lista de variáveis
   banco: AngularFirestore;
 
+  typo: any;
+
   constructor(
     db: AngularFirestore, //Confira App.components.ts
     public fAuth: AngularFireAuth,
@@ -29,6 +32,7 @@ export class Tab1Page {
     const currentUser = firebase.auth().currentUser; // Consegue o ID do usuário logado
     this.noticias = db.collection('noticias').valueChanges(); //consegue os valores da coelção noticias
     this.banco = db;
+    this.verifiUser();
   }
 
   // Função que chama a pagina na forma de um modal, enviando dados a ela
@@ -95,10 +99,36 @@ export class Tab1Page {
     await alert.present();
   }
 
+  verifiUser() {
+    try {
+      const currentUser = firebase.auth().currentUser;
+      this.typo = '';
+      this.banco.collection('indice').doc(currentUser.email).get().toPromise()
+        .then(doc => {
+          this.typo = doc.data().tipo;
+          console.log('funfa: ', doc.data().tipo)
+        })
+        .catch(err => {
+          this.typo = 'Error getting document' + err;
+        });
+    } finally {
+      console.log('Deu super certo!');
+    }
+  }
 
   sair() {
     this.presentAlert2('Realmente quer sair?');
 
+  }
+
+  async editarNoticia(item: any) {
+    const modal = await this.modalCtrl.create({
+      component: NovaNoticiaPage,
+      componentProps: {
+        item
+      }
+    });
+    return await modal.present();
   }
 
 }
