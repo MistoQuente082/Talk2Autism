@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController, AlertController, NavDelegate, NavParams } from '@ionic/angular';
 import { Item } from 'src/assets/extra/item';
 import { AngularFirestore } from '@angular/fire/firestore';
-
+import * as firebase from 'firebase/app';
 import * as moment from 'moment';
 
 @Component({
@@ -17,6 +17,8 @@ export class AgendaPage implements OnInit {
   public pOutput: Date;
   public comeu: boolean;
   public nTime: number;
+  public comentario: string;
+  public user: any;
 
 
 
@@ -28,6 +30,11 @@ export class AgendaPage implements OnInit {
     public alertController: AlertController,
     public navParams: NavParams) {
     this.info = navParams.get('item');
+    const currentUser = firebase.auth().currentUser
+    db.collection('indice').doc(currentUser.email).get().toPromise().then( doc => 
+      {
+        this.user = doc.data()
+      })
   }
 
   async dismiss() {
@@ -73,6 +80,7 @@ export class AgendaPage implements OnInit {
       comeu: this.comeu,
       nTime: this.nTime,
       terapeutas: 1,
+      comentario: this.user.nome+ ': ' + this.comentario,
     };
 
     //get os dados em atendidos -> this.info.Nome -> informes -> data
@@ -104,7 +112,8 @@ export class AgendaPage implements OnInit {
             comeu: this.comeu,
             nTime: this.nTime + dadosExistentes.nTime,
             dateAtend: this.dateAtend,
-            terapeutas: informe.terapeutas
+            terapeutas: informe.terapeutas,
+            comentario: dadosExistentes.comentario + '; ' + informe.comentario
           }
           this.db.collection('atendidos').doc(this.info.ID).collection('informes').doc(data).set(informeFinal);
           console.log('Já há dados para esse dia');
