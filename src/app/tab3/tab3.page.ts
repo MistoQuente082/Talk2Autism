@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, OnInit, OnDestroy } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
 import { ReqPage } from '../req/req.page';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -9,12 +9,15 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
 
+
+
+
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss']
 })
-export class Tab3Page {
+export class Tab3Page implements OnChanges {
 
   // Dados para os cards
   req: Observable<any[]>;
@@ -26,15 +29,10 @@ export class Tab3Page {
   sFar: boolean;
   sReu: boolean;
 
-  status = {
-    fard: false,
-    mod: false,
-    reun: false
-  };
 
 
   constructor(
-    db: AngularFirestore,
+    public db: AngularFirestore,
     public modalCtrl: ModalController,
     public alertController: AlertController,
     public fAuth: AngularFireAuth,
@@ -48,13 +46,14 @@ export class Tab3Page {
       this.sMod = doc.data().status;
     });
 
-    db.collection('requisicoes').doc('modulos').get().toPromise().then(doc => {
+    db.collection('requisicoes').doc('fardamentos').get().toPromise().then(doc => {
       this.sFar = doc.data().status;
     });
 
-    db.collection('requisicoes').doc('modulos').get().toPromise().then(doc => {
+    db.collection('requisicoes').doc('reunioes').get().toPromise().then(doc => {
       this.sReu = doc.data().status;
     });
+
   }
 
   async presentAlert(message: string) {
@@ -124,7 +123,7 @@ export class Tab3Page {
     }
   }
 
-  //Função que chama um alert
+  // Função que chama um alert
   async presentAlert2(mensagem) {
     const alert = await this.alertController.create({
       header: 'Atenção',
@@ -155,8 +154,8 @@ export class Tab3Page {
 
   }
 
-  ngOnInit() {
-    console.log(this.typo);
+  ngOnChanges() {
   }
+
 
 }

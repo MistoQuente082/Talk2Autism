@@ -5,6 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ObjectUnsubscribedError } from 'rxjs';
 import * as firebase from 'firebase';
 
+
 @Component({
   selector: 'app-req',
   templateUrl: './req.page.html',
@@ -22,6 +23,9 @@ export class ReqPage implements OnInit {
   sFar: boolean;
   sReu: boolean;
 
+
+
+
   modais: number;
 
   public aQnt: string;
@@ -38,6 +42,7 @@ export class ReqPage implements OnInit {
   public currentUser: any;
 
   constructor(
+    
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
     public db: AngularFirestore,
@@ -52,11 +57,11 @@ export class ReqPage implements OnInit {
       this.sMod = doc.data().status;
     });
 
-    db.collection('requisicoes').doc('modulos').get().toPromise().then(doc => {
+    db.collection('requisicoes').doc('fardamentos').get().toPromise().then(doc => {
       this.sFar = doc.data().status;
     });
 
-    db.collection('requisicoes').doc('modulos').get().toPromise().then(doc => {
+    db.collection('requisicoes').doc('reunioes').get().toPromise().then(doc => {
       this.sReu = doc.data().status;
     });
   }
@@ -113,15 +118,17 @@ export class ReqPage implements OnInit {
 
             this.db.collection('requisicoes').doc('fardamento').update({
               status: this.sFar,
-            })
+            });
 
             this.db.collection('requisicoes').doc('modulos').update({
               status: this.sMod,
-            })
+            });
 
             this.db.collection('requisicoes').doc('reunioes').update({
               status: this.sReu,
-            })
+            });
+
+
 
             console.log(status);
             this.dismiss();

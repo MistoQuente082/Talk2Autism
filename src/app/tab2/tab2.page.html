@@ -15,18 +15,8 @@
 <ion-content>
 
 
-    <!-- Escolher data, pode ser útil
-    <ion-item>
-    <ion-label>Data</ion-label>
-    <ion-datetime display-format="DD de MMM de YYYY" picker-format="DD MM YYYY" min="2019-10-15" max="2019-12-15"
-      value="2019-12-15"
-      monthShortNames="janeiro, fevereiro, março, abril, maio, junho, julho, agosto, setembro, outubro, novembro, dezembro">
-    </ion-datetime>
-  </ion-item> -->
 
-
-
-    <ion-card class="informe" *ngFor="let informe of informes | async" (click)="presentAlert(informe)">
+    <ion-card class="informe" *ngFor="let informe of informes | async" (click)="presentModal(informe)">
         <ion-card-content>
             <ion-card-subtitle>Dia: {{ informe.dateAtend.toDate() | date:'dd/MM/yyyy'}}</ion-card-subtitle>
             <p>Idas ao banheiro: {{ informe.nTime }}</p>
