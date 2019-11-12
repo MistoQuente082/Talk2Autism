@@ -5,14 +5,9 @@
         <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
-
-
     <ion-title>{{tipo.nome}}</ion-title>
-
   </ion-toolbar>
 </ion-header>
-
-
 
 <ion-content>
   <div *ngIf="typo == 'adm'">
@@ -20,24 +15,23 @@
       <ion-list-header>Ativar ou desativar</ion-list-header>
       <ion-item>
         <ion-label>Pedidos de Fardamento</ion-label>
-        <ion-toggle [(ngModel)]="sFar" color="medium"></ion-toggle>
+        <ion-toggle [(ngModel)]="sFar" value='fard' color="medium"></ion-toggle>
       </ion-item>
     </ion-list>
     <ion-list>
       <ion-item>
         <ion-label>Pedidos de Módulos</ion-label>
-        <ion-toggle [(ngModel)]="sMod" color="medium"></ion-toggle>
+        <ion-toggle [(ngModel)]="sMod" value='mod' color="medium"></ion-toggle>
       </ion-item>
     </ion-list>
     <ion-list>
       <ion-item>
         <ion-label>Pedidos de Reuniões</ion-label>
-        <ion-toggle [(ngModel)]="sReu" color="medium"></ion-toggle>
-
+        <ion-toggle [(ngModel)]="sReu" value='reun' color="medium"></ion-toggle>
       </ion-item>
     </ion-list>
 
-    <ion-button (click)="subStatus()" expand="block" color="medium">Modificar</ion-button>
+    <ion-button (click)="subStatus()" color="medium">Modificar</ion-button>
 
   </div>
 

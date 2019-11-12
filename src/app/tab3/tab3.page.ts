@@ -76,8 +76,6 @@ export class Tab3Page {
   }
 
   async presentModal(tipo: any) {
-
-
     if (this.typo === 'adm') {
       const modal = await this.modalCtrl.create({
         component: ReqPage,
