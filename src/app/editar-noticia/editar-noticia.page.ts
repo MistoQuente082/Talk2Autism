@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, AlertController, ToastController } from '@ionic/angular';
-
-
+import { ModalController, NavParams, ToastController, AlertController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-nova-noticia',
-  templateUrl: './nova-noticia.page.html',
-  styleUrls: ['./nova-noticia.page.scss'],
+  selector: 'app-editar-noticia',
+  templateUrl: './editar-noticia.page.html',
+  styleUrls: ['./editar-noticia.page.scss'],
 })
-export class NovaNoticiaPage implements OnInit {
+export class EditarNoticiaPage implements OnInit {
+  public noticia;
+
   public tituloNoticia;
   public descriNoticia;
   public horaNoticia: Date = new Date();
@@ -16,20 +16,12 @@ export class NovaNoticiaPage implements OnInit {
 
   constructor(
     public modalCtrl: ModalController,
-    public alertCtrl: AlertController,
-    public toastCtrl: ToastController
-  ) { }
-
-
-  // Sair da página
-  async dismiss() {
-    await this.modalCtrl.dismiss();
-  }
-
-
-  mudaData(event) {
-    this.horaNoticia = new Date(event.detail.value);
-
+    public navParams: NavParams,
+    public toastCtrl: ToastController,
+    public alertCtrl: AlertController) {
+    this.noticia = navParams.get('item');
+    this.tituloNoticia = this.noticia.nome;
+    this.descriNoticia = this.noticia.mensagem;
   }
 
   async presentAlert(message: string) {
@@ -50,7 +42,7 @@ export class NovaNoticiaPage implements OnInit {
               data: this.horaNoticia
             };
             this.dismiss();
-            this.presentToast('Notícia criada com sucesso!');
+            this.presentToast('Notícia modificada com sucesso!');
 
           }
 
@@ -65,12 +57,20 @@ export class NovaNoticiaPage implements OnInit {
     toast.present();
   }
 
+
   subNoticia() {
     if (this.tituloNoticia === undefined || this.descriNoticia === undefined) {
       this.presentToast('Preencha os Campos');
     } else {
-      this.presentAlert('Deseja criar a notícia?');
+      this.presentAlert('Deseja enviar as modificações?');
     }
+  }
+
+
+
+  // Sair da página
+  async dismiss() {
+    await this.modalCtrl.dismiss();
   }
 
   ngOnInit() {
