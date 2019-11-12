@@ -22,23 +22,37 @@
       </ion-list-header>
       <ion-item>
         <ion-label>Pedidos de Fardamento</ion-label>
-        <ion-note *ngIf="sFar == false" color="danger">Desativado</ion-note>
-        <ion-note *ngIf="sFar == true" color="success">Ativo</ion-note>
+        <div *ngIf="sFar == false">
+          <ion-note color="danger">Desativado</ion-note>
+        </div>
+
+        <div *ngIf="sFar == true">
+          <ion-note color="success">Ativado</ion-note>
+        </div>
       </ion-item>
     </ion-list>
     <ion-list>
       <ion-item>
         <ion-label>Pedidos de Módulos</ion-label>
-        <ion-note *ngIf="sMod == false" color="danger">Desativado</ion-note>
-        <ion-note *ngIf="sMod == true" color="success">Ativo</ion-note>
+        <div *ngIf="sMod == false">
+          <ion-note color="danger">Desativado</ion-note>
+        </div>
+
+        <div *ngIf="sMod == true">
+          <ion-note color="success">Ativado</ion-note>
+        </div>
       </ion-item>
     </ion-list>
     <ion-list>
       <ion-item>
         <ion-label>Pedidos de Reuniões</ion-label>
-        <ion-note *ngIf="sReu == false" color="danger">Desativado</ion-note>
-        <ion-note *ngIf="sReu == true" color="success">Ativo</ion-note>
+        <div *ngIf="sReu == false">
+          <ion-note color="danger">Desativado</ion-note>
+        </div>
 
+        <div *ngIf="sReu == true">
+          <ion-note color="success">Ativado</ion-note>
+        </div>
       </ion-item>
       <ion-button expand="small" slot="end" fill="outline" (click)="presentModal('req')">Alterar</ion-button>
 

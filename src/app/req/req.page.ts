@@ -5,6 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ObjectUnsubscribedError } from 'rxjs';
 import * as firebase from 'firebase';
 
+
 @Component({
   selector: 'app-req',
   templateUrl: './req.page.html',
@@ -23,11 +24,6 @@ export class ReqPage implements OnInit {
   sReu: boolean;
 
 
-  reun: boolean;
-  mod: boolean;
-  fard: boolean;
-
-
   modais: number;
 
   public aQnt: string;
@@ -44,6 +40,7 @@ export class ReqPage implements OnInit {
   public currentUser: any;
 
   constructor(
+
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
     public db: AngularFirestore,
@@ -53,9 +50,18 @@ export class ReqPage implements OnInit {
     this.banco = db;
     this.tipo = navParams.get('tipo');
     this.typo = navParams.get('typo');
-    db.collection('requisicoes').doc('fardamentos').get().toPromise().then(doc => { this.fard = doc.data().status; });
-    db.collection('requisicoes').doc('modulos').get().toPromise().then(doc => { this.mod = doc.data().status; });
-    db.collection('requisicoes').doc('reunioes').get().toPromise().then(doc => { this.reun = doc.data().status; });
+
+    db.collection('requisicoes').doc('modulos').get().toPromise().then(doc => {
+      this.sMod = doc.data().status;
+    });
+
+    db.collection('requisicoes').doc('fardamentos').get().toPromise().then(doc => {
+      this.sFar = doc.data().status;
+    });
+
+    db.collection('requisicoes').doc('reunioes').get().toPromise().then(doc => {
+      this.sReu = doc.data().status;
+    });
   }
   // Sair da página
   async dismiss() {

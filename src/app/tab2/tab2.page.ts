@@ -42,53 +42,29 @@ export class Tab2Page {
     this.user = db.collection('indice').doc(currentUser.email).get().toPromise()
       .then(doc => {
         this.user = doc.data();
-        for (var filho in this.user.atendido) {
-          let filhoo = this.user.atendido[filho]
+        // tslint:disable-next-line: forin
+        for (const filho in this.user.atendido) {
+          const filhoo = this.user.atendido[filho];
           console.log('filho:', filhoo);
           this.informes = db.collection('atendidos').doc(filhoo).collection('informes').valueChanges();
         }
-      })
+      });
     this.banco = db;
 
-    console.log()
   }
 
   async presentModal(item: Item) {
     const modal = await this.modalCtrl.create({
       component: InformePage,
       componentProps: {
-        item: item
+        item
       }
     });
     return await modal.present();
   }
 
 
-  //Função que chama um alert
-  async presentAlert(aviso) {
-    const alert = await this.alertController.create({
-      header: aviso.atendido,
-      message: aviso.alimentacao,
-      buttons: [
-        {
-          text: 'Fechar',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
-        }, {
-          text: 'Comentário',
-          handler: () => {
-            console.log('Yeetz!');
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
-
-  //Função que chama um alert
+  // Função que chama um alert
   async presentAlert2(mensagem) {
     const alert = await this.alertController.create({
       header: 'Atenção',
