@@ -12,16 +12,13 @@ import { NovaNoticiaPage } from '../nova-noticia/nova-noticia.page';
   entryComponents: [
     NoticiasPage,
     NovaNoticiaPage,
-
   ],
-
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
     RouterModule.forChild([{ path: '', component: Tab1Page }])
   ],
-
   declarations: [
     Tab1Page,
     NovaNoticiaPage,

@@ -59,7 +59,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs3/tab5',
+        redirectTo: '/tabs3/tab1',
         pathMatch: 'full'
       }
     ]
@@ -67,7 +67,7 @@ const routes: Routes = [
 
   {
     path: '',
-    redirectTo: '/tabs3/tab5',
+    redirectTo: '/tabs3/tab1',
     pathMatch: 'full'
   }
 ];

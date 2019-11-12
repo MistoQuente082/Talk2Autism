@@ -125,11 +125,8 @@ export class ReqPage implements OnInit {
     alert.present();
     this.dismiss();
   }
-
   subStatus() {
     this.alert();
-
-
   }
 
   // VERIFICA O TIPO DE REQUISIÇÃO E ABRE O MODAL CORRESPONDENTE
@@ -137,17 +134,17 @@ export class ReqPage implements OnInit {
     console.log(this.typo);
     this.db.collection('requisicoes').doc('modulos').get().toPromise().then(doc => {
       this.sMod = doc.data().status;
-      console.log(this.mod);
+      console.log(this.sMod);
     });
 
     this.db.collection('requisicoes').doc('modulos').get().toPromise().then(doc => {
       this.sFar = doc.data().status;
-      console.log(this.fard);
+      console.log(this.sFar);
     });
 
     this.db.collection('requisicoes').doc('modulos').get().toPromise().then(doc => {
       this.sReu = doc.data().status;
-      console.log(this.reun);
+      console.log(this.sReu);
     });
     if (this.tipo.nome === 'Fardamentos') {
       this.modais = 1;
@@ -186,7 +183,6 @@ export class ReqPage implements OnInit {
         });
     } else {
       this.presentAlert('Preencha os campos!');
-
     }
   }
 
