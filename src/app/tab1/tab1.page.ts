@@ -10,6 +10,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { NovaNoticiaPage } from '../nova-noticia/nova-noticia.page';
 import { EditarNoticiaPage } from '../editar-noticia/editar-noticia.page';
+import { async } from 'q';
 
 
 @Component({
@@ -34,19 +35,14 @@ export class Tab1Page {
     this.banco = db;
     this.verifiUser();
   }
-  // Função que chama a pagina na forma de um modal, enviando dados a ela
-  async presentModal(item: any) {
-    const modal = await this.modalCtrl.create({
-      component: NoticiasPage,
-      componentProps: {
-        item
-      }
-    });
-    return await modal.present();
-  }
+
 
   //Função que chama um alert
   async presentAlert(mensagem) {
+
+
+
+
     const alert = await this.alertController.create({
       header: mensagem.nome,
       message: mensagem.mensagem,
@@ -70,7 +66,32 @@ export class Tab1Page {
         }
       ]
     });
-    await alert.present();
+
+    const alert1 = await this.alertController.create({
+      header: mensagem.nome,
+      message: mensagem.mensagem,
+      buttons: [
+        {
+          text: 'Fechar',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Editar',
+          handler: async () => {
+            this.editarNoticia(mensagem);
+          }
+        }
+      ]
+    });
+
+    if (this.typo === 'adm') {
+      await alert1.present();
+    }
+
+    else {
+      await alert.present();
+
+    }
   }
 
   //Função que chama um alert

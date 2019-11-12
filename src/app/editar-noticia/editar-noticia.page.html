@@ -13,5 +13,27 @@
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Editar as informações</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label position="floating">Titulo</ion-label>
+      <ion-input [(ngModel)]="tituloNoticia" >
+        
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Descrição</ion-label>
+      <ion-textarea [(ngModel)]="descriNoticia" rows="6" cols="30" >
+        
+      </ion-textarea>
+    </ion-item>
+  </ion-list>
+
+  <ion-button color="medium" expand="block" (click)="subNoticia()">
+      Editar noticia
+    </ion-button>
 
 </ion-content>
