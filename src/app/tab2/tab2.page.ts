@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { DatePicker } from '@ionic-native/date-picker/ngx';
 import { ModalController, AlertController } from '@ionic/angular';
 import { InformePage } from '../informe/informe.page';
 import { Item } from 'src/assets/extra/item';
@@ -32,17 +31,14 @@ export class Tab2Page {
 
   constructor(
     db: AngularFirestore, // Confira App.components.ts  
-    // private datePicker: DatePicker,//Útil para a visão dos psicólogos
     public modalCtrl: ModalController,
     public fAuth: AngularFireAuth,
     public router: Router,
     public alertController: AlertController) {
-    let currentUser = firebase.auth().currentUser; // Consegue o ID do usuário logago
-    // consegue os valores dos documentos do usuario logado entrando na pasta pais, documento do pai logado, coleção mensagens
+    let currentUser = firebase.auth().currentUser; // Consegue o ID do usuário logado
     this.user = db.collection('indice').doc(currentUser.email).get().toPromise()
       .then(doc => {
         this.user = doc.data();
-        // tslint:disable-next-line: forin
         for (const filho in this.user.atendido) {
           const filhoo = this.user.atendido[filho];
           console.log('filho:', filhoo);
@@ -63,9 +59,8 @@ export class Tab2Page {
     return await modal.present();
   }
 
-
   // Função que chama um alert
-  async presentAlert2(mensagem) {
+  async presentAlert(mensagem) {
     const alert = await this.alertController.create({
       header: 'Atenção',
       message: mensagem,
@@ -80,8 +75,6 @@ export class Tab2Page {
             console.log('Saiu!');
             await this.fAuth.auth.signOut();
             this.router.navigate(['/']);
-
-
           }
         }
       ]
@@ -89,25 +82,9 @@ export class Tab2Page {
     await alert.present();
   }
 
-
   sair() {
-    this.presentAlert2('Realmente quer sair?');
+    this.presentAlert('Realmente quer sair?');
 
   }
-
-  // showDatepicker() {
-  //   this.datePicker.show({
-  //     date: new Date(),
-  //     mode: 'date',
-  //     androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK,
-  //     okText: "Save Date",
-  //     todayText: "Set Today"
-  //   }).then(
-  //     date => {
-  //       this.myDate = date.getDate() + "/" + date.toLocaleString('default', { month: 'long' }) + "/" + date.getFullYear();
-  //     },
-  //     err => console.log('Error occurred while getting date: ', err)
-  //   );
-  // }
 }
 

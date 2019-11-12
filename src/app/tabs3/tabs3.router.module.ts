@@ -18,12 +18,12 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab2',
+        path: 'tab4',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+              import('../tab4/tab4.module').then(m => m.Tab4PageModule)
           }
         ]
       },
@@ -59,7 +59,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs3/tab5',
+        redirectTo: '/tabs3/tab1',
         pathMatch: 'full'
       }
     ]
@@ -67,7 +67,7 @@ const routes: Routes = [
 
   {
     path: '',
-    redirectTo: '/tabs3/tab5',
+    redirectTo: '/tabs3/tab1',
     pathMatch: 'full'
   }
 ];

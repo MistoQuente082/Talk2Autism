@@ -24,18 +24,16 @@ export class Tab1Page {
   typo: any;
 
   constructor(
-    db: AngularFirestore, //Confira App.components.ts
+    public db: AngularFirestore, //Confira App.components.ts
     public fAuth: AngularFireAuth,
     public router: Router,
     public alertController: AlertController,
     public popoverCtrl: PopoverController,
     public modalCtrl: ModalController) {
-    const currentUser = firebase.auth().currentUser; // Consegue o ID do usuário logado
     this.noticias = db.collection('noticias').valueChanges(); //consegue os valores da coelção noticias
     this.banco = db;
     this.verifiUser();
   }
-
   // Função que chama a pagina na forma de um modal, enviando dados a ela
   async presentModal(item: any) {
     const modal = await this.modalCtrl.create({

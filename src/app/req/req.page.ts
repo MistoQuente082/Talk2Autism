@@ -24,8 +24,6 @@ export class ReqPage implements OnInit {
   sReu: boolean;
 
 
-
-
   modais: number;
 
   public aQnt: string;
@@ -65,7 +63,6 @@ export class ReqPage implements OnInit {
       this.sReu = doc.data().status;
     });
   }
-
   // Sair da página
   async dismiss() {
     await this.modalCtrl.dismiss();
@@ -97,7 +94,7 @@ export class ReqPage implements OnInit {
   }
 
   // MOSTRA UMA ALERTA NA TELA
-  async subStatus() {
+  async alert() {
     const alert = await this.alertController.create({
       header: 'Atenção',
       message: 'Deseja realizar as modificações?',
@@ -110,39 +107,45 @@ export class ReqPage implements OnInit {
           text: 'Confirmar',
           handler: async () => {
             console.log('Enviou!');
-            const status = {
-              reun: this.sReu,
-              mod: this.sMod,
-              fard: this.sFar
-            };
-
-            this.db.collection('requisicoes').doc('fardamento').update({
+            this.db.collection('requisicoes').doc('fardamentos').update({
               status: this.sFar,
-            });
+            }); console.log(this.sFar);
 
             this.db.collection('requisicoes').doc('modulos').update({
               status: this.sMod,
-            });
+            }); console.log(this.sMod);
 
             this.db.collection('requisicoes').doc('reunioes').update({
               status: this.sReu,
-            });
-
-
-
-            console.log(status);
-            this.dismiss();
+            }); console.log(this.sReu);
           }
         }
-
       ]
     });
     alert.present();
+    this.dismiss();
+  }
+  subStatus() {
+    this.alert();
   }
 
   // VERIFICA O TIPO DE REQUISIÇÃO E ABRE O MODAL CORRESPONDENTE
   ngOnInit() {
     console.log(this.typo);
+    this.db.collection('requisicoes').doc('modulos').get().toPromise().then(doc => {
+      this.sMod = doc.data().status;
+      console.log(this.sMod);
+    });
+
+    this.db.collection('requisicoes').doc('modulos').get().toPromise().then(doc => {
+      this.sFar = doc.data().status;
+      console.log(this.sFar);
+    });
+
+    this.db.collection('requisicoes').doc('modulos').get().toPromise().then(doc => {
+      this.sReu = doc.data().status;
+      console.log(this.sReu);
+    });
     if (this.tipo.nome === 'Fardamentos') {
       this.modais = 1;
       // console.log('isso láaaaaa', this.typo);
@@ -180,7 +183,6 @@ export class ReqPage implements OnInit {
         });
     } else {
       this.presentAlert('Preencha os campos!');
-
     }
   }
 
@@ -207,10 +209,8 @@ export class ReqPage implements OnInit {
         });
     } else {
       this.presentAlert('Preencha os campos!');
-
     }
   }
-
   // Enviar pedido de fardamento
   async subUniform() {
     if (this.tamanho !== undefined && this.quantidade !== undefined) {
@@ -230,7 +230,6 @@ export class ReqPage implements OnInit {
     } else {
       // MOSTRA UMA ALERTA CASO NÃO PREENCHEU OS CAMPOS
       this.presentAlert('Preencha os campos!');
-
     }
   }
 }

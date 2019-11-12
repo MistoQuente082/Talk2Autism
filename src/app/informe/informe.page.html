@@ -10,7 +10,23 @@
 </ion-header>
 
 <ion-content>
-  <h2>{{ this.info.data }}</h2>
-  <h1>{{ this.info.mensagem }}</h1>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Data: {{ this.info.dateAtend.toDate() | date: 'dd/MM/yyyy' }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+    </ion-card-content>
+  </ion-card>
 
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Mais detalhes:</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      {{this.info.detalhes}}
+      <p>Idas ao banheiro: {{ this.info.nTime }}</p>
+      <p>Alimentação: {{ this.info.nTime }}</p>
+      <p>Nota de Comportamento: {{ this.info.conduct }}</p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

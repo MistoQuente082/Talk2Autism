@@ -75,8 +75,6 @@ export class Tab3Page implements OnChanges {
   }
 
   async presentModal(tipo: any) {
-
-
     if (this.typo === 'adm') {
       const modal = await this.modalCtrl.create({
         component: ReqPage,
