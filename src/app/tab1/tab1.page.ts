@@ -9,6 +9,7 @@ import * as firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { NovaNoticiaPage } from '../nova-noticia/nova-noticia.page';
+import { EditarNoticiaPage } from '../editar-noticia/editar-noticia.page';
 
 
 @Component({
@@ -106,7 +107,7 @@ export class Tab1Page {
       this.banco.collection('indice').doc(currentUser.email).get().toPromise()
         .then(doc => {
           this.typo = doc.data().tipo;
-          console.log('funfa: ', doc.data().tipo)
+          console.log('funfa: ', doc.data().tipo);
         })
         .catch(err => {
           this.typo = 'Error getting document' + err;
@@ -123,6 +124,16 @@ export class Tab1Page {
 
   async editarNoticia(item: any) {
     const modal = await this.modalCtrl.create({
+      component: EditarNoticiaPage,
+      componentProps: {
+        item
+      }
+    });
+    return await modal.present();
+  }
+
+  async novaNoticia(item: any) {
+    const modal = await this.modalCtrl.create({
       component: NovaNoticiaPage,
       componentProps: {
         item
@@ -130,5 +141,6 @@ export class Tab1Page {
     });
     return await modal.present();
   }
+
 
 }

@@ -42,7 +42,7 @@ export class ReqPage implements OnInit {
   public currentUser: any;
 
   constructor(
-    
+
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
     public db: AngularFirestore,

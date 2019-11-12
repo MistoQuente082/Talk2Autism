@@ -6,12 +6,15 @@ import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 import { NoticiasPage } from '../noticias/noticias.page';
 import { NovaNoticiaPage } from '../nova-noticia/nova-noticia.page';
+import { EditarNoticiaPage } from '../editar-noticia/editar-noticia.page';
 
 
 @NgModule({
   entryComponents: [
     NoticiasPage,
     NovaNoticiaPage,
+    EditarNoticiaPage
+
 
   ],
 
@@ -25,6 +28,8 @@ import { NovaNoticiaPage } from '../nova-noticia/nova-noticia.page';
   declarations: [
     Tab1Page,
     NovaNoticiaPage,
-    NoticiasPage]
+    EditarNoticiaPage,
+
+    NoticiasPage],
 })
 export class Tab1PageModule { }
