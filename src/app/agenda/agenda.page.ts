@@ -4,6 +4,7 @@ import { Item } from 'src/assets/extra/item';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import * as moment from 'moment';
+import { present } from '@ionic/core/dist/types/utils/overlays';
 
 @Component({
   selector: 'app-agenda',
@@ -11,6 +12,8 @@ import * as moment from 'moment';
   styleUrls: ['./agenda.page.scss'],
 })
 export class AgendaPage implements OnInit {
+  public currentUser: any;
+
   public conduct: number;
   public dateAtend: Date = new Date();
   public pInput: Date;
@@ -30,11 +33,10 @@ export class AgendaPage implements OnInit {
     public alertController: AlertController,
     public navParams: NavParams) {
     this.info = navParams.get('item');
-    const currentUser = firebase.auth().currentUser
-    db.collection('indice').doc(currentUser.email).get().toPromise().then( doc => 
-      {
-        this.user = doc.data()
-      })
+    this.currentUser = firebase.auth().currentUser
+    db.collection('indice').doc(this.currentUser.email).get().toPromise().then(doc => {
+      this.user = doc.data()
+    })
   }
 
   async dismiss() {
@@ -80,7 +82,7 @@ export class AgendaPage implements OnInit {
       comeu: this.comeu,
       nTime: this.nTime,
       terapeutas: 1,
-      comentario: this.user.nome+ ': ' + this.comentario,
+      comentario: this.user.nome + ': ' + this.comentario,
     };
 
     //get os dados em atendidos -> this.info.Nome -> informes -> data
@@ -92,30 +94,42 @@ export class AgendaPage implements OnInit {
       .then(doc => {
         if (!doc.exists) {
           this.db.collection('atendidos').doc(this.info.ID).collection('informes').doc(data).set(informe);
+          this.db.collection('atendidos').doc(this.info.ID).collection('informes').doc(data).collection('comentarios').doc(this.currentUser.email).set({
+            mensagem: this.comentario,
+          })
           console.log('ainda não há dados para esse dia');
         } else {
-          const dadosExistentes = doc.data();
-          if (this.pInput < dadosExistentes.pInput) {
-            this.pInput = dadosExistentes.pInput;
-          }
-          if (this.pOutput > dadosExistentes.pOutput) {
-            this.pOutput = dadosExistentes.pOutput;
-          }
-          if (this.comeu === false) {
-            this.comeu = dadosExistentes.comeu;
-          }
-          informe.terapeutas += dadosExistentes.terapeutas;
-          const informeFinal = {
-            conduct: ((dadosExistentes.conduct * dadosExistentes.terapeutas) + informe.conduct) / informe.terapeutas,
-            pOutput: this.pOutput,
-            pInput: this.pInput,
-            comeu: this.comeu,
-            nTime: this.nTime + dadosExistentes.nTime,
-            dateAtend: this.dateAtend,
-            terapeutas: informe.terapeutas,
-            comentario: dadosExistentes.comentario + '; ' + informe.comentario
-          }
-          this.db.collection('atendidos').doc(this.info.ID).collection('informes').doc(data).set(informeFinal);
+          this.db.collection('atendidos').doc(this.info.ID).collection('informes').doc(data).collection('comentarios').doc(this.currentUser.email).get().toPromise().then(coment => {
+            if (!coment.exists) {
+              const dadosExistentes = doc.data();
+              if (this.pInput < dadosExistentes.pInput) {
+                this.pInput = dadosExistentes.pInput;
+              }
+              if (this.pOutput > dadosExistentes.pOutput) {
+                this.pOutput = dadosExistentes.pOutput;
+              }
+              if (this.comeu === false) {
+                this.comeu = dadosExistentes.comeu;
+              }
+              informe.terapeutas += dadosExistentes.terapeutas;
+              const informeFinal = {
+                conduct: ((dadosExistentes.conduct * dadosExistentes.terapeutas) + informe.conduct) / informe.terapeutas,
+                pOutput: this.pOutput,
+                pInput: this.pInput,
+                comeu: this.comeu,
+                nTime: this.nTime + dadosExistentes.nTime,
+                dateAtend: this.dateAtend,
+                terapeutas: informe.terapeutas
+              }
+              this.db.collection('atendidos').doc(this.info.ID).collection('informes').doc(data).set(informeFinal);
+              this.db.collection('atendidos').doc(this.info.ID).collection('informes').doc(data).collection('comentarios').doc(this.currentUser.email).set({
+                mensagem: this.comentario,
+              })
+            } else {
+              let mensagem = 'Você já enviou um informe para esse dia, não é possível enviar outro, fale com a TI para resolver esse caso';
+              this.presentAlert1(mensagem);
+            }
+          })
           console.log('Já há dados para esse dia');
         }
       })
@@ -149,6 +163,28 @@ export class AgendaPage implements OnInit {
     });
     await alert.present();
   }
+
+  // Função que chama um alert
+  async presentAlert1(mensagem) {
+    const alert = await this.alertController.create({
+      header: 'ATENÇÃO!',
+      message: mensagem,
+      buttons: [
+        {
+          text: 'Fechar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+
 
 
   async presentToast(message: string) {
