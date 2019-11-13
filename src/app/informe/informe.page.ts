@@ -12,7 +12,7 @@ import * as moment from 'moment';
 })
 export class InformePage implements OnInit {
 
-  info: Item;
+  info: any;
   comentarios: Observable<any[]>; //Só declaração de uma lista de variáveis
 
   constructor(
@@ -20,6 +20,10 @@ export class InformePage implements OnInit {
     public modalCtrl: ModalController,
     navParams: NavParams) {
     this.info = navParams.get('item');
+    let data = moment(this.info.dateAtend.toDate()).format('DD-MM-YYYY');
+    console.log(this.info.atendido);
+    console.log(data);
+    this.comentarios = db.collection('atendidos').doc(this.info.atendido).collection('informes').doc(data).collection('comentarios').valueChanges()
   }
 
   async dismiss() {
