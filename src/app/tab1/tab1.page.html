@@ -15,12 +15,12 @@
 
     <ion-card class="aviso" *ngFor="let noticia of noticias | async" (click)="presentAlert(noticia)">
         <ion-card-header>
-            <ion-card-subtitle>{{noticia.nome}}</ion-card-subtitle>
+            <ion-card-subtitle>{{noticia.titulo}}</ion-card-subtitle>
         </ion-card-header>
 
 
         <ion-card-content>
-            <p>{{noticia.mensagem}}</p>
+            <p>{{noticia.descricao}}</p>
         </ion-card-content>
     </ion-card>
 

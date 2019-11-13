@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, AlertController, ToastController } from '@ionic/angular';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 
 
@@ -15,6 +16,7 @@ export class NovaNoticiaPage implements OnInit {
 
 
   constructor(
+    public db: AngularFirestore,
     public modalCtrl: ModalController,
     public alertCtrl: AlertController,
     public toastCtrl: ToastController
@@ -44,11 +46,15 @@ export class NovaNoticiaPage implements OnInit {
         }, {
           text: 'Enviar',
           handler: async () => {
-            const novaNoticia = {
-              titulo: this.tituloNoticia,
-              descricao: this.descriNoticia,
-              data: this.horaNoticia
-            };
+            this.db.collection('noticias').add({ tiulo: 'a', }).then(ref => {
+              const novaNoticia = {
+                titulo: this.tituloNoticia,
+                descricao: this.descriNoticia,
+                data: this.horaNoticia,
+                id: ref.id,
+              };
+              this.db.collection('noticias').doc(ref.id).set(novaNoticia);
+            });
             this.dismiss();
             this.presentToast('Notícia criada com sucesso!');
 
