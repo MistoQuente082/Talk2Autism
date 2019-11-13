@@ -97,6 +97,8 @@ export class AgendaPage implements OnInit {
           this.db.collection('atendidos').doc(this.info.ID).collection('informes').doc(data).collection('comentarios').doc(this.currentUser.email).set({
             mensagem: this.comentario,
           })
+          this.presentToast('Informe enviado com sucesso');
+          this.dismiss();
           console.log('ainda não há dados para esse dia');
         } else {
           this.db.collection('atendidos').doc(this.info.ID).collection('informes').doc(data).collection('comentarios').doc(this.currentUser.email).get().toPromise().then(coment => {
@@ -125,6 +127,8 @@ export class AgendaPage implements OnInit {
               this.db.collection('atendidos').doc(this.info.ID).collection('informes').doc(data).collection('comentarios').doc(this.currentUser.email).set({
                 mensagem: this.comentario,
               })
+              this.presentToast('Informe enviado com sucesso');
+              this.dismiss();
             } else {
               let mensagem = 'Você já enviou um informe para esse dia, não é possível enviar outro, fale com a TI para resolver esse caso';
               this.presentAlert1(mensagem);
@@ -155,8 +159,6 @@ export class AgendaPage implements OnInit {
           handler: () => {
             this.subInform();
             console.log('Yeetz!');
-            this.presentToast('Informe enviado com sucesso');
-            this.dismiss();
           }
         }
       ]
@@ -175,27 +177,22 @@ export class AgendaPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
+            this.dismiss();
             console.log('Confirm Cancel: blah');
           }
-
-        }
+        },
       ]
     });
     await alert.present();
   }
-
-
-
 
   async presentToast(message: string) {
     const toast = await this.toastCtrl.create({
       message,
       duration: 2000
     });
-
     toast.present();
   }
-
 
   ngOnInit() {
   }
