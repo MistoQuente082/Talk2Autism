@@ -1,39 +1,66 @@
-<ion-header>
-  <ion-toolbar [color]="colorStatus?'toolbar-color':'medium'">
-    <ion-title>Usuários</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="sair()">
-        <ion-icon slot="icon-only" name="log-out"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<ion-toolbar [color]="colorStatus?'toolbar-color':'medium'">
+  <ion-buttons slot="end">
+    <ion-button (click)="sair()">
+      <ion-icon slot="icon-only" name="log-out"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-title>
+    Usuários
+  </ion-title>
+</ion-toolbar>
 
 <ion-content>
+
+
+  <!--PARTE DOS TERAPEUTAS-->
   <ion-list>
-    <h6>pais</h6>
-    <ion-item *ngFor="let pai of pais | async">
-      <ion-label>
-        <h3>{{pai.nome}}: {{pai.email}}</h3>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-  <ion-list>
-    <h6>Terapeutas</h6>
+    <ion-list-header>
+      Terapeutas
+    </ion-list-header>
+
     <ion-item *ngFor="let terapeuta of terapeutas | async">
       <ion-label>
-        <h3>{{terapeuta.nome}}: {{terapeuta.email}}</h3>
+        <h2>{{terapeuta.nome}}</h2>
+        <p>{{terapeuta.email}}</p>
+      </ion-label>
+      
+    </ion-item>
+  </ion-list>
+
+  <!--PARTE DOS PAIS-->
+  <ion-list>
+    <ion-list-header>
+      Pais
+    </ion-list-header>
+
+    <ion-item *ngFor="let pai of pais | async">
+      <ion-label>
+        <h2>{{pai.nome}}</h2>
+        <p>{{pai.email}}</p>
       </ion-label>
     </ion-item>
   </ion-list>
 
+  <!--PARTE DOS ADM-->
   <ion-list>
-    <h6>Administradores</h6>
+    <ion-list-header>
+      <ion-label>
+        Administradores
+      </ion-label>
+    </ion-list-header>
+
     <ion-item *ngFor="let adm of admins | async">
       <ion-label>
-        <h3>{{adm.nome}}: {{adm.email}}</h3>
+        <h2>{{adm.nome}}</h2>
+        <p>{{adm.email}}</p>
       </ion-label>
     </ion-item>
   </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="presentModal('adicionar')">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 </ion-content>
