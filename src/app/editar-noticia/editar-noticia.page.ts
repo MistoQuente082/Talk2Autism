@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams, ToastController, AlertController } from '@ionic/angular';
+import { FirebaseFirestore } from '@angular/fire';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-editar-noticia',
@@ -11,17 +13,19 @@ export class EditarNoticiaPage implements OnInit {
 
   public tituloNoticia;
   public descriNoticia;
-  public horaNoticia: Date = new Date();
+  public horaNoticia: any;
 
 
   constructor(
+    public db: AngularFirestore,
     public modalCtrl: ModalController,
     public navParams: NavParams,
     public toastCtrl: ToastController,
     public alertCtrl: AlertController) {
     this.noticia = navParams.get('item');
-    this.tituloNoticia = this.noticia.nome;
-    this.descriNoticia = this.noticia.mensagem;
+    this.tituloNoticia = this.noticia.titulo;
+    this.descriNoticia = this.noticia.descricao;
+    this.horaNoticia = this.noticia.data;
   }
 
   async presentAlert(message: string) {
@@ -41,11 +45,35 @@ export class EditarNoticiaPage implements OnInit {
               descricao: this.descriNoticia,
               data: this.horaNoticia
             };
+            console.log(this.noticia.id)
+            this.db.collection('noticias').doc(this.noticia.id).update(novaNoticia);
             this.dismiss();
             this.presentToast('Notícia modificada com sucesso!');
 
           }
 
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  async presentAlert1(message: string) {
+    const alert = await this.alertCtrl.create({
+      header: 'Atenção',
+      message,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Continuar',
+          handler: async () => {
+            this.db.collection('noticias').doc(this.noticia.id).delete();
+            this.dismiss();
+            this.presentToast('Notícia apagada com sucesso!');
+          }
         }
       ]
     });
@@ -62,8 +90,13 @@ export class EditarNoticiaPage implements OnInit {
     if (this.tituloNoticia === undefined || this.descriNoticia === undefined) {
       this.presentToast('Preencha os Campos');
     } else {
+      console.log(this.noticia);
       this.presentAlert('Deseja enviar as modificações?');
     }
+  }
+
+  excluirNoticia() {
+    this.presentAlert1('Tem certeza que deseja excluir essa notícia? (Essa ação não poderá ser desfeita)')
   }
 
 

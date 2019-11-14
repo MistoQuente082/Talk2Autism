@@ -75,6 +75,7 @@ export class AgendaPage implements OnInit {
       this.comeu = false;
     }
     const informe = {
+      atendido: this.info.ID,
       conduct: this.conduct,
       dateAtend: this.dateAtend,
       pInput: this.pInput,
@@ -82,7 +83,6 @@ export class AgendaPage implements OnInit {
       comeu: this.comeu,
       nTime: this.nTime,
       terapeutas: 1,
-      comentario: this.user.nome + ': ' + this.comentario,
     };
 
     //get os dados em atendidos -> this.info.Nome -> informes -> data
@@ -96,6 +96,7 @@ export class AgendaPage implements OnInit {
           this.db.collection('atendidos').doc(this.info.ID).collection('informes').doc(data).set(informe);
           this.db.collection('atendidos').doc(this.info.ID).collection('informes').doc(data).collection('comentarios').doc(this.currentUser.email).set({
             mensagem: this.comentario,
+            remetente: this.currentUser.email,
           })
           this.presentToast('Informe enviado com sucesso');
           this.dismiss();

@@ -29,4 +29,10 @@
       <p>Nota de Comportamento: {{ this.info.conduct }}</p>
     </ion-card-content>
   </ion-card>
+  <h5>Comentários e informações de terapia: </h5>
+  <ion-card *ngFor="let comentario of comentarios | async">
+    <ion-card-content>
+      <p>{{ comentario.mensagem }}</p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

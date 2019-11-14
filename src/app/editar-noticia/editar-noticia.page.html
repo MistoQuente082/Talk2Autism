@@ -19,21 +19,24 @@
     </ion-list-header>
     <ion-item>
       <ion-label position="floating">Titulo</ion-label>
-      <ion-input [(ngModel)]="tituloNoticia" >
-        
+      <ion-input [(ngModel)]="tituloNoticia">
+
       </ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Descrição</ion-label>
-      <ion-textarea [(ngModel)]="descriNoticia" rows="6" cols="30" >
-        
+      <ion-textarea [(ngModel)]="descriNoticia" rows="6" cols="30">
+
       </ion-textarea>
     </ion-item>
   </ion-list>
 
   <ion-button color="medium" expand="block" (click)="subNoticia()">
-      Editar noticia
-    </ion-button>
+    Editar noticia
+  </ion-button>
+  <ion-button color="medium" expand="block" (click)="excluirNoticia()">
+    Apagar Notícia
+  </ion-button>
 
 </ion-content>
