@@ -29,7 +29,12 @@
 
   </ion-list>
 
-  <ion-button color="medium" expand="block" (click)="subNoticia()">
-    Adicionar nova noticia
+  <ion-button color="medium" expand="block" (click)="subNoticia(true)">
+    Salvar e Publicar nova noticia
   </ion-button>
+
+  <ion-button color="medium" expand="block" (click)="subNoticia(false)">
+    Salvar como rascunho nova noticia
+  </ion-button>
+  
 </ion-content>
