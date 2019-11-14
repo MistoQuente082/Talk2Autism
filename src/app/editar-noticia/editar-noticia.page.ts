@@ -10,6 +10,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class EditarNoticiaPage implements OnInit {
   public noticia;
+  public postar: boolean;
 
   public tituloNoticia;
   public descriNoticia;
@@ -43,7 +44,8 @@ export class EditarNoticiaPage implements OnInit {
             const novaNoticia = {
               titulo: this.tituloNoticia,
               descricao: this.descriNoticia,
-              data: this.horaNoticia
+              data: this.horaNoticia,
+              postar: this.postar
             };
             console.log(this.noticia.id)
             this.db.collection('noticias').doc(this.noticia.id).update(novaNoticia);
@@ -86,11 +88,12 @@ export class EditarNoticiaPage implements OnInit {
   }
 
 
-  subNoticia() {
+  subNoticia(valor: boolean) {
     if (this.tituloNoticia === undefined || this.descriNoticia === undefined) {
       this.presentToast('Preencha os Campos');
     } else {
       console.log(this.noticia);
+      this.postar = valor;
       this.presentAlert('Deseja enviar as modificações?');
     }
   }

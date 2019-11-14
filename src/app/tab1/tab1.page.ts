@@ -44,8 +44,8 @@ export class Tab1Page {
 
 
     const alert = await this.alertController.create({
-      header: mensagem.nome,
-      message: mensagem.mensagem,
+      header: mensagem.titulo,
+      message: mensagem.descricao + "Disponibilidade: " + mensagem.postar,
       buttons: [
         {
           text: 'Fechar',
@@ -118,7 +118,6 @@ export class Tab1Page {
     });
     await alert.present();
   }
-
   verifiUser() {
     try {
       const currentUser = firebase.auth().currentUser;
@@ -160,6 +159,4 @@ export class Tab1Page {
     });
     return await modal.present();
   }
-
-
 }

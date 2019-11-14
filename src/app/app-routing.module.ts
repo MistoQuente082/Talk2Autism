@@ -36,7 +36,8 @@ const routes: Routes = [
   { path: 'tab6', loadChildren: './tab6/tab6.module#Tab6PageModule' },
   { path: 'tab7', loadChildren: './tab7/tab7.module#Tab7PageModule' },
   { path: 'agenda', loadChildren: './agenda/agenda.module#AgendaPageModule' },  { path: 'nova-noticia', loadChildren: './nova-noticia/nova-noticia.module#NovaNoticiaPageModule' },
-  { path: 'editar-noticia', loadChildren: './editar-noticia/editar-noticia.module#EditarNoticiaPageModule' }
+  { path: 'editar-noticia', loadChildren: './editar-noticia/editar-noticia.module#EditarNoticiaPageModule' },
+  { path: 'novo-evento', loadChildren: './novo-evento/novo-evento.module#NovoEventoPageModule' }
 
   
 
