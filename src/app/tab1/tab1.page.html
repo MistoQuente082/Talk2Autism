@@ -1,26 +1,24 @@
-<ion-header>
-    <ion-toolbar [color]="colorStatus?'toolbar-color':'medium'">
-        <ion-buttons slot="end">
-            <ion-button (click)="sair()">
-                <ion-icon slot="icon-only" name="log-out"></ion-icon>
-            </ion-button>
-        </ion-buttons>
-        <ion-title>
-            Notícias
-        </ion-title>
-    </ion-toolbar>
-</ion-header>
+<ion-toolbar [color]="colorStatus?'toolbar-color':'medium'">
+    <ion-buttons slot="end">
+        <ion-button (click)="sair()">
+            <ion-icon slot="icon-only" name="log-out"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+    <ion-title>
+        Informes
+    </ion-title>
+</ion-toolbar>
 
 <ion-content>
 
     <ion-card class="aviso" *ngFor="let noticia of noticias | async" (click)="presentAlert(noticia)">
         <ion-card-header>
-            <ion-card-subtitle>{{noticia.nome}}</ion-card-subtitle>
+            <ion-card-subtitle>{{noticia.titulo}}</ion-card-subtitle>
         </ion-card-header>
 
 
         <ion-card-content>
-            <p>{{noticia.mensagem}}</p>
+            <p>{{noticia.descricao}}</p>
         </ion-card-content>
     </ion-card>
 

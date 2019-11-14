@@ -39,10 +39,6 @@ export class Tab1Page {
 
   //Função que chama um alert
   async presentAlert(mensagem) {
-
-
-
-
     const alert = await this.alertController.create({
       header: mensagem.nome,
       message: mensagem.mensagem,

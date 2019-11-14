@@ -3,7 +3,8 @@ import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
+import { EditarUsuarioPage } from '../editar-usuario/editar-usuario.page';
 
 @Component({
   selector: 'app-tab7',
@@ -20,7 +21,8 @@ export class Tab7Page implements OnInit {
     db: AngularFirestore,
     public fAuth: AngularFireAuth,
     public router: Router,
-    public alertController: AlertController
+    public alertController: AlertController,
+    public modalCtrl: ModalController
   ) {
     this.pais = db.collection('indice', ref =>
       ref.where('tipo', '==', 'pai')).valueChanges();
@@ -55,6 +57,18 @@ export class Tab7Page implements OnInit {
     await alert.present();
   }
 
+
+  async presentModal(item) {
+    const modal = await this.modalCtrl.create({
+      component: EditarUsuarioPage,
+      componentProps: {
+        item
+      }
+    });
+
+    await modal.present();
+
+  }
 
   sair() {
     this.presentAlert2('Realmente quer sair?');
