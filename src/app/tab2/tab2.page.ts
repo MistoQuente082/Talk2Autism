@@ -35,7 +35,7 @@ export class Tab2Page {
     public fAuth: AngularFireAuth,
     public router: Router,
     public alertController: AlertController) {
-    let currentUser = firebase.auth().currentUser; // Consegue o ID do usuário logado
+    const currentUser = firebase.auth().currentUser; // Consegue o ID do usuário logado
     this.user = db.collection('indice').doc(currentUser.email).get().toPromise()
       .then(doc => {
         this.user = doc.data();

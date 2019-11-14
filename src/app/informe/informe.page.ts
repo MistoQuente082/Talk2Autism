@@ -24,6 +24,8 @@ export class InformePage implements OnInit {
     console.log(this.info.atendido);
     console.log(data);
     this.comentarios = db.collection('atendidos').doc(this.info.atendido).collection('informes').doc(data).collection('comentarios').valueChanges()
+    const pI = new Date(this.info.pInput * 1000);
+    console.log(pI.toLocaleDateString('pt-BR'));
   }
 
   async dismiss() {

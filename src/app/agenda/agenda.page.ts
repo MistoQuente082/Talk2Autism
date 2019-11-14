@@ -123,11 +123,11 @@ export class AgendaPage implements OnInit {
                 nTime: this.nTime + dadosExistentes.nTime,
                 dateAtend: this.dateAtend,
                 terapeutas: informe.terapeutas
-              }
+              };
               this.db.collection('atendidos').doc(this.info.ID).collection('informes').doc(data).set(informeFinal);
               this.db.collection('atendidos').doc(this.info.ID).collection('informes').doc(data).collection('comentarios').doc(this.currentUser.email).set({
                 mensagem: this.comentario,
-              })
+              });
               this.presentToast('Informe enviado com sucesso');
               this.dismiss();
             } else {

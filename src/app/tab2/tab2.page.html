@@ -18,7 +18,9 @@
         <ion-card-content>
             <ion-card-subtitle>Dia: {{ informe.dateAtend.toDate() | date:'dd/MM/yyyy'}}</ion-card-subtitle>
             <p>Idas ao banheiro: {{ informe.nTime }}</p>
-            <p>Alimentação: {{ informe.nTime }}</p>
+            <p *ngIf="informe.comeu == false">Alimentação: Não comeu</p>
+            <p *ngIf="informe.comeu == true">Alimentação: Comeu</p>
+
             <p>Nota de Comportamento: {{ informe.conduct }}</p>
 
         </ion-card-content>
