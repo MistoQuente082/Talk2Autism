@@ -10,8 +10,18 @@
 </ion-toolbar>
 
 <ion-content>
-
-    <ion-card class="aviso" *ngFor="let noticia of noticias | async" (click)="presentAlert(noticia)">
+<div *ngFor="let noticia of noticias | async" (click)="presentAlert(noticia)">
+    <ion-card class="aviso" *ngIf="typo == 'adm'">
+        <ion-card-header>
+            <ion-card-subtitle>{{noticia.titulo}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+            <p>{{noticia.descricao}}</p>
+            <p *ngIf="noticia.postar == true" > Visível</p>
+            <p *ngIf="noticia.postar == false" > Oculta</p>
+        </ion-card-content>
+    </ion-card>
+    <ion-card class="aviso" *ngIf="typo == 'pai' && noticia.postar == true">
         <ion-card-header>
             <ion-card-subtitle>{{noticia.titulo}}</ion-card-subtitle>
         </ion-card-header>
@@ -21,7 +31,7 @@
             <p>{{noticia.descricao}}</p>
         </ion-card-content>
     </ion-card>
-
+</div>
     <ion-fab *ngIf="typo == 'adm'" vertical="bottom" horizontal="end" slot="fixed">
         <ion-fab-button (click)="novaNoticia()">
             <ion-icon name="add"></ion-icon>

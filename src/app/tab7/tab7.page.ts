@@ -31,7 +31,6 @@ export class Tab7Page implements OnInit {
     this.admins = db.collection('indice', ref =>
       ref.where('tipo', '==', 'adm')).valueChanges();
   }
-
   //Função que chama um alert
   async presentAlert2(mensagem) {
     const alert = await this.alertController.create({

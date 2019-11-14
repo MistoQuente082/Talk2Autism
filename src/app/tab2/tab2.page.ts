@@ -42,7 +42,8 @@ export class Tab2Page {
         for (const filho in this.user.atendido) {
           const filhoo = this.user.atendido[filho];
           console.log('filho:', filhoo);
-          this.informes = db.collection('atendidos').doc(filhoo).collection('informes').valueChanges();
+          this.informes = db.collection('atendidos').doc(filhoo).collection('informes', ref =>
+      ref.orderBy('dateAtend', 'desc')).valueChanges();
         }
       });
     this.banco = db;

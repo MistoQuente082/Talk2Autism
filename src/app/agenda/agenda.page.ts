@@ -97,6 +97,7 @@ export class AgendaPage implements OnInit {
           this.db.collection('atendidos').doc(this.info.ID).collection('informes').doc(data).collection('comentarios').doc(this.currentUser.email).set({
             mensagem: this.comentario,
             remetente: this.currentUser.email,
+            nome: this.user.nome,
           })
           this.presentToast('Informe enviado com sucesso');
           this.dismiss();
@@ -126,6 +127,8 @@ export class AgendaPage implements OnInit {
               }
               this.db.collection('atendidos').doc(this.info.ID).collection('informes').doc(data).set(informeFinal);
               this.db.collection('atendidos').doc(this.info.ID).collection('informes').doc(data).collection('comentarios').doc(this.currentUser.email).set({
+                remetente: this.currentUser.email,
+                nome: this.user.nome,
                 mensagem: this.comentario,
               })
               this.presentToast('Informe enviado com sucesso');
