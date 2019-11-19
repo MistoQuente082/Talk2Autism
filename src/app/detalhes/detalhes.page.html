@@ -5,34 +5,42 @@
         <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class=ion-text-left>Detalhes do Evento</ion-title>
+    <ion-title *ngIf="typo == 'pais'" class=ion-text-left>Detalhes do Evento</ion-title>
+    <ion-title *ngIf="typo == 'adm'" class=ion-text-left>Adicionar Evento</ion-title>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+<div *ngIf="typo == 'pais'">
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>Descrição:</ion-card-subtitle>
-      <ion-card-title>{{this.info.nome}}</ion-card-title>
-    </ion-card-header>
+    <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>Descrição:</ion-card-subtitle>
+          <ion-card-title>{{this.info.nome}}</ion-card-title>
+        </ion-card-header>
+    
+        <ion-card-header>
+          <ion-card-subtitle>Realização:</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          Data: {{ this.info.datainicio.toDate() | date: 'dd/MM/yyyy' }} <br>
+          Hora: {{ this.info.datainicio.toDate() | date: 'HH:mm' }} às {{ this.info.datafim.toDate() | date: 'HH:mm' }}
+        </ion-card-content>
+    
+    
+        <ion-card-header>
+          <ion-card-subtitle>Mais detalhes:</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          {{this.info.detalhes}}
+        </ion-card-content>
+      </ion-card>
+</div>
 
-    <ion-card-header>
-      <ion-card-subtitle>Realização:</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      Data: {{ this.info.datainicio.toDate() | date: 'dd/MM/yyyy' }} <br>
-      Hora: {{ this.info.datainicio.toDate() | date: 'HH:mm' }} às {{ this.info.datafim.toDate() | date: 'HH:mm' }}
-    </ion-card-content>
-
-
-    <ion-card-header>
-      <ion-card-subtitle>Mais detalhes:</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      {{this.info.detalhes}}
-    </ion-card-content>
-  </ion-card>
+<div *ngIf="typo == 'adm'">
+  <!--ADICIONAR UM FORMULÁRIO AQUI-->
+</div>
 
 
 

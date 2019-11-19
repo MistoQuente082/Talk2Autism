@@ -23,7 +23,8 @@ registerLocaleData(localePt);
 })
 export class Tab4Page implements OnInit {
   eventos: Observable<any[]>; // Só declaração de uma lista de variáveis
-
+  public typo;
+  public banco;
 
   constructor(
     db: AngularFirestore, // Confira App.components.ts
@@ -32,6 +33,8 @@ export class Tab4Page implements OnInit {
     public fAuth: AngularFireAuth,
     public router: Router,
   ) {
+    this.banco = db;
+    this.verifiUser();
     const currentUser = firebase.auth().currentUser; // Consegue o ID do usuário logago
     this.eventos = db.collection('eventos').valueChanges(); // consegue os valores da coelção noticias
   }
@@ -72,11 +75,30 @@ export class Tab4Page implements OnInit {
   }
 
 
+
+
   sair() {
     this.presentAlert2('Realmente quer sair?');
 
   }
 
+
+  verifiUser() {
+    try {
+      const currentUser = firebase.auth().currentUser;
+      this.typo = '';
+      this.banco.collection('indice').doc(currentUser.email).get().toPromise()
+        .then(doc => {
+          this.typo = doc.data().tipo;
+          console.log('funfa: ', doc.data().tipo);
+        })
+        .catch(err => {
+          this.typo = 'Error getting document' + err;
+        });
+    } finally {
+      console.log('Deu super certo!');
+    }
+  }
 
 
   ngOnInit() {

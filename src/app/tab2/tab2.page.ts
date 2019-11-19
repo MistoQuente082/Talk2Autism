@@ -17,10 +17,10 @@ import { Router } from '@angular/router';
 })
 
 export class Tab2Page {
-  //myDate: string;
-  //customPickerOptions: any;
-
-  //Só declaração de uma lista de variáveis
+  // myDate: string;
+  // customPickerOptions: any;
+ 
+  // Só declaração de uma lista de variáveis
   informes: Observable<any[]>;
 
   informesModifi = {};
