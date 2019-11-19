@@ -12,27 +12,31 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-subtitle>Data: {{ this.info.dateAtend.toDate() | date: 'dd/MM/yyyy' }}</ion-card-subtitle>
+      <ion-card-title>Horário de Atendimento</ion-card-title>
     </ion-card-header>
     <ion-card-content>
+      <p>Data: {{ this.info.dateAtend.toDate() | date: 'dd/MM/yyyy' }}</p>
+      <p>Hora de chegada: {{this.info.pInput.toDate() | date: 'HH:mm'}}</p>
+      <p>Hora de saída: {{this.info.pOutput.toDate() | date: 'HH:mm'}}</p>
     </ion-card-content>
-  </ion-card>
 
-  <ion-card>
     <ion-card-header>
-      <ion-card-subtitle>Mais detalhes:</ion-card-subtitle>
+      <ion-card-title>Mais detalhes:</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      {{this.info.detalhes}}
       <p>Idas ao banheiro: {{ this.info.nTime }}</p>
-      <p>Alimentação: {{ this.info.nTime }}</p>
+      <p *ngIf="info.comeu == false">Alimentação: Não comeu</p>
+      <p *ngIf="info.comeu == true">Alimentação: Comeu</p>
       <p>Nota de Comportamento: {{ this.info.conduct }}</p>
     </ion-card-content>
-  </ion-card>
-  <h5>Comentários e informações de terapia: </h5>
-  <ion-card *ngFor="let comentario of comentarios | async">
-    <ion-card-content>
-      <p>{{ comentario.mensagem }}</p>
+
+    <ion-card-header>
+
+      <ion-card-title>Comentários e informações da terapia: </ion-card-title>
+    </ion-card-header>
+    <ion-card-content *ngFor="let comentario of comentarios | async">
+      {{comentario.nome}}: {{ comentario.mensagem }}
     </ion-card-content>
+
   </ion-card>
 </ion-content>

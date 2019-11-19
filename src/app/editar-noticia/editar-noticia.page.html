@@ -32,11 +32,14 @@
     </ion-item>
   </ion-list>
 
-  <ion-button color="medium" expand="block" (click)="subNoticia()">
-    Editar noticia
+  <ion-button color="medium" expand="block" (click)="subNoticia(true)">
+    Salvar e postar noticia
   </ion-button>
-  <ion-button color="medium" expand="block" (click)="excluirNoticia()">
-    Apagar Notícia
+  <ion-button color="medium" expand="block" (click)="subNoticia(false)">
+    Salvar e ocultar Notícia
+  </ion-button>
+  <ion-button color="danger" expand="block" (click)="excluirNoticia()">
+    Excluir Notícia
   </ion-button>
 
 </ion-content>

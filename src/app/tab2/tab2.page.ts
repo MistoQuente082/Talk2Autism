@@ -35,14 +35,15 @@ export class Tab2Page {
     public fAuth: AngularFireAuth,
     public router: Router,
     public alertController: AlertController) {
-    let currentUser = firebase.auth().currentUser; // Consegue o ID do usuário logado
+    const currentUser = firebase.auth().currentUser; // Consegue o ID do usuário logado
     this.user = db.collection('indice').doc(currentUser.email).get().toPromise()
       .then(doc => {
         this.user = doc.data();
         for (const filho in this.user.atendido) {
           const filhoo = this.user.atendido[filho];
           console.log('filho:', filhoo);
-          this.informes = db.collection('atendidos').doc(filhoo).collection('informes').valueChanges();
+          this.informes = db.collection('atendidos').doc(filhoo).collection('informes', ref =>
+      ref.orderBy('dateAtend', 'desc')).valueChanges();
         }
       });
     this.banco = db;

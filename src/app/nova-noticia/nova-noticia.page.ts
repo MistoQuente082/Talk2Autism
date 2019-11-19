@@ -13,6 +13,7 @@ export class NovaNoticiaPage implements OnInit {
   public tituloNoticia;
   public descriNoticia;
   public horaNoticia: Date = new Date();
+  public postar: boolean;
 
 
   constructor(
@@ -52,6 +53,7 @@ export class NovaNoticiaPage implements OnInit {
                 descricao: this.descriNoticia,
                 data: this.horaNoticia,
                 id: ref.id,
+                postar: this.postar
               };
               this.db.collection('noticias').doc(ref.id).set(novaNoticia);
             });
@@ -71,10 +73,11 @@ export class NovaNoticiaPage implements OnInit {
     toast.present();
   }
 
-  subNoticia() {
+  subNoticia(valor: boolean) {
     if (this.tituloNoticia === undefined || this.descriNoticia === undefined) {
       this.presentToast('Preencha os Campos');
     } else {
+      this.postar = valor;
       this.presentAlert('Deseja criar a notícia?');
     }
   }
