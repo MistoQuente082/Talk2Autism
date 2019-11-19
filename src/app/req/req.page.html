@@ -10,32 +10,9 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="typo == 'adm'">
-    <ion-list>
-      <ion-list-header>Ativar ou desativar</ion-list-header>
-      <ion-item>
-        <ion-label>Pedidos de Fardamento</ion-label>
-        <ion-toggle [(ngModel)]="sFar" value="sFar" color="medium"></ion-toggle>
-      </ion-item>
-    </ion-list>
-    <ion-list>
-      <ion-item>
-        <ion-label>Pedidos de Módulos</ion-label>
-        <ion-toggle [(ngModel)]="sMod" value="sMod" color="medium"></ion-toggle>
-      </ion-item>
-    </ion-list>
-    <ion-list>
-      <ion-item>
-        <ion-label>Pedidos de Reuniões</ion-label>
-        <ion-toggle [(ngModel)]="sReu" value="sReu" color="medium"></ion-toggle>
-
-      </ion-item>
-    </ion-list>
-
-    <ion-button (click)="subStatus()" color="medium">Modificar</ion-button>
-
+  <div *ngIf="modais == 0">
+    <p>não há avisos</p>
   </div>
-
 
   <!-- Mostra a tela de Modal Fardamento-->
   <div *ngIf="modais == 1">
