@@ -11,6 +11,7 @@
 
 <ion-content>
 
+ 
   <div *ngIf="item == 'adicionar'">
     <ion-list>
       <ion-list-header>
@@ -42,13 +43,20 @@
       </ion-item>
 
       <ion-item *ngIf="tipoUsuario == 'pai'">
-        <ion-label color="medium" position="floating">Selecionar filho</ion-label>
+        
         <ion-select [(ngModel)]="nomeFilho" multiple>
           <ion-select-option *ngFor="let atendido of Atendidos | async" value="{{atendido.id}}">
             {{atendido.nome}}
           </ion-select-option>
         </ion-select>
       </ion-item>
+
+      <ion-item>
+          <ion-label>Destinatário</ion-label>
+          <ion-select [(ngModel)]="mDestino" placeholder="Selecione" multiple>
+            <ion-select-option *ngFor="let pessoa of pessoas | async">{{pessoa.nome}}: {{pessoa.email}}</ion-select-option>
+          </ion-select>
+        </ion-item>
 
       <ion-item *ngIf="tipoUsuario != 'atend'">
         <ion-label position="floating">Email</ion-label>

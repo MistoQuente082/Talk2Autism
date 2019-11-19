@@ -26,7 +26,7 @@ export class EditarNoticiaPage implements OnInit {
     this.noticia = navParams.get('item');
     this.tituloNoticia = this.noticia.titulo;
     this.descriNoticia = this.noticia.descricao;
-    this.horaNoticia = this.noticia.data;
+    this.horaNoticia = this.noticia.data; 
   }
 
   async presentAlert(message: string) {

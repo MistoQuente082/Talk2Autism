@@ -24,6 +24,14 @@
         <p>{{terapeuta.email}}</p>
       </ion-label>
 
+      <ion-buttons slot="end">
+        <ion-button (click)="excluir(terapeuta.email)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+
+
+
     </ion-item>
   </ion-list>
 
@@ -38,7 +46,13 @@
         <h2>{{pai.nome}}</h2>
         <p>{{pai.email}}</p>
       </ion-label>
+      <ion-buttons slot="end">
+        <ion-button (click)="excluir(pai)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-item>
+
   </ion-list>
 
   <!--PARTE DOS ADM-->
@@ -54,7 +68,14 @@
         <h2>{{adm.nome}}</h2>
         <p>{{adm.email}}</p>
       </ion-label>
+      <ion-buttons slot="end">
+        <ion-button (click)="excluir(adm)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-item>
+
+
   </ion-list>
 
   <ion-list>
