@@ -152,8 +152,6 @@ export class Tab3Page implements OnChanges {
             console.log('Saiu!');
             await this.fAuth.auth.signOut();
             this.router.navigate(['/']);
-
-
           }
         }
       ]
