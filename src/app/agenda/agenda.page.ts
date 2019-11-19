@@ -83,6 +83,7 @@ export class AgendaPage implements OnInit {
       comeu: this.comeu,
       nTime: this.nTime,
       terapeutas: 1,
+      lido: false
     };
 
     //get os dados em atendidos -> this.info.Nome -> informes -> data
@@ -123,8 +124,9 @@ export class AgendaPage implements OnInit {
                 comeu: this.comeu,
                 nTime: this.nTime + dadosExistentes.nTime,
                 dateAtend: this.dateAtend,
-                terapeutas: informe.terapeutas
-              };
+                terapeutas: informe.terapeutas,
+                lido: false
+              }
               this.db.collection('atendidos').doc(this.info.ID).collection('informes').doc(data).set(informeFinal);
               this.db.collection('atendidos').doc(this.info.ID).collection('informes').doc(data).collection('comentarios').doc(this.currentUser.email).set({
                 remetente: this.currentUser.email,
