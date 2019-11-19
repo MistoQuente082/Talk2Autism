@@ -15,15 +15,17 @@ export class Tab7Page implements OnInit {
   pais: Observable<any[]>;
   terapeutas: Observable<any[]>;
   admins: Observable<any[]>;
+  atendidos: Observable<any[]>;
 
 
   constructor(
-    db: AngularFirestore,
+    public db: AngularFirestore,
     public fAuth: AngularFireAuth,
     public router: Router,
     public alertController: AlertController,
     public modalCtrl: ModalController
   ) {
+    this.atendidos = db.collection('atendidos').valueChanges();
     this.pais = db.collection('indice', ref =>
       ref.where('tipo', '==', 'pai')).valueChanges();
     this.terapeutas = db.collection('indice', ref =>
@@ -54,6 +56,10 @@ export class Tab7Page implements OnInit {
       ]
     });
     await alert.present();
+  }
+
+  excluir(email){
+    this.db.collection("indice").doc(email).delete();
   }
 
 
