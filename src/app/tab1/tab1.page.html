@@ -5,36 +5,54 @@
         </ion-button>
     </ion-buttons>
     <ion-title>
-        Informes
+        Noticias
     </ion-title>
 </ion-toolbar>
 
 <ion-content>
-<div *ngFor="let noticia of noticias | async" (click)="presentAlert(noticia)">
-    <ion-card class="aviso" *ngIf="typo == 'adm'">
-        <ion-card-header>
-            <ion-card-subtitle>{{noticia.titulo}}</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-            <p>{{noticia.descricao}}</p>
-            <p *ngIf="noticia.postar == true" > Visível</p>
-            <p *ngIf="noticia.postar == false" > Oculta</p>
-        </ion-card-content>
-    </ion-card>
-    <ion-card class="aviso" *ngIf="typo == 'pai' && noticia.postar == true">
-        <ion-card-header>
-            <ion-card-subtitle>{{noticia.titulo}}</ion-card-subtitle>
-        </ion-card-header>
+    <div *ngFor="let noticia of noticias | async" (click)="presentAlert(noticia)">
+        <ion-card class="aviso" *ngIf="typo == 'adm'">
+
+            <ion-card-header>
+
+                <ion-card-title>{{noticia.titulo}}</ion-card-title>
+            </ion-card-header>
+
+            <ion-list>
+                <ion-item>
+                    <ion-label>
+
+                        <p>{{noticia.descricao}}</p>
+                    </ion-label>
+
+                    <div *ngIf="noticia.postar == true">
+                        <ion-note color="success"> Visível</ion-note>
+                    </div>
+
+                    <div *ngIf="noticia.postar == false">
+                        <ion-note color="danger"> Rascunho</ion-note>
+                    </div>
+                </ion-item>
+            </ion-list>
 
 
-        <ion-card-content>
-            <p>{{noticia.descricao}}</p>
-        </ion-card-content>
-    </ion-card>
-</div>
+
+        </ion-card>
+        <ion-card class="aviso" *ngIf="typo == 'pai' && noticia.postar == true">
+            <ion-card-header>
+                <ion-card-title>{{noticia.titulo}}</ion-card-title>
+            </ion-card-header>
+
+
+            <ion-card-content>
+                <p>{{noticia.descricao}}</p>
+            </ion-card-content>
+        </ion-card>
+    </div>
     <ion-fab *ngIf="typo == 'adm'" vertical="bottom" horizontal="end" slot="fixed">
         <ion-fab-button (click)="novaNoticia()">
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
+
 </ion-content>

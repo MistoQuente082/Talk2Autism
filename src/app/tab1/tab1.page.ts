@@ -64,8 +64,8 @@ export class Tab1Page {
     });
 
     const alert1 = await this.alertController.create({
-      header: mensagem.nome,
-      message: mensagem.mensagem,
+      header: mensagem.titulo,
+      message: mensagem.descricao,
       buttons: [
         {
           text: 'Fechar',

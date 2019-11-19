@@ -20,43 +20,18 @@
       <ion-list-header>
         Status das Requisições
       </ion-list-header>
-      <ion-item>
-        <ion-label>Pedidos de Fardamento</ion-label>
-        <div *ngIf="sFar == false">
+      <ion-item *ngFor="let req of req | async">
+        <ion-label>Pedidos de {{req.nome}}</ion-label>
+        <div *ngIf="req.status == false">
           <ion-note color="danger">Desativado</ion-note>
         </div>
 
-        <div *ngIf="sFar == true">
+        <div *ngIf="req.status == true">
           <ion-note color="success">Ativado</ion-note>
         </div>
       </ion-item>
     </ion-list>
-    <ion-list>
-      <ion-item>
-        <ion-label>Pedidos de Módulos</ion-label>
-        <div *ngIf="sMod == false">
-          <ion-note color="danger">Desativado</ion-note>
-        </div>
-
-        <div *ngIf="sMod == true">
-          <ion-note color="success">Ativado</ion-note>
-        </div>
-      </ion-item>
-    </ion-list>
-    <ion-list>
-      <ion-item>
-        <ion-label>Pedidos de Reuniões</ion-label>
-        <div *ngIf="sReu == false">
-          <ion-note color="danger">Desativado</ion-note>
-        </div>
-
-        <div *ngIf="sReu == true">
-          <ion-note color="success">Ativado</ion-note>
-        </div>
-      </ion-item>
-      <ion-button expand="small" slot="end" fill="outline" (click)="presentModal('req')">Alterar</ion-button>
-
-    </ion-list>
+    <ion-button expand="small" slot="end" fill="outline" (click)="presentModal('req')">Alterar</ion-button>
   </div>
 
   <div *ngIf="typo == 'pai'">

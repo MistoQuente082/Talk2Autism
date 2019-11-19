@@ -32,14 +32,18 @@
     </ion-item>
   </ion-list>
 
+  <ion-fab (click)="excluirNoticia()" vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button color="danger">
+      <ion-icon name="trash"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <ion-button color="medium" expand="block" (click)="subNoticia(true)">
-    Salvar e postar noticia
+    Publicar
   </ion-button>
   <ion-button color="medium" expand="block" (click)="subNoticia(false)">
-    Salvar e ocultar Notícia
+    Salvar como rascunho
   </ion-button>
-  <ion-button color="danger" expand="block" (click)="excluirNoticia()">
-    Excluir Notícia
-  </ion-button>
+
+
 
 </ion-content>
