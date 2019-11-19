@@ -25,7 +25,7 @@ export class Tab5Page implements OnInit {
 
   mensagensrec: Observable<any[]>; // Só declaração de uma lista de variáveis
   mensagensenv: Observable<any[]>; // Só declaração de uma lista de variáveis
-  tipo: string;
+  tipo: string = "recebidos";
 
   constructor(
     public fAuth: AngularFireAuth,

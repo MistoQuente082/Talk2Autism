@@ -24,8 +24,9 @@
         <ion-label color="medium" position="floating">Tipo de Usuário</ion-label>
         <ion-select [(ngModel)]="tipoUsuario">
           <ion-select-option value="pai">Pai</ion-select-option>
-          <ion-select-option value="tera">Terapeuta</ion-select-option>
+          <ion-select-option value="terapeuta">Terapeuta</ion-select-option>
           <ion-select-option value="adm">Administrador</ion-select-option>
+          <ion-select-option value="atend">Atendido</ion-select-option>
         </ion-select>
       </ion-item>
 
@@ -41,29 +42,34 @@
       </ion-item>
 
       <ion-item *ngIf="tipoUsuario == 'pai'">
-        <ion-label position="floating">Nome do filho</ion-label>
-        <ion-input type="text" [(ngModel)]="nomeFilho" placeholder="Ex.: Marco Taborga"></ion-input>
+        <ion-label color="medium" position="floating">Selecionar filho</ion-label>
+        <ion-select [(ngModel)]="nomeFilho" multiple>
+          <ion-select-option *ngFor="let atendido of Atendidos | async" value="{{atendido.id}}">
+            {{atendido.nome}}
+          </ion-select-option>
+        </ion-select>
       </ion-item>
 
-      <ion-item>
+      <ion-item *ngIf="tipoUsuario != 'atend'">
         <ion-label position="floating">Email</ion-label>
         <ion-input type="email" [(ngModel)]="email" placeholder="Ex.: joao.pedro@gmail.com"></ion-input>
       </ion-item>
 
-      <ion-item>
+      <ion-item *ngIf="tipoUsuario != 'atend'">
         <ion-label position="floating">CPF</ion-label>
-        <ion-input inputmode="numeric" [(ngModel)]="cpf" maxlength="11" type="number" placeholder="12345678912"></ion-input>
+        <ion-input inputmode="numeric" [(ngModel)]="cpf" maxlength="11" type="number" placeholder="12345678912">
+        </ion-input>
       </ion-item>
 
 
-      <ion-item>
+      <ion-item *ngIf="tipoUsuario != 'atend'">
         <ion-label position="floating">Confirmar CPF</ion-label>
         <ion-input [(ngModel)]="concpf" maxlength="11" type="number" placeholder="12345678912"></ion-input>
       </ion-item>
     </ion-list>
 
     <ion-button color="medium" expand="block" (click)="criarConta()">
-      Adicionar nova usuário
+      Adicionar novo usuário
     </ion-button>
   </div>
 </ion-content>
