@@ -22,7 +22,7 @@
                 <p>Nota de Comportamento: {{ informe.conduct }}</p>
             </ion-card-content>
         </ion-card>
-
+    </div>
     <ion-card class="informe" *ngFor="let informe of informes | async" (click)="presentModal(informe)">
         <ion-card-content>
             <ion-card-subtitle>Dia: {{ informe.dateAtend.toDate() | date:'dd/MM/yyyy'}}</ion-card-subtitle>
@@ -32,7 +32,4 @@
             <p>Nota de Comportamento: {{ informe.conduct }}</p>
         </ion-card-content>
     </ion-card>
-      
-
-
 </ion-content>
