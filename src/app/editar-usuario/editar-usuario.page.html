@@ -11,6 +11,7 @@
 
 <ion-content>
 
+ 
   <div *ngIf="item == 'adicionar'">
     <ion-list>
       <ion-list-header>
@@ -39,11 +40,20 @@
         <ion-label position="floating">Nome do responsável</ion-label>
         <ion-input type="text" [(ngModel)]="nome" placeholder="Ex.: João Pedro"></ion-input>
       </ion-item>
-
+<!--
       <ion-item *ngIf="tipoUsuario == 'pai'">
-        <ion-label position="floating">Nome do filho</ion-label>
-        <ion-input type="text" [(ngModel)]="nomeFilho" placeholder="Ex.: Marco Taborga"></ion-input>
+        <ion-label>Destinatário</ion-label>
+          <ion-select [(ngModel)]="nomeFilho" placeholder="Selecione" multiple>
+            <ion-select-option *ngFor="let  of pessoas | async">{{pessoa.nome}}: {{pessoa.email}}</ion-select-option>
+          </ion-select>
       </ion-item>
+-->
+      <ion-item>
+          <ion-label>Destinatário</ion-label>
+          <ion-select [(ngModel)]="mDestino" placeholder="Selecione" multiple>
+            <ion-select-option *ngFor="let pessoa of pessoas | async">{{pessoa.nome}}: {{pessoa.email}}</ion-select-option>
+          </ion-select>
+        </ion-item>
 
       <ion-item>
         <ion-label position="floating">Email</ion-label>
@@ -52,7 +62,8 @@
 
       <ion-item>
         <ion-label position="floating">CPF</ion-label>
-        <ion-input inputmode="numeric" [(ngModel)]="cpf" maxlength="11" type="number" placeholder="12345678912"></ion-input>
+        <ion-input inputmode="numeric" [(ngModel)]="cpf" maxlength="11" type="number" placeholder="12345678912">
+        </ion-input>
       </ion-item>
 
 

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { EditarUsuarioPage } from '../editar-usuario/editar-usuario.page';
 
 @Component({
@@ -21,6 +21,7 @@ export class Tab7Page implements OnInit {
     db: AngularFirestore,
     public fAuth: AngularFireAuth,
     public router: Router,
+    public toastCtrl: ToastController,
     public alertController: AlertController,
     public modalCtrl: ModalController
   ) {
@@ -67,6 +68,35 @@ export class Tab7Page implements OnInit {
 
     await modal.present();
 
+  }
+
+  async excluir(user) {
+    const alert = await this.alertController.create({
+      header: 'Atenção',
+      message: 'Realmente deseja excluir?',
+      buttons: [
+        {
+          text: 'Fechar',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Excluir',
+          handler: async () => {
+            // Coloca aqui para excluir
+
+            this.presentToast('Excluido com sucesso');
+          }
+        }
+      ]
+    });
+    await alert.present();
+
+  }
+
+
+  async presentToast(message: string) {
+    const toast = await this.toastCtrl.create({ message, duration: 2000 });
+    toast.present();
   }
 
   sair() {
