@@ -14,25 +14,31 @@
 
 <ion-content>
   <!--Mostra card para cada categoria-->
-
   <div *ngIf="typo == 'adm'">
-    <ion-list>
-      <ion-list-header>
-        Status das Requisições
-      </ion-list-header>
-      <ion-item *ngFor="let req of req | async">
-        <ion-label>Pedidos de {{req.nome}}</ion-label>
-        <div *ngIf="req.status == false">
-          <ion-note color="danger">Desativado</ion-note>
-        </div>
-
-        <div *ngIf="req.status == true">
-          <ion-note color="success">Ativado</ion-note>
-        </div>
-      </ion-item>
-    </ion-list>
-    <ion-button expand="small" slot="end" fill="outline" (click)="presentModal('req')">Alterar</ion-button>
-  </div>
+      <ion-list>
+        <ion-list-header>Status das Requisições</ion-list-header>
+        <ion-item>
+          <ion-label>Pedidos de Fardamento</ion-label>
+          <ion-toggle (ionChange)="status()" [(ngModel)]="sFar" value="sFar" color="medium"></ion-toggle>
+        </ion-item>
+      </ion-list>
+      <ion-list>
+        <ion-item>
+          <ion-label>Pedidos de Módulos</ion-label>
+          <ion-toggle (ionChange)="status()" [(ngModel)]="sMod" value="sMod" color="medium"></ion-toggle>
+        </ion-item>
+      </ion-list>
+      <ion-list>
+        <ion-item>
+          <ion-label>Pedidos de Reuniões</ion-label>
+          <ion-toggle (ionChange)="status()" [(ngModel)]="sReu" value="sReu" color="medium"></ion-toggle>
+  
+        </ion-item>
+      </ion-list>
+  
+      
+  
+    </div>
 
   <div *ngIf="typo == 'pai'">
     <div *ngFor="let req of req | async">

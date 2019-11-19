@@ -12,6 +12,8 @@ export class TabsPage {
   usuario: any;
   user: any;
 
+  k = 1;
+
   constructor(
     public db: AngularFirestore,
   ) {

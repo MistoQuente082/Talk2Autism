@@ -74,6 +74,9 @@ export class ReqPage implements OnInit {
     toast.present();
   }
 
+
+
+
   // MOSTRA UMA ALERTA NA TELA
   async presentAlert(message: string) {
     const alert = await this.alertController.create({
@@ -158,10 +161,14 @@ export class ReqPage implements OnInit {
 
     if (this.tipo.nome === 'Reuniões') {
       this.modais = 3;
+      console.log(this.tipo);
       // console.log('isso láaaaaa', this.typo);
     }
-  }
 
+    if (this.tipo.status === false && this.tipo.nome === 'Reuniões') {
+      this.modais = 0;
+    }
+  }
   // Enviar pedido de reunião
   subMeeting() {
     if (this.motivo !== undefined && this.limHorario !== undefined

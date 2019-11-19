@@ -56,6 +56,21 @@ export class Tab3Page implements OnChanges {
 
   }
 
+  status() {
+
+    this.db.collection('requisicoes').doc('fardamentos').update({
+      status: this.sFar,
+    });
+
+    this.db.collection('requisicoes').doc('modulos').update({
+      status: this.sMod,
+    });
+
+    this.db.collection('requisicoes').doc('reunioes').update({
+      status: this.sReu,
+    });
+  }
+
   async presentAlert(message: string) {
     const alert = await this.alertController.create({
       header: 'Algo deu errado',
