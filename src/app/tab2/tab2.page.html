@@ -13,16 +13,25 @@
 
 
 <ion-content>
+    <div *ngFor="let informe of informes | async" (click)="presentModal(informe)">
+        <ion-card *ngIf=" informe.lido == true" class="informe">
+            <ion-card-content>
+                <ion-card-subtitle>Dia: {{ informe.dateAtend.toDate() | date:'dd/MM/yyyy'}}</ion-card-subtitle>
+                <p>Idas ao banheiro: {{ informe.nTime }}</p>
+                <p>Alimentação: {{ informe.nTime }}</p>
+                <p>Nota de Comportamento: {{ informe.conduct }}</p>
+            </ion-card-content>
+        </ion-card>
 
-    <ion-card class="informe" *ngFor="let informe of informes | async" (click)="presentModal(informe)">
-        <ion-card-content>
-            <ion-card-subtitle>Dia: {{ informe.dateAtend.toDate() | date:'dd/MM/yyyy'}}</ion-card-subtitle>
-            <p>Idas ao banheiro: {{ informe.nTime }}</p>
-            <p>Alimentação: {{ informe.nTime }}</p>
-            <p>Nota de Comportamento: {{ informe.conduct }}</p>
-
-        </ion-card-content>
-    </ion-card>
+        <ion-card *ngIf="this.informe.lido == false" class="vermelho">
+            <ion-card-content>
+                <ion-card-subtitle>Dia: {{ informe.dateAtend.toDate() | date:'dd/MM/yyyy'}}</ion-card-subtitle>
+                <p>Idas ao banheiro: {{ informe.nTime }}</p>
+                <p>Alimentação: {{ informe.nTime }}</p>
+                <p>Nota de Comportamento: {{ informe.conduct }}</p>
+            </ion-card-content>
+        </ion-card>
+    </div>
 
 
 </ion-content>
