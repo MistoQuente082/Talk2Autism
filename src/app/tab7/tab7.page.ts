@@ -59,11 +59,6 @@ export class Tab7Page implements OnInit {
     await alert.present();
   }
 
-  excluir(email){
-    this.db.collection("indice").doc(email).delete();
-  }
-
-
   async presentModal(item) {
     const modal = await this.modalCtrl.create({
       component: EditarUsuarioPage,
@@ -89,14 +84,13 @@ export class Tab7Page implements OnInit {
           text: 'Excluir',
           handler: async () => {
             // Coloca aqui para excluir
-
+            this.db.collection("indice").doc(user).delete();
             this.presentToast('Excluido com sucesso');
           }
         }
       ]
     });
     await alert.present();
-
   }
 
 

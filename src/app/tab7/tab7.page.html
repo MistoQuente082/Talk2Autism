@@ -47,7 +47,7 @@
         <p>{{pai.email}}</p>
       </ion-label>
       <ion-buttons slot="end">
-        <ion-button (click)="excluir(pai)">
+        <ion-button (click)="excluir(pai.email)">
           <ion-icon slot="icon-only" name="trash"></ion-icon>
         </ion-button>
       </ion-buttons>
@@ -69,7 +69,7 @@
         <p>{{adm.email}}</p>
       </ion-label>
       <ion-buttons slot="end">
-        <ion-button (click)="excluir(adm)">
+        <ion-button (click)="excluir(adm.email)">
           <ion-icon slot="icon-only" name="trash"></ion-icon>
         </ion-button>
       </ion-buttons>
