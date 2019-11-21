@@ -7,6 +7,7 @@ import * as firebase from 'firebase/app';
 import { Item } from 'src/assets/extra/item';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { PerfilMeninosPage } from '../perfil-meninos/perfil-meninos.page';
 
 @Component({
   selector: 'app-tab6',
@@ -32,7 +33,7 @@ export class Tab6Page implements OnInit {
 
   async presentModal(item: Item) {
     const modal = await this.modalCtrl.create({
-      component: AgendaPage,
+      component: PerfilMeninosPage,
       componentProps: {
         item
       }
