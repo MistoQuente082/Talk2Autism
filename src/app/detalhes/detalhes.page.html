@@ -12,35 +12,71 @@
 </ion-header>
 
 <ion-content>
-<div *ngIf="typo == 'pais'">
 
+  <div *ngIf="info != 'edit'">
     <ion-card>
-        <ion-card-header>
-          <ion-card-subtitle>Descrição:</ion-card-subtitle>
-          <ion-card-title>{{this.info.nome}}</ion-card-title>
-        </ion-card-header>
-    
-        <ion-card-header>
-          <ion-card-subtitle>Realização:</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          Data: {{ this.info.datainicio.toDate() | date: 'dd/MM/yyyy' }} <br>
-          Hora: {{ this.info.datainicio.toDate() | date: 'HH:mm' }} às {{ this.info.datafim.toDate() | date: 'HH:mm' }}
-        </ion-card-content>
-    
-    
-        <ion-card-header>
-          <ion-card-subtitle>Mais detalhes:</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          {{this.info.detalhes}}
-        </ion-card-content>
-      </ion-card>
-</div>
 
-<div *ngIf="typo == 'adm'">
-  <!--ADICIONAR UM FORMULÁRIO AQUI-->
-</div>
+      <ion-card-header>
+        <ion-card-subtitle>Descrição:</ion-card-subtitle>
+        <ion-card-title>{{this.info.nome}}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-header>
+        <ion-card-subtitle>Realização:</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        Data: {{ this.info.datainicio.toDate() | date: 'dd/MM/yyyy' }} <br>
+        Hora: {{ this.info.datainicio.toDate() | date: 'HH:mm' }} às {{ this.info.datafim.toDate() | date: 'HH:mm' }}
+      </ion-card-content>
+
+
+      <ion-card-header>
+        <ion-card-subtitle>Mais detalhes:</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        {{this.info.detalhes}}
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+
+  <div *ngIf="typo == 'adm'">
+    <!--ADICIONAR UM FORMULÁRIO AQUI-->
+
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Nome do Evento</ion-label>
+        <ion-input type="text" [(ngModel)]="nomeEvento" placeholder="Ex.: Assembleia de pais"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Realização</ion-label>
+
+        <ion-datetime display-format="HH:mm" cancelText="Cancelar" doneText="Escolher" ([ngModel])="horaInicio"
+          placeholder="Hora de Início" (ionChange)="mudaIn( $event )">
+        </ion-datetime>
+
+        <ion-datetime display-format="HH:mm" cancelText="Cancelar" doneText="Escolher" ([ngModel])="horaTermino"
+          placeholder="Hora de Término" (ionChange)="mudaFin( $event )">
+        </ion-datetime>
+
+        <ion-datetime display-format="DD MMM YYYY" strin cancelText="Cancelar" doneText="Escolher"
+          ([ngModel])="dataEvento" placeholder="Seleciona a dia" (ionChange)="mudaData( $event )">
+        </ion-datetime>
+      </ion-item>
+
+
+
+      <ion-item>
+        <ion-label position="floating">Mais Detalhes:</ion-label>
+        <ion-textarea [(ngModel)]="detalheEvento" rows="5" cols="30"></ion-textarea>
+      </ion-item>
+    </ion-list>
+
+    <ion-button (click)="subEvento()" expand="block" color="medium">Criar Evento</ion-button>
+
+
+  </div>
 
 
 

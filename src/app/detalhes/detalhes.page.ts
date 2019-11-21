@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavParams } from '@ionic/angular';
+import { ModalController, NavParams, ToastController, AlertController } from '@ionic/angular';
 import { Item } from 'src/assets/extra/item';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
@@ -14,17 +14,90 @@ export class DetalhesPage implements OnInit {
   info: Item;
   public typo;
 
+  public info2;
+
+  public nomeEvento;
+  public horaInicio;
+  public horaTermino;
+  public dataEvento;
+  public detalheEvento;
+
+
   constructor(
     public modalCtrl: ModalController,
     public banco: AngularFirestore, // Confira App.components.ts
-    navParams: NavParams) {
+    public navParams: NavParams,
+    public toastCtrl: ToastController,
+    public alertController: AlertController) {
     this.info = navParams.get('item');
+    this.info2 = navParams.get('item');
+
     this.verifiUser();
   }
   async dismiss() {
     await this.modalCtrl.dismiss();
   }
 
+  // Horario
+  mudaIn(event) {
+    this.horaInicio = new Date(event.detail.value);
+
+  }
+
+  mudaFin(event) {
+    this.horaTermino = new Date(event.detail.value);
+
+  }
+
+  mudaData(event) {
+    this.dataEvento = new Date(event.detail.value);
+
+
+  }
+
+
+
+  // ENNVIAR EVENTO
+  subEvento() {
+    if (this.nomeEvento === undefined || this.horaInicio === undefined ||
+      this.dataEvento === undefined || this.horaTermino === undefined ||
+      this.detalheEvento === undefined) {
+      this.presentToast('Preencha os Campos');
+    } else {
+      this.presentAlert();
+    }
+
+
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Atenção',
+      message: 'Deseja criar um novo evento?',
+      buttons: [
+        {
+          text: 'Fechar',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Criar',
+          handler: async () => {
+            this.dados({
+              nomeEvento: this.nomeEvento,
+              horaInicio: this.horaInicio,
+              horaTermino: this.horaTermino,
+              dataEvento: this.dataEvento,
+              detalheEvento: this.detalheEvento
+            });
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+
+  // Verifica o Usuário
   verifiUser() {
     try {
       const currentUser = firebase.auth().currentUser;
@@ -40,6 +113,19 @@ export class DetalhesPage implements OnInit {
     } finally {
       console.log('Deu super certo!');
     }
+  }
+
+  //Dados que vão para o firebase
+  dados(dados) {
+    // Coloca aqui o codigo para enviar ao firebase
+    console.log(dados);
+  }
+
+
+  // Mostra um aviso de envio
+  async presentToast(message: string) {
+    const toast = await this.toastCtrl.create({ message, duration: 2000 });
+    toast.present();
   }
 
   ngOnInit() {
