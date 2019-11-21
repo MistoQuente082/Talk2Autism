@@ -14,7 +14,7 @@
   <ion-list>
     <ion-item *ngFor="let atendido of atendidos | async" (click)="presentModal(atendido)">
       <ion-avatar>
-        <img [src]="getUrl(atendido)">
+        <img [src]="atendido.foto">
       </ion-avatar>
       <ion-label>
         <h4>{{atendido.foto}}</h4>
