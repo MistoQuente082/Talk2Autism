@@ -24,6 +24,8 @@ export class Tab1Page {
 
   typo: any;
 
+  imagem: any;
+
   constructor(
     public db: AngularFirestore, //Confira App.components.ts
     public fAuth: AngularFireAuth,
@@ -34,6 +36,8 @@ export class Tab1Page {
     this.noticias = db.collection('noticias').valueChanges(); //consegue os valores da coelção noticias
     this.banco = db;
     this.verifiUser();
+    this.imagem = firebase.storage().ref("/download.jpg").getDownloadURL();
+    console.log(this.imagem);
   }
 
 
@@ -106,8 +110,6 @@ export class Tab1Page {
             console.log('Saiu!');
             await this.fAuth.auth.signOut();
             this.router.navigate(['/']);
-
-
           }
         }
       ]

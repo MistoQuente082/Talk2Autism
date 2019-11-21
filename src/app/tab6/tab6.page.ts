@@ -21,12 +21,11 @@ export class Tab6Page implements OnInit {
   constructor(
     public modalCtrl: ModalController,
     db: AngularFirestore,
-    public fAuth: AngularFireAuth,
+    public fAuth: AngularFireAuth, 
     public router: Router,
     public alertController: AlertController
   ) {
     const currentUser = firebase.auth().currentUser;
-    this.atendidos = db.collection('atendidos').valueChanges();
   }
 
 
@@ -70,6 +69,10 @@ export class Tab6Page implements OnInit {
   sair() {
     this.presentAlert2('Realmente quer sair?');
 
+  }
+
+  getUrl(item){
+    return firebase.storage().ref(item.foto).getDownloadURL()
   }
 
 

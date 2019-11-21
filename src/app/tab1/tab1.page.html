@@ -10,11 +10,12 @@
 </ion-toolbar>
 
 <ion-content>
+    <img [src]="imagem.i">
+    <p>{{imagem}}</p>
+    <p>{{imagem.i}}</p>
     <div *ngFor="let noticia of noticias | async" (click)="presentAlert(noticia)">
         <ion-card class="aviso" *ngIf="typo == 'adm'">
-
             <ion-card-header>
-
                 <ion-card-title>{{noticia.titulo}}</ion-card-title>
             </ion-card-header>
 
@@ -24,7 +25,6 @@
 
                         <p>{{noticia.descricao}}</p>
                     </ion-label>
-
                     <div *ngIf="noticia.postar == true">
                         <ion-note color="success"> Visível</ion-note>
                     </div>
