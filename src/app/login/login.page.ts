@@ -15,7 +15,7 @@ export class LoginPage implements OnInit {
   email: string;
   senha: string;
   loading: HTMLIonLoadingElement;
-  public usuario: any;
+    public usuario: any;
 
   tipo: boolean;
 

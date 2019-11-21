@@ -5,21 +5,20 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { Tab6Page } from './tab6.page';
+import { PerfilMeninosPage } from './perfil-meninos.page';
+
 import { AgendaPage } from '../agenda/agenda.page';
-import { PerfilMeninosPage } from '../perfil-meninos/perfil-meninos.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: Tab6Page
+    component: PerfilMeninosPage
   }
 ];
 
 @NgModule({
   entryComponents: [
-    AgendaPage,
-    PerfilMeninosPage
+    AgendaPage
   ],
 
   imports: [
@@ -29,8 +28,7 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [
-    Tab6Page,
-    AgendaPage,
-    PerfilMeninosPage]
+    AgendaPage
+  ]
 })
-export class Tab6PageModule { }
+export class PerfilMeninosPageModule { }

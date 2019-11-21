@@ -1,11 +1,14 @@
 <ion-header>
   <ion-toolbar [color]="colorStatus?'toolbar-color':'medium'">
+    
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()">
         <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
+
     <ion-title>{{tipo.nome}}</ion-title>
+
   </ion-toolbar>
 </ion-header>
 
@@ -87,7 +90,7 @@
 
       <ion-button (click)="subModules()" expand="block" color="medium">Fazer pedido</ion-button>
 
-    </ion-list>`,
+    </ion-list>
   </div>
 
 
