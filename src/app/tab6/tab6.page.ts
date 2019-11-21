@@ -7,7 +7,6 @@ import * as firebase from 'firebase/app';
 import { Item } from 'src/assets/extra/item';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { PerfilMeninosPage } from '../perfil-meninos/perfil-meninos.page';
 
 @Component({
   selector: 'app-tab6',
@@ -19,6 +18,8 @@ export class Tab6Page implements OnInit {
   usuario: any;
   att: any;
 
+
+
   constructor(
     public modalCtrl: ModalController,
     db: AngularFirestore,
@@ -26,15 +27,21 @@ export class Tab6Page implements OnInit {
     public router: Router,
     public alertController: AlertController
   ) {
-    const currentUser = firebase.auth().currentUser;
-    this.atendidos = db.collection('atendidos').valueChanges();
+    db.collection('atendidos').get().toPromise().then(snapshot => {
+      snapshot.forEach(doc => {
+        console.log(doc.data().foto);
+        doc.data().foto = firebase.storage().ref(doc.data().foto).getDownloadURL();
+        console.log(doc.data().foto)
+      })
+      this.vai = snapshot;
+    });
   }
 
 
 
   async presentModal(item: Item) {
     const modal = await this.modalCtrl.create({
-      component: PerfilMeninosPage,
+      component: AgendaPage,
       componentProps: {
         item
       }
@@ -70,9 +77,7 @@ export class Tab6Page implements OnInit {
 
   sair() {
     this.presentAlert2('Realmente quer sair?');
-
   }
-
 
   ngOnInit() {
   }

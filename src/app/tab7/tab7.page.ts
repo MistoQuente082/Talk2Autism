@@ -92,8 +92,6 @@ export class Tab7Page implements OnInit {
     });
     await alert.present();
   }
-
-
   async presentToast(message: string) {
     const toast = await this.toastCtrl.create({ message, duration: 2000 });
     toast.present();
