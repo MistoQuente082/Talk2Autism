@@ -19,6 +19,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth'; //Autenticação
 
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+
+import { Camera } from '@ionic-native/camera/ngx';
+
 registerLocaleData(localePt);
 
 @NgModule({
@@ -38,6 +41,7 @@ registerLocaleData(localePt);
     StatusBar,
     SplashScreen,
     DatePicker,
+    Camera,
     { provide: LOCALE_ID, useValue: 'pt-BR' },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
