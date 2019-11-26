@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { listLazyRoutes } from '@angular/compiler/src/aot/lazy_routes';
+import { PedidosPage } from '../pedidos/pedidos.page';
 
 
 
@@ -162,6 +164,29 @@ export class Tab3Page implements OnChanges {
 
   sair() {
     this.presentAlert2('Realmente quer sair?');
+
+  }
+
+  async verPedidos(tipo) {
+    const modal = await this.modalCtrl.create({
+      component: PedidosPage,
+      componentProps: {
+        tipo: tipo,
+      }
+    });
+
+    return await modal.present();
+  }
+
+  async presentModal2(tipo: any) {
+    const modal = await this.modalCtrl.create({
+      component: PedidosPage,
+      componentProps: {
+
+      }
+    });
+
+    return await modal.present();
 
   }
 

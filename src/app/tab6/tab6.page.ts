@@ -33,7 +33,6 @@ export class Tab6Page implements OnInit {
         doc.data().foto = firebase.storage().ref(doc.data().foto).getDownloadURL();
         console.log(doc.data().foto)
       })
-      this.vai = snapshot;
     });
   }
 

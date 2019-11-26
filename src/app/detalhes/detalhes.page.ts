@@ -24,6 +24,7 @@ export class DetalhesPage implements OnInit {
 
 
   constructor(
+    public db: AngularFirestore,
     public modalCtrl: ModalController,
     public banco: AngularFirestore, // Confira App.components.ts
     public navParams: NavParams,
@@ -117,6 +118,7 @@ export class DetalhesPage implements OnInit {
 
   //Dados que vão para o firebase
   dados(dados) {
+    this.db.collection("eventos").add(dados);
     // Coloca aqui o codigo para enviar ao firebase
     console.log(dados);
   }

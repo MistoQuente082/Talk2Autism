@@ -15,30 +15,32 @@
 <ion-content>
   <!--Mostra card para cada categoria-->
   <div *ngIf="typo == 'adm'">
-      <ion-list>
-        <ion-list-header>Status das Requisições</ion-list-header>
-        <ion-item>
-          <ion-label>Pedidos de Fardamento</ion-label>
-          <ion-toggle (ionChange)="status()" [(ngModel)]="sFar" value="sFar" color="medium"></ion-toggle>
-        </ion-item>
-      </ion-list>
-      <ion-list>
-        <ion-item>
-          <ion-label>Pedidos de Módulos</ion-label>
-          <ion-toggle (ionChange)="status()" [(ngModel)]="sMod" value="sMod" color="medium"></ion-toggle>
-        </ion-item>
-      </ion-list>
-      <ion-list>
-        <ion-item>
-          <ion-label>Pedidos de Reuniões</ion-label>
-          <ion-toggle (ionChange)="status()" [(ngModel)]="sReu" value="sReu" color="medium"></ion-toggle>
-  
-        </ion-item>
-      </ion-list>
-  
-      
-  
-    </div>
+    <ion-list>
+      <ion-list-header>Status das Requisições</ion-list-header>
+      <ion-item>
+        <ion-label>Pedidos de Fardamento</ion-label>
+        <ion-toggle (ionChange)="status()" [(ngModel)]="sFar" value="sFar" color="medium"></ion-toggle>
+        <ion-note (click)="verPedidos('fardamentos')"> Ver Pedidos </ion-note>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item>
+        <ion-label>Pedidos de Módulos</ion-label>
+        <ion-toggle (ionChange)="status()" [(ngModel)]="sMod" value="sMod" color="medium"></ion-toggle>
+        <ion-note (click)="verPedidos('modulos')"> Ver Pedidos </ion-note>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item>
+        <ion-label>Pedidos de Reuniões</ion-label>
+        <ion-toggle (ionChange)="status()" [(ngModel)]="sReu" value="sReu" color="medium"></ion-toggle>
+        <ion-note (click)="verPedidos('reunioes')"> Ver Pedidos </ion-note>
+      </ion-item>
+    </ion-list>
+
+
+
+  </div>
 
   <div *ngIf="typo == 'pai'">
     <div *ngFor="let req of req | async">

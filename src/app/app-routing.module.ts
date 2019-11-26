@@ -39,7 +39,8 @@ const routes: Routes = [
   { path: 'nova-noticia', loadChildren: './nova-noticia/nova-noticia.module#NovaNoticiaPageModule' },
   { path: 'editar-noticia', loadChildren: './editar-noticia/editar-noticia.module#EditarNoticiaPageModule' },
   { path: 'novo-evento', loadChildren: './novo-evento/novo-evento.module#NovoEventoPageModule' },
-  { path: 'perfil-meninos', loadChildren: './perfil-meninos/perfil-meninos.module#PerfilMeninosPageModule' },
+  { path: 'perfil-meninos', loadChildren: './perfil-meninos/perfil-meninos.module#PerfilMeninosPageModule' },  { path: 'pedidos', loadChildren: './pedidos/pedidos.module#PedidosPageModule' },
+
 
 ];
 @NgModule({

@@ -5,10 +5,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab3Page } from './tab3.page';
 import { ReqPage } from '../req/req.page';
+import { PedidosPage } from '../pedidos/pedidos.page';
 
 @NgModule({
 
   entryComponents: [
+    PedidosPage,
     ReqPage
   ],
 
@@ -20,6 +22,7 @@ import { ReqPage } from '../req/req.page';
     RouterModule.forChild([{ path: '', component: Tab3Page }])
   ],
   declarations: [
+    PedidosPage,
     Tab3Page,
     ReqPage
   ]

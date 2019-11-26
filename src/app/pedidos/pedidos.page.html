@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar [color]="colorStatus?'toolbar-color':'medium'">
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class=ion-text-left>Pedidos de {{tipo.nome}}</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let pedido of lista | async">
+    <div *ngIf="tipo.id == 'modulos'">
+      <ion-card-header>
+        <ion-card-subtitle>
+          {{pedido.aQnt}} módulos de {{pedido.modulos}}
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <h4>{{pedido.infoAd}}</h4>
+      </ion-card-content>
+    </div>
+
+    <div *ngIf="tipo.id == 'fardamentos'">
+      <ion-card-content>
+        <h4>{{pedido.quantidade}} fardas de tamanho {{pedido.tamanho}}</h4>
+      </ion-card-content>
+    </div>
+
+    <div *ngIf="tipo.id == 'reunioes'">
+      <ion-card-header>
+        <ion-card-subtitle>{{pedido.motivo}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <h4>{{pedido.detalhes}}</h4>
+        <p>Limites de data: {{pedido.limData}}</p>
+        <p>Limites de horário: {{pedido.limHorario}}</p>
+      </ion-card-content>
+    </div>
+  </ion-card>
+
+</ion-content>

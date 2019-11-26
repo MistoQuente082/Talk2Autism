@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, AlertController, ToastController } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-
-
 @Component({
   selector: 'app-nova-noticia',
   templateUrl: './nova-noticia.page.html',
