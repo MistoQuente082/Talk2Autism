@@ -5,6 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import * as moment from 'moment';
 import { present } from '@ionic/core/dist/types/utils/overlays';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-agenda',
@@ -25,7 +26,7 @@ export class AgendaPage implements OnInit {
 
 
 
-  info: any;
+  info: Observable<any[]>;
   constructor(
     public db: AngularFirestore,
     public toastCtrl: ToastController,
@@ -36,7 +37,7 @@ export class AgendaPage implements OnInit {
     this.currentUser = firebase.auth().currentUser
     db.collection('indice').doc(this.currentUser.email).get().toPromise().then(doc => {
       this.user = doc.data()
-    })
+    });
   }
 
   async dismiss() {
@@ -75,7 +76,7 @@ export class AgendaPage implements OnInit {
       this.comeu = false;
     }
     const informe = {
-      atendido: this.info.ID,
+      atendido: this.info.id,
       conduct: this.conduct,
       dateAtend: this.dateAtend,
       pInput: this.pInput,

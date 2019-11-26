@@ -1,41 +1,60 @@
 <ion-header>
   <ion-toolbar [color]="colorStatus?'toolbar-color':'medium'">
-
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()">
         <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
-
     <ion-title>Perfil</ion-title>
-
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
-  <ion-avatar>
-    <img [src]="foto"/>
-  </ion-avatar>
+  <ion-content>
+    <div class="centro">
+      <img class="conteudo" [src]="item.foto" (click)="cam()">
+    </div>
 
-  <ion-list>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>
+          Dados da Criança
+        </ion-card-subtitle>
+      </ion-card-header>
 
-    <ion-list-header>
-      <ion-label>Informações da Criança</ion-label>
-    </ion-list-header>
-    <ion-item>
-      <ion-label>
-        <p>Nome:</p>
-        <h2>{{nome}}</h2>
-      </ion-label>
-    </ion-item>
+      <img *ngIf="imgPessoa" [src]="item.foto">
 
-    <ion-item>
-        <ion-label>
-          <p>Responsavel:</p>
-          <h2>{{responsaveis}}</h2>
-        </ion-label>
+      <ion-item>
+        <ion-label position="floating" color="medium">Nome:</ion-label>
+        <br>
+        <p>{{item.nome}}</p>
       </ion-item>
 
-  </ion-list>
-  <ion-button expand="block" (click)="presentModal()" color="medium">Fazer informe</ion-button>
 
-</ion-content>
+      <ion-item>
+        <ion-label color="medium" position="floating">Idade:</ion-label>
+        <br>
+        <p>{{item.idade}}</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="medium" position="floating">Grau de Autismo</ion-label>
+        <br>
+        <p>{{item.grauAutismo}}</p>
+      </ion-item>
+
+      <ion-item *ngIf="item.pais">
+        <ion-label color="medium" position="floating">Pais</ion-label>
+        <br>
+        <p>{{item.pais}}</p>
+      </ion-item>
+
+    </ion-card>
+
+    <ion-button (click)="presentModal()" expand="block" color="medium">Fazer Informe</ion-button>
+
+
+
+
+
+  </ion-content>

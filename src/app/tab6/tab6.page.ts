@@ -7,6 +7,7 @@ import * as firebase from 'firebase/app';
 import { Item } from 'src/assets/extra/item';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { PerfilMeninosPage } from '../perfil-meninos/perfil-meninos.page';
 
 @Component({
   selector: 'app-tab6',
@@ -22,31 +23,28 @@ export class Tab6Page implements OnInit {
 
   constructor(
     public modalCtrl: ModalController,
-    db: AngularFirestore,
+    public db: AngularFirestore,
     public fAuth: AngularFireAuth,
     public router: Router,
     public alertController: AlertController
   ) {
-    db.collection('atendidos').get().toPromise().then(snapshot => {
-      snapshot.forEach(doc => {
-        console.log(doc.data().foto);
-        doc.data().foto = firebase.storage().ref(doc.data().foto).getDownloadURL();
-        console.log(doc.data().foto)
-      });
-    });
+    this.atendidos = this.db.collection('atendidos').valueChanges();
   }
 
 
 
   async presentModal(item: Item) {
     const modal = await this.modalCtrl.create({
-      component: AgendaPage,
+      component: PerfilMeninosPage,
       componentProps: {
         item
       }
     });
     return await modal.present();
   }
+
+
+
 
   //Função que chama um alert
   async presentAlert2(mensagem) {
