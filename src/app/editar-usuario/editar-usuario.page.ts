@@ -3,6 +3,7 @@ import { ModalController, NavParams, AlertController, ToastController } from '@i
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { CameraService } from '../services/camera/camera.service';
 
 
 
@@ -20,6 +21,9 @@ export class EditarUsuarioPage implements OnInit {
   public email;
   public cpf;
   public concpf;
+  public imgMenino;
+  public idade;
+  public grauAutismo;
 
   Atendidos: Observable<any[]>;
 
@@ -29,11 +33,23 @@ export class EditarUsuarioPage implements OnInit {
     public navParams: NavParams,
     public fAuth: AngularFireAuth,
     public alertCtrl: AlertController,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    public usarCamera: CameraService
   ) {
     this.Atendidos = this.db.collection("atendidos").valueChanges();
     this.item = this.navParams.get('item');
+
   }
+
+  cam() {
+    this.usarCamera.presentActionSheet();
+    if (this.usarCamera.imgPessoa) {
+      this.imgMenino = this.usarCamera.imgPessoa;
+    }
+  }
+
+
+
 
   async presentAlert(message: string) {
     const alert = await this.alertCtrl.create({
@@ -59,8 +75,13 @@ export class EditarUsuarioPage implements OnInit {
               novoUsuario = {
                 id: id,
                 nome: this.nome,
-                pais: []
-              }
+                pais: [],
+                idade: this.idade,
+                grauAutismo: this.grauAutismo
+
+              };
+
+              const imgCrianca = this.usarCamera.imgDato;
               this.db.collection("atendidos").doc(id).set(novoUsuario);
               this.dismiss();
               this.presentToast('Usuário adicionado com sucesso!');
@@ -92,7 +113,7 @@ export class EditarUsuarioPage implements OnInit {
                   tipo: this.tipoUsuario,
                   nome: this.nome,
                   email: this.email,
-                }
+                };
               }
               const email = this.email;
               const cpf = this.cpf.toString();
@@ -159,6 +180,7 @@ export class EditarUsuarioPage implements OnInit {
 
 
   ngOnInit() {
+    this.imgMenino = "../../assets/avatar.svg";
   }
 
 }
