@@ -11,15 +11,15 @@ import * as firebase from 'firebase';
   styleUrls: ['./detalhes.page.scss'],
 })
 export class DetalhesPage implements OnInit {
-  info: Item;
+  public info;
   public typo;
 
   public info2;
 
   public nomeEvento;
-  public horaInicio;
-  public horaTermino;
-  public dataEvento;
+  public horaInicio: Date = new Date();
+  public horaTermino: Date = new Date();
+  public dataEvento: Date = new Date();
   public detalheEvento;
 
 
@@ -47,7 +47,6 @@ export class DetalhesPage implements OnInit {
 
   mudaFin(event) {
     this.horaTermino = new Date(event.detail.value);
-
   }
 
   mudaData(event) {

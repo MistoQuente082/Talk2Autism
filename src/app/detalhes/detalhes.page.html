@@ -13,20 +13,20 @@
 
 <ion-content>
 
-  <div *ngIf="info != 'edit'">
+  <div *ngIf="typo == 'pais'">
     <ion-card>
 
       <ion-card-header>
         <ion-card-subtitle>Descrição:</ion-card-subtitle>
-        <ion-card-title>{{this.info.nome}}</ion-card-title>
+        <ion-card-title>{{this.info.nomeEvento}}</ion-card-title>
       </ion-card-header>
 
       <ion-card-header>
         <ion-card-subtitle>Realização:</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        Data: {{ this.info.datainicio.toDate() | date: 'dd/MM/yyyy' }} <br>
-        Hora: {{ this.info.datainicio.toDate() | date: 'HH:mm' }} às {{ this.info.datafim.toDate() | date: 'HH:mm' }}
+        Data: {{ this.info.dataEvento.toDate() | date: 'dd/MM/yyyy' }} <br>
+        Hora: {{ this.info.horaInicio.toDate() | date: 'HH:mm' }} às {{ this.info.horaTermino.toDate() | date: 'HH:mm' }}
       </ion-card-content>
 
 
@@ -34,7 +34,7 @@
         <ion-card-subtitle>Mais detalhes:</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        {{this.info.detalhes}}
+        {{this.info.detalheEvento}}
       </ion-card-content>
     </ion-card>
   </div>
@@ -61,7 +61,7 @@
         </ion-datetime>
 
         <ion-datetime display-format="DD MMM YYYY" strin cancelText="Cancelar" doneText="Escolher"
-          ([ngModel])="dataEvento" placeholder="Seleciona a dia" (ionChange)="mudaData( $event )">
+          ([ngModel])="dataEvento.toISOString()" placeholder="Seleciona a dia" (ionChange)="mudaData( $event )">
         </ion-datetime>
       </ion-item>
 
