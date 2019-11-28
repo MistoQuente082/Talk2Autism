@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "571431387161",
+    "firebase_url": "https://talk2autism.firebaseio.com",
+    "project_id": "talk2autism",
+    "storage_bucket": "talk2autism.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:571431387161:android:9f37a929c82170ce3caa88",
+        "android_client_info": {
+          "package_name": "com.AMA.androidapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "571431387161-3bhd8ac2c1lddva3br5un604c2a318vm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCr9atpDNb26MLdHM9NJoMFunzIm2G-MS4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "571431387161-3bhd8ac2c1lddva3br5un604c2a318vm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

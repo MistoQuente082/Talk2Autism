@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { AlertController, ModalController, ToastController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController, ActionSheetController } from '@ionic/angular';
 import { EditarUsuarioPage } from '../editar-usuario/editar-usuario.page';
 
 @Component({
@@ -24,6 +24,7 @@ export class Tab7Page implements OnInit {
     public router: Router,
     public toastCtrl: ToastController,
     public alertController: AlertController,
+    public actionSheetController: ActionSheetController,
     public modalCtrl: ModalController
   ) {
     this.atendidos = db.collection('atendidos').valueChanges();
@@ -99,7 +100,21 @@ export class Tab7Page implements OnInit {
 
   sair() {
     this.presentAlert2('Realmente quer sair?');
+  }
 
+  async presentActionSheet(usuario) {
+    const actionSheet = await this.actionSheetController.create({
+      buttons: [{
+        text: 'Excluir usuário',
+        icon: 'trash',
+        cssClass: 'vermelho',
+        handler: () => {
+          this.excluir(usuario);
+          console.log('Tirar foto clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 
   ngOnInit() {

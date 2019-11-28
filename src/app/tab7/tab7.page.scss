@@ -1,3 +1,11 @@
 ion-list-header {
     --color: #006b67;
 }
+
+.vermelho{
+    --color: #d40000;
+    color: red;
+    ion-icon{
+        color: 'red';
+    }
+}
