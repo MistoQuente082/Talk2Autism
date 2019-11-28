@@ -21,7 +21,7 @@ import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 
 import { Camera } from '@ionic-native/camera/ngx';
-
+import { BrMaskerModule } from 'br-mask';
 registerLocaleData(localePt);
 
 @NgModule({
@@ -31,6 +31,7 @@ registerLocaleData(localePt);
 
   imports: [BrowserModule,
     IonicModule.forRoot(),
+    BrMaskerModule,
     AppRoutingModule,
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,

@@ -12,14 +12,13 @@
 <ion-content>
 
   <ion-list>
-    <ion-item *ngFor="let atendido of atendidos | async" (click)="presentModal(atendido)">
-      <ion-avatar>
-        <img [src]="atendido.foto">
-      </ion-avatar>
-      <ion-label>
-        <h3>{{atendido.nome}}</h3>
-      </ion-label>
-    </ion-item>
+    <ion-item-sliding>
+      <ion-item *ngFor="let atendido of atendidos | async" (click)="presentModal(atendido)">
+        <ion-avatar slot="start">
+          <img [src]="atendido.foto">
+        </ion-avatar>
+       <p>{{atendido.nome}}</p>
+      </ion-item>
+    </ion-item-sliding>
   </ion-list>
-
 </ion-content>
