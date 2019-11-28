@@ -74,7 +74,7 @@
         <ion-item>
           <ion-label position="floating">Filho(s)</ion-label>
           <ion-select [(ngModel)]="nomeFilho" placeholder="Selecione: " multiple>
-            <ion-select-option *ngFor="let atendido of Atendidos | async" value="{{atendido.id}}">
+            <ion-select-option *ngFor="let atendido of Atendidos | async">
               {{atendido.nome}}
             </ion-select-option>
           </ion-select>

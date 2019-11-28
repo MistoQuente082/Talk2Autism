@@ -87,8 +87,8 @@ export class EditarUsuarioPage implements OnInit {
 
               };
               const imgCrianca = this.usarCamera.imgDato;
-              firebase.storage().ref().child('atendidos/'+id+'.jpg').putString(imgCrianca, 'base64', this.metadata).then( doc =>{
-                firebase.storage().ref().child('atendidos/'+id+'.jpg').getDownloadURL().then(url =>{
+              firebase.storage().ref().child('atendidos/' + id + '.jpg').putString(imgCrianca, 'base64', this.metadata).then(doc => {
+                firebase.storage().ref().child('atendidos/' + id + '.jpg').getDownloadURL().then(url => {
                   novoUsuario.foto = url;
                   this.db.collection("atendidos").doc(id).set(novoUsuario);
                   this.dismiss();
@@ -99,22 +99,25 @@ export class EditarUsuarioPage implements OnInit {
               if (this.tipoUsuario === "pai") {
                 let filhos: string[];
                 filhos = [];
+                console.log(this.nomeFilho)
                 for (var filho in this.nomeFilho) {
                   let list: string[];
+
                   list = this.nomeFilho[filho].split(" ");
                   var id = "";
-                  console.log(list);
                   for (var no in list) {
                     id += list[no]
                   }
                   console.log(id);
-                  filhos.push(id);
-                  this.db.collection('atendidos').doc(id).get().toPromise().then(doc =>{
+
+                  await this.db.collection('atendidos').doc(id).get().toPromise().then(doc => {
                     var lista = doc.data().pais;
                     lista.push(this.email);
                     this.db.collection('atendidos').doc(id).update({
                       pais: lista
-                    })
+                    });
+                    console.log(id);
+                    filhos.push(id);
                   })
                 }
 
@@ -162,7 +165,7 @@ export class EditarUsuarioPage implements OnInit {
 
   async criarConta() {
     if (this.tipoUsuario === "atend") {
-      if (this.nome === undefined || this.grauAutismo === undefined || this.idade === undefined ) {
+      if (this.nome === undefined || this.grauAutismo === undefined || this.idade === undefined) {
         this.presentToast('Prencha os campos!');
       } else {
         this.presentAlert('Deseja adicionar um novo usuário?');
