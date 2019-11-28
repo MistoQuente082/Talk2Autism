@@ -18,20 +18,11 @@
       Terapeutas
     </ion-list-header>
 
-    <ion-item *ngFor="let terapeuta of terapeutas | async">
+    <ion-item (click)="presentActionSheet(terapeuta.email)" *ngFor="let terapeuta of terapeutas | async">
       <ion-label>
         <h2>{{terapeuta.nome}}</h2>
         <p>{{terapeuta.email}}</p>
       </ion-label>
-
-      <ion-buttons slot="end">
-        <ion-button (click)="excluir(terapeuta.email)">
-          <ion-icon slot="icon-only" name="trash"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-
-
-
     </ion-item>
   </ion-list>
 
@@ -41,16 +32,11 @@
       Pais
     </ion-list-header>
 
-    <ion-item *ngFor="let pai of pais | async">
+    <ion-item (click)="presentActionSheet(pai.email)" *ngFor="let pai of pais | async">
       <ion-label>
         <h2>{{pai.nome}}</h2>
         <p>{{pai.email}}</p>
       </ion-label>
-      <ion-buttons slot="end">
-        <ion-button (click)="excluir(pai.email)">
-          <ion-icon slot="icon-only" name="trash"></ion-icon>
-        </ion-button>
-      </ion-buttons>
     </ion-item>
 
   </ion-list>
@@ -63,16 +49,11 @@
       </ion-label>
     </ion-list-header>
 
-    <ion-item *ngFor="let adm of admins | async">
+    <ion-item (click)="presentActionSheet(adm.email)" *ngFor="let adm of admins | async">
       <ion-label>
         <h2>{{adm.nome}}</h2>
         <p>{{adm.email}}</p>
       </ion-label>
-      <ion-buttons slot="end">
-        <ion-button (click)="excluir(adm.email)">
-          <ion-icon slot="icon-only" name="trash"></ion-icon>
-        </ion-button>
-      </ion-buttons>
     </ion-item>
 
 

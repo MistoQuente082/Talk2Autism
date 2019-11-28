@@ -157,6 +157,8 @@ export class EditarUsuarioPage implements OnInit {
     alert.present();
   }
 
+
+
   async presentToast(message: string) {
     const toast = await this.toastCtrl.create({ message, duration: 2000 });
     toast.present();
