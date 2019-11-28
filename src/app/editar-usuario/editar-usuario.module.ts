@@ -7,6 +7,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { EditarUsuarioPage } from './editar-usuario.page';
 
+import { BrMaskerModule } from 'br-mask';
+
+
 const routes: Routes = [
   {
     path: '',
@@ -18,6 +21,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    BrMaskerModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
