@@ -5,7 +5,7 @@
         <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title *ngIf="typo == 'pais'" class=ion-text-left>Detalhes do Evento</ion-title>
+    <ion-title *ngIf="typo == 'pai'" class=ion-text-left>Detalhes do Evento</ion-title>
     <ion-title *ngIf="typo == 'adm'" class=ion-text-left>Adicionar Evento</ion-title>
 
   </ion-toolbar>
@@ -13,20 +13,20 @@
 
 <ion-content>
 
-  <div *ngIf="typo == 'pais'">
+  <div *ngIf="typo == 'pai'">
     <ion-card>
 
       <ion-card-header>
         <ion-card-subtitle>Descrição:</ion-card-subtitle>
-        <ion-card-title>{{this.info.nomeEvento}}</ion-card-title>
+        <ion-card-title>{{info.nomeEvento}}</ion-card-title>
       </ion-card-header>
 
       <ion-card-header>
         <ion-card-subtitle>Realização:</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        Data: {{ this.info.dataEvento.toDate() | date: 'dd/MM/yyyy' }} <br>
-        Hora: {{ this.info.horaInicio.toDate() | date: 'HH:mm' }} às {{ this.info.horaTermino.toDate() | date: 'HH:mm' }}
+        Data: {{ info.dataEvento.toDate() | date: 'dd/MM/yyyy' }} <br>
+        Hora: {{ info.horaInicio.toDate() | date: 'HH:mm' }} às {{ info.horaTermino.toDate() | date: 'HH:mm' }}
       </ion-card-content>
 
 
@@ -34,7 +34,7 @@
         <ion-card-subtitle>Mais detalhes:</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        {{this.info.detalheEvento}}
+        {{info.detalheEvento}}
       </ion-card-content>
     </ion-card>
   </div>
