@@ -13,8 +13,17 @@
   <ion-list>
     <ion-item>
       <ion-label>Destinatário</ion-label>
-      <ion-select [(ngModel)]="mDestino" placeholder="Selecione" multiple>
+      <ion-select *ngIf="typo != 'pai'" [(ngModel)]="mDestino" placeholder="Selecione" multiple>
         <ion-select-option *ngFor="let pessoa of pessoas | async">{{pessoa.nome}}: {{pessoa.email}}</ion-select-option>
+        <ion-select-option *ngFor="let terapeuta of terapeutas | async">{{terapeuta.nome}}: {{terapeuta.email}}
+        </ion-select-option>
+        <ion-select-option *ngFor="let pai of pais | async">{{pai.nome}}: {{pai.email}}
+        </ion-select-option>
+      </ion-select>
+      <ion-select *ngIf="typo == 'pai'" [(ngModel)]="mDestino" placeholder="Selecione" multiple>
+        <ion-select-option *ngFor="let pessoa of pessoas | async">{{pessoa.nome}}: {{pessoa.email}}</ion-select-option>
+        <ion-select-option *ngFor="let terapeuta of terapeutas | async">{{terapeuta.nome}}: {{terapeuta.email}}
+        </ion-select-option>
       </ion-select>
     </ion-item>
 
