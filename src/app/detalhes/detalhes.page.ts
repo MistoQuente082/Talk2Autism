@@ -31,7 +31,7 @@ export class DetalhesPage implements OnInit {
     public toastCtrl: ToastController,
     public alertController: AlertController) {
     this.info = navParams.get('item');
-    this.info2 = navParams.get('item');
+
 
     this.verifiUser();
   }
@@ -82,12 +82,15 @@ export class DetalhesPage implements OnInit {
         }, {
           text: 'Criar',
           handler: async () => {
-            this.dados({
+            const dados = {
               nomeEvento: this.nomeEvento,
               horaInicio: this.horaInicio,
               horaTermino: this.horaTermino,
               dataEvento: this.dataEvento,
               detalheEvento: this.detalheEvento
+            };
+            this.db.collection('eventos').add(dados).then(doc => {
+              this.dismiss();
             });
           }
         }
@@ -130,6 +133,7 @@ export class DetalhesPage implements OnInit {
   }
 
   ngOnInit() {
+    console.log('info:', this.info);
   }
 
 }

@@ -39,6 +39,8 @@ export class ReqPage implements OnInit {
   public quantidade: string;
   public currentUser: any;
 
+  public nomePai;
+
   constructor(
 
     public modalCtrl: ModalController,
@@ -47,6 +49,9 @@ export class ReqPage implements OnInit {
     public alertController: AlertController,
     public navParams: NavParams) {
     this.currentUser = firebase.auth().currentUser;
+    this.db.collection('indice').doc(this.currentUser.email).get().toPromise().then(doc =>{
+        this.nomePai = doc.data().nome
+    })
     this.banco = db;
     this.tipo = navParams.get('tipo');
     this.typo = navParams.get('typo');
@@ -173,12 +178,14 @@ export class ReqPage implements OnInit {
   subMeeting() {
     if (this.motivo !== undefined && this.limHorario !== undefined
       && this.limData !== undefined && this.detalhes !== undefined) {
+        
       const reun = {
         motivo: this.motivo,
         limHorario: this.limHorario,
         limData: this.limData,
         detalhes: this.detalhes,
-        pai: this.currentUser.email
+        pai: this.nomePai,
+        paiEmail: this.currentUser.email
       };
       console.log(reun);
       this.banco.collection("requisicoes").doc(this.tipo.id).collection("pedidos").add(
@@ -203,7 +210,8 @@ export class ReqPage implements OnInit {
         elementos: this.elementos,
         infoAd: this.infoAd,
         modulos: this.modulos,
-        pai: this.currentUser.email
+        pai: this.nomePai,
+        paiEmail: this.currentUser.email
       };
 
       console.log(mod);
@@ -224,6 +232,8 @@ export class ReqPage implements OnInit {
       const fard = {
         tamanho: this.tamanho,
         quantidade: this.quantidade,
+        pai: this.nomePai,
+        paiEmail: this.currentUser.email
       };
 
       console.log(fard);

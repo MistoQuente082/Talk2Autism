@@ -5,6 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { CameraService } from '../services/camera/camera.service';
 
+import * as firebase from 'firebase';
 
 
 @Component({
@@ -24,6 +25,10 @@ export class EditarUsuarioPage implements OnInit {
   public imgMenino;
   public idade;
   public grauAutismo;
+
+  metadata = {
+    contentType: 'image/jpeg',
+  };
 
   Atendidos: Observable<any[]>;
 
@@ -77,28 +82,43 @@ export class EditarUsuarioPage implements OnInit {
                 nome: this.nome,
                 pais: [],
                 idade: this.idade,
-                grauAutismo: this.grauAutismo
+                grauAutismo: this.grauAutismo,
+                foto: ' '
 
               };
-
               const imgCrianca = this.usarCamera.imgDato;
-              this.db.collection("atendidos").doc(id).set(novoUsuario);
-              this.dismiss();
-              this.presentToast('Usuário adicionado com sucesso!');
+              firebase.storage().ref().child('atendidos/' + id + '.jpg').putString(imgCrianca, 'base64', this.metadata).then(doc => {
+                firebase.storage().ref().child('atendidos/' + id + '.jpg').getDownloadURL().then(url => {
+                  novoUsuario.foto = url;
+                  this.db.collection("atendidos").doc(id).set(novoUsuario);
+                  this.dismiss();
+                  this.presentToast('Usuário adicionado com sucesso!');
+                })
+              })
             } else {
               if (this.tipoUsuario === "pai") {
                 let filhos: string[];
                 filhos = [];
+                console.log(this.nomeFilho)
                 for (var filho in this.nomeFilho) {
                   let list: string[];
+
                   list = this.nomeFilho[filho].split(" ");
                   var id = "";
-                  console.log(list);
                   for (var no in list) {
                     id += list[no]
                   }
                   console.log(id);
-                  filhos.push(id);
+
+                  await this.db.collection('atendidos').doc(id).get().toPromise().then(doc => {
+                    var lista = doc.data().pais;
+                    lista.push(this.email);
+                    this.db.collection('atendidos').doc(id).update({
+                      pais: lista
+                    });
+                    console.log(id);
+                    filhos.push(id);
+                  })
                 }
 
                 novoUsuario = {
@@ -107,6 +127,7 @@ export class EditarUsuarioPage implements OnInit {
                   email: this.email,
                   atendido: filhos
                 };
+
 
               } else {
                 novoUsuario = {
@@ -136,6 +157,8 @@ export class EditarUsuarioPage implements OnInit {
     alert.present();
   }
 
+
+
   async presentToast(message: string) {
     const toast = await this.toastCtrl.create({ message, duration: 2000 });
     toast.present();
@@ -144,7 +167,7 @@ export class EditarUsuarioPage implements OnInit {
 
   async criarConta() {
     if (this.tipoUsuario === "atend") {
-      if (this.nome === undefined) {
+      if (this.nome === undefined || this.grauAutismo === undefined || this.idade === undefined) {
         this.presentToast('Prencha os campos!');
       } else {
         this.presentAlert('Deseja adicionar um novo usuário?');

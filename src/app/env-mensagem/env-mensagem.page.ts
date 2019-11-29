@@ -13,11 +13,14 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class EnvMensagemPage implements OnInit {
 
   pessoas: Observable<any[]>;
+  terapeutas: Observable<any[]>;
+  pais: Observable<any[]>;
 
   public mAssunto: string;
   public mConteudo: string;
   public mDestino: any;
   public banco: any;
+  typo: string;
 
   constructor(
     public modalCtrl: ModalController,
@@ -26,7 +29,10 @@ export class EnvMensagemPage implements OnInit {
     db: AngularFirestore
   ) {
     this.banco = db;
-    this.pessoas = db.collection('indice').valueChanges(); //consegue os valores da coelção noticias
+    this.verifiUser();
+    this.pessoas = db.collection('indice', ref => ref.where('tipo', '==', 'adm')).valueChanges(); //consegue os valores da coelção noticias
+    this.terapeutas = db.collection('indice', ref => ref.where('tipo', '==', 'terapeuta')).valueChanges();
+    this.pais = db.collection('indice', ref => ref.where('tipo', '==', 'pai')).valueChanges();
   }
 
   // ENVIA MENSAGEM
@@ -73,6 +79,24 @@ export class EnvMensagemPage implements OnInit {
 
 
 
+  }
+
+
+  verifiUser() {
+    try {
+      const currentUser = firebase.auth().currentUser;
+      this.typo = '';
+      this.banco.collection('indice').doc(currentUser.email).get().toPromise()
+        .then(doc => {
+          this.typo = doc.data().tipo;
+          console.log('funfa: ', doc.data().tipo)
+        })
+        .catch(err => {
+          this.typo = 'Error getting document' + err;
+        });
+    } finally {
+      console.log('Deu super certo!');
+    }
   }
 
 

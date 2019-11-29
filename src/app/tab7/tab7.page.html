@@ -11,29 +11,17 @@
 
 <ion-content>
 
-
   <!--PARTE DOS TERAPEUTAS-->
   <ion-list>
     <ion-list-header>
       Terapeutas
     </ion-list-header>
 
-    <ion-item *ngFor="let terapeuta of terapeutas | async">
+    <ion-item (click)="presentActionSheet(terapeuta.email)" *ngFor="let terapeuta of terapeutas | async">
       <ion-label>
         <h2>{{terapeuta.nome}}</h2>
         <p>{{terapeuta.email}}</p>
       </ion-label>
-      <ion-note></ion-note>
-
-      <ion-buttons slot="end">
-        <ion-button (click)="excluir(terapeuta.email)">
-
-          <ion-icon slot="icon-only" name="trash"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-
-
-
     </ion-item>
   </ion-list>
 
@@ -43,16 +31,11 @@
       Pais
     </ion-list-header>
 
-    <ion-item *ngFor="let pai of pais | async">
+    <ion-item (click)="presentActionSheet(pai.email)" *ngFor="let pai of pais | async">
       <ion-label>
         <h2>{{pai.nome}}</h2>
         <p>{{pai.email}}</p>
       </ion-label>
-      <ion-buttons slot="end">
-        <ion-button (click)="excluir(pai.email)">
-          <ion-icon slot="icon-only" name="trash"></ion-icon>
-        </ion-button>
-      </ion-buttons>
     </ion-item>
 
   </ion-list>
@@ -65,34 +48,30 @@
       </ion-label>
     </ion-list-header>
 
-    <ion-item *ngFor="let adm of admins | async">
+    <ion-item (click)="presentActionSheet(adm.email)" *ngFor="let adm of admins | async">
       <ion-label>
         <h2>{{adm.nome}}</h2>
         <p>{{adm.email}}</p>
       </ion-label>
-      <ion-buttons slot="end">
-        <ion-button (click)="excluir(adm.email)">
-          <ion-icon slot="icon-only" name="trash"></ion-icon>
-        </ion-button>
-      </ion-buttons>
     </ion-item>
-
-
   </ion-list>
 
   <ion-list>
-    <ion-list-header>
-      <ion-label>
-        Atendidos
-      </ion-label>
-    </ion-list-header>
+      <ion-list-header>
+        <ion-label>
+          Atendidos
+        </ion-label>
+      </ion-list-header>
+  
+      <ion-item *ngFor="let atendido of atendidos | async">
+        <ion-label>
+          <p>{{atendido.nome}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  
 
-    <ion-item *ngFor="let atendido of atendidos | async" (click)="presentModal(atendido)">
-      <ion-label>
-        <h3>{{atendido.nome}}</h3>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="presentModal('adicionar')">
