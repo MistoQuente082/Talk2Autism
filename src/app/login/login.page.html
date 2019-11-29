@@ -1,33 +1,46 @@
 <ion-content class="fn-img">
-  <div>
 
 
-  </div>
+
   <div class="input">
-    <ion-card>
-      <ion-item>
-        <ion-input type="text" placeholder="Email" [(ngModel)]="email"></ion-input>
-      </ion-item>
-    </ion-card>
 
-    <ion-card>
-      <ion-item>
-        <ion-buttons slot="end">
-          <ion-button (click)="hideShow()">
-            <ion-icon slot="icon-only" color="dark" [name]="tipo ? 'md-eye-off' : 'md-eye'">
-            </ion-icon>
-          </ion-button>
-        </ion-buttons>
 
-        <ion-input [type]="tipo ? 'text' : 'password'" type="password" placeholder="Senha" [(ngModel)]="senha">
-        </ion-input>
 
-      </ion-item>
-    </ion-card>
 
-    <div>
-      <ion-button (click)="login()" class="btnLogin" expand="block" color="medium">Login</ion-button>
+    <div id="container">
+
+      <div class="centro">
+        <img class="conteudo" src="../../assets/logo.png">
+      </div>
+      <ion-card>
+        <ion-item>
+          <ion-input type="text" placeholder="Email" [(ngModel)]="email"></ion-input>
+        </ion-item>
+      </ion-card>
+
+
+
+
+
+
+      <ion-card>
+        <ion-item>
+          <ion-buttons slot="end">
+            <ion-button (click)="hideShow()">
+              <ion-icon slot="icon-only" color="dark" [name]="tipo ? 'md-eye-off' : 'md-eye'">
+              </ion-icon>
+            </ion-button>
+          </ion-buttons>
+
+          <ion-input [type]="tipo ? 'text' : 'password'" type="password" placeholder="Senha" [(ngModel)]="senha">
+          </ion-input>
+
+        </ion-item>
+      </ion-card>
+
+      <div>
+        <ion-button (click)="login()" class="btnLogin" expand="block" color="medium">Login</ion-button>
+      </div>
     </div>
   </div>
-
 </ion-content>

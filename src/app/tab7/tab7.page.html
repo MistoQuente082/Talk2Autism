@@ -23,9 +23,11 @@
         <h2>{{terapeuta.nome}}</h2>
         <p>{{terapeuta.email}}</p>
       </ion-label>
+      <ion-note></ion-note>
 
       <ion-buttons slot="end">
         <ion-button (click)="excluir(terapeuta.email)">
+
           <ion-icon slot="icon-only" name="trash"></ion-icon>
         </ion-button>
       </ion-buttons>

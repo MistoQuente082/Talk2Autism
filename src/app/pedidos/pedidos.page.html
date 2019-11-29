@@ -11,34 +11,85 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let pedido of lista | async">
+  <div *ngFor="let pedido of lista | async">
     <div *ngIf="tipo.id == 'modulos'">
-      <ion-card-header>
-        <ion-card-subtitle>
-          {{pedido.aQnt}} módulos de {{pedido.modulos}}
-        </ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <h4>{{pedido.infoAd}}</h4>
-      </ion-card-content>
+      <ion-card>
+
+        <ion-card-header>
+          <ion-card-subtitle>
+            {{pedido.aQnt}} módulos de {{pedido.modulos}}
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <h4>{{pedido.infoAd}}</h4>
+        </ion-card-content>
+      </ion-card>
     </div>
 
+
     <div *ngIf="tipo.id == 'fardamentos'">
-      <ion-card-content>
-        <h4>{{pedido.quantidade}} fardas de tamanho {{pedido.tamanho}}</h4>
-      </ion-card-content>
+      <ion-card>
+
+
+        <ion-card-content>
+          <h4>{{pedido.quantidade}} fardas de tamanho {{pedido.tamanho}}</h4>
+        </ion-card-content>
+      </ion-card>
     </div>
 
     <div *ngIf="tipo.id == 'reunioes'">
-      <ion-card-header>
-        <ion-card-subtitle>{{pedido.motivo}}</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <h4>{{pedido.detalhes}}</h4>
-        <p>Limites de data: {{pedido.limData}}</p>
-        <p>Limites de horário: {{pedido.limHorario}}</p>
-      </ion-card-content>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>Motivo</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          {{pedido.motivo}}
+        </ion-card-content>
+
+        <ion-card-header>
+          <ion-card-subtitle>Horários</ion-card-subtitle>
+        </ion-card-header>
+
+
+
+
+
+        <ion-card-content>
+
+          <ion-label>
+            <p>Limites de data: {{pedido.limData}}</p>
+            <p>Limites de horário: {{pedido.limHorario}}</p>
+          </ion-label>
+
+        </ion-card-content>
+
+        <ion-card-header>
+          <ion-card-subtitle>Detalhes</ion-card-subtitle>
+        </ion-card-header>
+
+
+        <ion-card-content>
+          {{pedido.detalhes}}
+        </ion-card-content>
+
+
+        <ion-card-header>
+          <ion-card-subtitle>Pedinte</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          {{pedido.pai}}
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+
+
+      </ion-card>
     </div>
-  </ion-card>
+
+  </div>
+
 
 </ion-content>

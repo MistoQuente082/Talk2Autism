@@ -59,7 +59,7 @@ export class CameraService {
         //this.imgPessoa = this.webView.convertFileSrc(imageData);
         this.imgPessoa = 'data:image/jpeg;base64,' + imageData;
         this.imgDato = imageData;
-        console.log('imgDato - escolher');
+        console.log('imgDato - escolher', imageData);
       }, (err) => {
         // Handle error
       });

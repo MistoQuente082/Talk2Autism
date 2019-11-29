@@ -9,7 +9,7 @@
     </ion-title>
 </ion-toolbar>
 
-<ion-content>    
+<ion-content>
     <div *ngFor="let noticia of noticias | async" (click)="presentAlert(noticia)">
         <ion-card class="aviso" *ngIf="typo == 'adm'">
             <ion-card-header>
