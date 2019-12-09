@@ -76,7 +76,7 @@ export class AgendaPage implements OnInit {
       this.comeu = false;
     }
     const informe = {
-      atendido: this.info.identificador,
+      atendido: this.info.id,
       conduct: this.conduct,
       dateAtend: this.dateAtend,
       pInput: this.pInput,
@@ -84,19 +84,19 @@ export class AgendaPage implements OnInit {
       comeu: this.comeu,
       nTime: this.nTime,
       terapeutas: 1,
-      lido: false
+      lido: false,
     };
 
     //get os dados em atendidos -> this.info.Nome -> informes -> data
     //Se houver um doc lá puxa os dados e soma
     //Se não, apenas cria o doc
     let data = moment(informe.dateAtend).format('DD-MM-YYYY');
-    console.log(this.info.identificador);
-    this.db.collection('atendidos').doc(this.info.identificador).collection('informes').doc(data).get().toPromise()
+    console.log(this.info.id);
+    this.db.collection('atendidos').doc(this.info.id).collection('informes').doc(data).get().toPromise()
       .then(doc => {
         if (!doc.exists) {
-          this.db.collection('atendidos').doc(this.info.identificador).collection('informes').doc(data).set(informe);
-          this.db.collection('atendidos').doc(this.info.identificador).collection('informes').doc(data).collection('comentarios').doc(this.currentUser.email).set({
+          this.db.collection('atendidos').doc(this.info.id).collection('informes').doc(data).set(informe);
+          this.db.collection('atendidos').doc(this.info.id).collection('informes').doc(data).collection('comentarios').doc(this.currentUser.email).set({
             mensagem: this.comentario,
             remetente: this.currentUser.email,
             nome: this.user.nome,
@@ -105,7 +105,7 @@ export class AgendaPage implements OnInit {
           this.dismiss();
           console.log('ainda não há dados para esse dia');
         } else {
-          this.db.collection('atendidos').doc(this.info.identificador).collection('informes').doc(data).collection('comentarios').doc(this.currentUser.email).get().toPromise().then(coment => {
+          this.db.collection('atendidos').doc(this.info.id).collection('informes').doc(data).collection('comentarios').doc(this.currentUser.email).get().toPromise().then(coment => {
             if (!coment.exists) {
               const dadosExistentes = doc.data();
               if (this.pInput < dadosExistentes.pInput) {
@@ -126,10 +126,11 @@ export class AgendaPage implements OnInit {
                 nTime: this.nTime + dadosExistentes.nTime,
                 dateAtend: this.dateAtend,
                 terapeutas: informe.terapeutas,
-                lido: false
+                lido: false,
+                atendido: this.info.id
               }
-              this.db.collection('atendidos').doc(this.info.identificador).collection('informes').doc(data).set(informeFinal);
-              this.db.collection('atendidos').doc(this.info.identificador).collection('informes').doc(data).collection('comentarios').doc(this.currentUser.email).set({
+              this.db.collection('atendidos').doc(this.info.id).collection('informes').doc(data).set(informeFinal);
+              this.db.collection('atendidos').doc(this.info.id).collection('informes').doc(data).collection('comentarios').doc(this.currentUser.email).set({
                 remetente: this.currentUser.email,
                 nome: this.user.nome,
                 mensagem: this.comentario,

@@ -1,50 +1,47 @@
 <ion-header>
-  <ion-toolbar [color]="colorStatus?'toolbar-color':'medium'">
-    <ion-buttons slot="end">
-      <ion-button (click)="sair()">
-        <ion-icon slot="icon-only" name="log-out"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>
-      Requisições
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar [color]="colorStatus?'toolbar-color':'medium'">
+        <ion-buttons slot="end">
+            <ion-button (click)="sair()">
+                <ion-icon slot="icon-only" name="log-out"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            Requisições
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
-  <!--Mostra card para cada categoria-->
-  <div *ngIf="typo == 'adm'">
-    <ion-list>
-      <ion-list-header>Status das Requisições</ion-list-header>
-      <ion-item>
-        <ion-label (click)="verPedidos('fardamentos')">Pedidos de Fardamento</ion-label>
-        <ion-toggle (ionChange)="status()" [(ngModel)]="sFar" value="sFar" color="medium"></ion-toggle>
-      </ion-item>
-    </ion-list>
-    <ion-list>
-      <ion-item>
-        <ion-label (click)="verPedidos('modulos')">Pedidos de Módulos</ion-label>
-        <ion-toggle (ionChange)="status()" [(ngModel)]="sMod" value="sMod" color="medium"></ion-toggle>
-      </ion-item>
-    </ion-list>
-    <ion-list>
-      <ion-item>
-        <ion-label (click)="verPedidos('reunioes')">Pedidos de Reuniões</ion-label>
-        <ion-toggle (ionChange)="status()" [(ngModel)]="sReu" value="sReu" color="medium"></ion-toggle>
-      </ion-item>
-    </ion-list>
-
-
-
-  </div>
-
-  <div *ngIf="typo == 'pai'">
-    <div *ngFor="let req of req | async">
-      <ion-card *ngIf="req.status == true" (click)="presentModal(req)">
-        <img class="img" src="{{req.img}}" />
-        <div class="card-title">{{req.nome}}</div>
-      </ion-card>
+    <!--Mostra card para cada categoria-->
+    <div *ngIf="typo == 'adm'">
+        <ion-list>
+            <ion-list-header>Status das Requisições</ion-list-header>
+            <ion-item>
+                <ion-label (click)="verPedidos('fardamentos')">Pedidos de Fardamento</ion-label>
+                <ion-toggle (ionChange)="status()" [(ngModel)]="sFar" value="sFar" color="medium"></ion-toggle>
+            </ion-item>
+        </ion-list>
+        <ion-list>
+            <ion-item>
+                <ion-label (click)="verPedidos('modulos')">Pedidos de Módulos</ion-label>
+                <ion-toggle (ionChange)="status()" [(ngModel)]="sMod" value="sMod" color="medium"></ion-toggle>
+            </ion-item>
+        </ion-list>
+        <ion-list>
+            <ion-item>
+                <ion-label (click)="verPedidos('reunioes')">Pedidos de Reuniões</ion-label>
+                <ion-toggle (ionChange)="status()" [(ngModel)]="sReu" value="sReu" color="medium"></ion-toggle>
+            </ion-item>
+        </ion-list>
     </div>
-  </div>
+
+    <div *ngIf="typo == 'pai'">
+        <div *ngFor="let req of req | async">
+            <ion-card *ngIf="req.status == true" (click)="presentModal(req)">
+                <img class="img" src="{{req.img}}" />
+                <div class="card-title">{{req.nome}}</div>
+            </ion-card>
+        </div>
+    </div>
 </ion-content>

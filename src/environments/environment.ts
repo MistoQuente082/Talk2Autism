@@ -10,7 +10,8 @@ export const environment = {
     databaseURL: "https://talk2autism.firebaseio.com",
     projectId: "talk2autism",
     storageBucket: "talk2autism.appspot.com",
-    messagingSenderId: "571431387161"
+    messagingSenderId: "571431387161",
+    appId: "1:571431387161:web:090df8e8cc7737f33caa88"
   }
 };
 

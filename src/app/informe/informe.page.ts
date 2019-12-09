@@ -21,7 +21,7 @@ export class InformePage implements OnInit {
     navParams: NavParams) {
     this.info = navParams.get('item');
     let data = moment(this.info.dateAtend.toDate()).format('DD-MM-YYYY');
-    console.log(this.info.atendido);
+    console.log(this.info.id);
     console.log(data);
     this.comentarios = db.collection('atendidos').doc(this.info.atendido).collection('informes').doc(data).collection('comentarios').valueChanges()
     const pI = new Date(this.info.pInput * 1000);

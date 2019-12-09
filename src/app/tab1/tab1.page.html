@@ -10,9 +10,9 @@
 </ion-toolbar>
 
 <ion-content>
-    <div>
+    <div *ngFor="let noticia of noticias | async">
 
-        <ion-card *ngFor="let noticia of noticias | async" (click)="presentAlert(noticia)">
+        <ion-card *ngIf="typo=='adm'" (click)="presentAlert(noticia)">
             <ion-card-header>
                 <ion-card-subtitle>{{noticia.titulo}}</ion-card-subtitle>
 
@@ -33,18 +33,19 @@
 
         </ion-card>
 
+        <div *ngIf="typo =='pai'">
+            <ion-card class="aviso" *ngIf="noticia.postar == true">
+                <ion-card-header>
+                    <ion-card-subtitle>{{noticia.titulo}}</ion-card-subtitle>
 
-        <ion-card class="aviso" *ngIf="typo == 'pai' && noticia.postar == true">
-            <ion-card-header>
-                <ion-card-subtitle>{{noticia.titulo}}</ion-card-subtitle>
-
-            </ion-card-header>
+                </ion-card-header>
 
 
-            <ion-card-content>
-                <p>{{noticia.descricao}}</p>
-            </ion-card-content>
-        </ion-card>
+                <ion-card-content>
+                    <p>{{noticia.descricao}}</p>
+                </ion-card-content>
+            </ion-card>
+        </div>
     </div>
     <ion-fab *ngIf="typo == 'adm'" vertical="bottom" horizontal="end" slot="fixed">
         <ion-fab-button (click)="novaNoticia()">
